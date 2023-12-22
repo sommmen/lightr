@@ -4,7 +4,28 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Lightr</Title>
+    <Authors>sommmen</Authors>
+    <Description>C# api wrapper for https://lightr.nl/ a SAAS to send handwritten cards via an API </Description>
+    <PackageProjectUrl>https://github.com/sommmen/lightr</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/sommmen/lightr.git</RepositoryUrl>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageIcon>nuget-icon-lightr.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\img\nuget-icon-lightr.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <OpenApiReference Include="OpenAPIs\docs.json" CodeGenerator="NSwagCSharp" Options="/GenerateClientInterfaces:true /GenerateOptionalParameters:true" ClassName="LightrClient">
