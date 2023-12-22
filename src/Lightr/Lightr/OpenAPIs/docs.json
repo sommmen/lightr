@@ -6800,8 +6800,7 @@
                         "name": "id",
                         "in": "path",
                         "schema": {
-                            "type": "string",
-                            "required": true
+                            "type": "string"
                         }
                     },
                     {
@@ -6815,8 +6814,7 @@
                                 "xlsx",
                                 "xml"
                             ],
-                            "type": "string",
-                            "required": true
+                            "type": "string"
                         }
                     }
                 ],
