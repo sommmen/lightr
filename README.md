@@ -20,7 +20,7 @@ services.AddLightr("my-token");
 
 Then use this service;
 
-```
+``` csharp
 public class MyAwesomeApp
 {
     private readonly ILightrClient _lightrClient;
