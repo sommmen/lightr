@@ -36,7 +36,7 @@ jobs:
       # Use --skip-duplicate to prevent errors if a package with the same version already exists.
       # If you retry a failed workflow, already published packages will be skipped without error.
     - name: pack
-      run: dotnet pack --include-symbols --include-source --configuration release --no-build --no-restore --output ${{ env.NuGetDirectory }}
+      run: dotnet pack --include-symbols --include-source --no-build --no-restore --configuration Release --output ${{ env.NuGetDirectory }}
       # Publish all NuGet packages to NuGet.org
       # Use --skip-duplicate to prevent errors if a package with the same version already exists.
       # If you retry a failed workflow, already published packages will be skipped without error.
