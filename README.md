@@ -18,6 +18,17 @@ Then simply add the `ILightrClient` to your DI using:
 services.AddLightr("my-token");
 ```
 
+Or:
+
+``` csharp
+services
+    .AddLightr((provider, options) =>
+    {
+        var token = provider.GetRequiredService<ILightrSettings>().ApiKey;
+        options.UseToken(token);
+    });
+```
+
 Then use this service;
 
 ``` csharp
