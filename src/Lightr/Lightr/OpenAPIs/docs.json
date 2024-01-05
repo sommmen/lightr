@@ -32,7 +32,6 @@
                                                         "last_name",
                                                         "email",
                                                         "phone_number",
-                                                        "password",
                                                         "created_at",
                                                         "updated_at",
                                                         "organization"
@@ -59,10 +58,6 @@
                                                         "phone_number": {
                                                             "type": "string",
                                                             "nullable": true
-                                                        },
-                                                        "password": {
-                                                            "type": "string",
-                                                            "writeOnly": true
                                                         },
                                                         "created_at": {
                                                             "type": "string",
@@ -2892,9 +2887,13 @@
                                     },
                                     "file": {
                                         "type": "string",
-                                        "format": "binary",
-                                        "mime-type": "application\/pdf"
+                                        "format": "binary"
                                     }
+                                }
+                            },
+                            "encoding": {
+                                "file": {
+                                    "contentType": "application\/pdf"
                                 }
                             }
                         }
@@ -3535,14 +3534,14 @@
                                                                     "type": "string"
                                                                 },
                                                                 "width": {
+                                                                    "minimum": 0,
                                                                     "type": "number",
-                                                                    "format": "float",
-                                                                    "min": 0
+                                                                    "format": "float"
                                                                 },
                                                                 "height": {
+                                                                    "minimum": 0,
                                                                     "type": "number",
-                                                                    "format": "float",
-                                                                    "min": 0
+                                                                    "format": "float"
                                                                 },
                                                                 "is_qr": {
                                                                     "type": "boolean"
@@ -3556,18 +3555,16 @@
                                                                 "file": {
                                                                     "type": "string",
                                                                     "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                                    "format": "image",
+                                                                    "format": "binary",
                                                                     "nullable": true,
-                                                                    "writeOnly": true,
-                                                                    "scheme": "binary"
+                                                                    "writeOnly": true
                                                                 },
                                                                 "file_url": {
                                                                     "type": "string",
                                                                     "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                                    "format": "image",
+                                                                    "format": "binary",
                                                                     "nullable": true,
-                                                                    "readOnly": true,
-                                                                    "scheme": "binary"
+                                                                    "readOnly": true
                                                                 }
                                                             }
                                                         }
@@ -3705,14 +3702,14 @@
                                                     "type": "string"
                                                 },
                                                 "width": {
+                                                    "minimum": 0,
                                                     "type": "number",
-                                                    "format": "float",
-                                                    "min": 0
+                                                    "format": "float"
                                                 },
                                                 "height": {
+                                                    "minimum": 0,
                                                     "type": "number",
-                                                    "format": "float",
-                                                    "min": 0
+                                                    "format": "float"
                                                 },
                                                 "is_qr": {
                                                     "type": "boolean"
@@ -3726,18 +3723,16 @@
                                                 "file": {
                                                     "type": "string",
                                                     "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                    "format": "image",
+                                                    "format": "binary",
                                                     "nullable": true,
-                                                    "writeOnly": true,
-                                                    "scheme": "binary"
+                                                    "writeOnly": true
                                                 },
                                                 "file_url": {
                                                     "type": "string",
                                                     "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                    "format": "image",
+                                                    "format": "binary",
                                                     "nullable": true,
-                                                    "readOnly": true,
-                                                    "scheme": "binary"
+                                                    "readOnly": true
                                                 }
                                             }
                                         }
@@ -3838,14 +3833,14 @@
                                                                 "type": "string"
                                                             },
                                                             "width": {
+                                                                "minimum": 0,
                                                                 "type": "number",
-                                                                "format": "float",
-                                                                "min": 0
+                                                                "format": "float"
                                                             },
                                                             "height": {
+                                                                "minimum": 0,
                                                                 "type": "number",
-                                                                "format": "float",
-                                                                "min": 0
+                                                                "format": "float"
                                                             },
                                                             "is_qr": {
                                                                 "type": "boolean"
@@ -3859,18 +3854,16 @@
                                                             "file": {
                                                                 "type": "string",
                                                                 "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                                "format": "image",
+                                                                "format": "binary",
                                                                 "nullable": true,
-                                                                "writeOnly": true,
-                                                                "scheme": "binary"
+                                                                "writeOnly": true
                                                             },
                                                             "file_url": {
                                                                 "type": "string",
                                                                 "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                                "format": "image",
+                                                                "format": "binary",
                                                                 "nullable": true,
-                                                                "readOnly": true,
-                                                                "scheme": "binary"
+                                                                "readOnly": true
                                                             }
                                                         }
                                                     }
@@ -4059,14 +4052,14 @@
                                                                 "type": "string"
                                                             },
                                                             "width": {
+                                                                "minimum": 0,
                                                                 "type": "number",
-                                                                "format": "float",
-                                                                "min": 0
+                                                                "format": "float"
                                                             },
                                                             "height": {
+                                                                "minimum": 0,
                                                                 "type": "number",
-                                                                "format": "float",
-                                                                "min": 0
+                                                                "format": "float"
                                                             },
                                                             "is_qr": {
                                                                 "type": "boolean"
@@ -4080,18 +4073,16 @@
                                                             "file": {
                                                                 "type": "string",
                                                                 "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                                "format": "image",
+                                                                "format": "binary",
                                                                 "nullable": true,
-                                                                "writeOnly": true,
-                                                                "scheme": "binary"
+                                                                "writeOnly": true
                                                             },
                                                             "file_url": {
                                                                 "type": "string",
                                                                 "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                                "format": "image",
+                                                                "format": "binary",
                                                                 "nullable": true,
-                                                                "readOnly": true,
-                                                                "scheme": "binary"
+                                                                "readOnly": true
                                                             }
                                                         }
                                                     }
@@ -4441,6 +4432,17 @@
                     "Receiver"
                 ],
                 "summary": "Get a list of receivers.",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "List of receivers.",
@@ -4501,11 +4503,6 @@
                                                             "city": {
                                                                 "type": "string",
                                                                 "nullable": true
-                                                            },
-                                                            "allOf": {
-                                                                "0": {
-                                                                    "$ref": ".\/common\/timestamps.yaml"
-                                                                }
                                                             }
                                                         }
                                                     },
@@ -4570,6 +4567,17 @@
                     "Receiver"
                 ],
                 "summary": "Create a new receiver.",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application\/json": {
@@ -4621,11 +4629,6 @@
                                     "city": {
                                         "type": "string",
                                         "nullable": true
-                                    },
-                                    "allOf": {
-                                        "0": {
-                                            "$ref": ".\/common\/timestamps.yaml"
-                                        }
                                     }
                                 }
                             }
@@ -4688,11 +4691,6 @@
                                                 "city": {
                                                     "type": "string",
                                                     "nullable": true
-                                                },
-                                                "allOf": {
-                                                    "0": {
-                                                        "$ref": ".\/common\/timestamps.yaml"
-                                                    }
                                                 }
                                             }
                                         }
@@ -4785,6 +4783,15 @@
                             "type": "string",
                             "format": "uuid"
                         }
+                    },
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
                     }
                 ],
                 "responses": {
@@ -4845,11 +4852,6 @@
                                                         "city": {
                                                             "type": "string",
                                                             "nullable": true
-                                                        },
-                                                        "allOf": {
-                                                            "0": {
-                                                                "$ref": ".\/common\/timestamps.yaml"
-                                                            }
                                                         }
                                                     }
                                                 },
@@ -4916,6 +4918,15 @@
                 "parameters": [
                     {
                         "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "order",
                         "in": "path",
                         "required": true,
                         "schema": {
@@ -4992,6 +5003,15 @@
                             "type": "string",
                             "format": "uuid"
                         }
+                    },
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
                     }
                 ],
                 "responses": {
@@ -5052,11 +5072,6 @@
                                                         "city": {
                                                             "type": "string",
                                                             "nullable": true
-                                                        },
-                                                        "allOf": {
-                                                            "0": {
-                                                                "$ref": ".\/common\/timestamps.yaml"
-                                                            }
                                                         }
                                                     }
                                                 },
@@ -6805,6 +6820,7 @@
                     {
                         "name": "id",
                         "in": "path",
+                        "required": true,
                         "schema": {
                             "type": "string"
                         }
@@ -6812,6 +6828,7 @@
                     {
                         "name": "type",
                         "in": "query",
+                        "required": true,
                         "schema": {
                             "enum": [
                                 "csv",

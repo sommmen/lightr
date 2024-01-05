@@ -48,3 +48,14 @@ public class MyAwesomeApp
 }
 ```
 
+# Development
+
+The project should run out of the box.
+
+The library is basically a wrapper to an api document.
+It uses the .net open api integration.
+
+To update the open api document follow the steps below.
+ - Within visual studio open the connected services tab for the project.
+ - Open the dropdown menu for the openapi document, and press refresh.
+ - Rebuild the project.
