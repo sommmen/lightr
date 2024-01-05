@@ -33,15 +33,15 @@ jobs:
     - name: Test
       run: dotnet test --no-build --no-restore --verbosity normal --configuration Release
     - name: pack
-      run: dotnet pack --include-symbols --include-source --no-build --no-restore --configuration Release --output ${{ env.NuGetDirectory }} -p:IncludeSymbols=false
+      run: dotnet pack --include-symbols --include-source --no-build --no-restore --configuration Release --output ${{ env.NuGetDirectory }}
     - name: Publish NuGet package
       run: |
         foreach($file in (Get-ChildItem "${{ env.NuGetDirectory }}" -Recurse -Include *.nupkg)) {
-            dotnet nuget push $file --api-key "${{ secrets.NUGET_APIKEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
+            dotnet nuget push $file --api-key "${{ secrets.NUGET_APIKEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate --no-symbols
         }
     - name: Publish NuGet package (Github)
       run: |
         dotnet nuget add source --username sommmen --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/sommmen/index.json"
         foreach($file in (Get-ChildItem "${{ env.NuGetDirectory }}" -Recurse -Include *.nupkg)) {
-            dotnet nuget push $file --api-key ${{ secrets.GITHUB_TOKEN }} --source "github" --skip-duplicate
+            dotnet nuget push $file --api-key ${{ secrets.GITHUB_TOKEN }} --source "github" --skip-duplicate --no-symbols
         }
