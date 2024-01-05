@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "servers": [
       {
-        "url": "https://app.lightr.nl/api/v1",
+        "url": "https://app.lightr.nl/",
         "description": "Development server"
       }
     ],
