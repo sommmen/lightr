@@ -3552,17 +3552,9 @@
                                                                     "format": "url",
                                                                     "nullable": true
                                                                 },
-                                                                "file": {
-                                                                    "type": "string",
-                                                                    "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                                    "format": "binary",
-                                                                    "nullable": true,
-                                                                    "writeOnly": true
-                                                                },
                                                                 "file_url": {
                                                                     "type": "string",
                                                                     "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                                    "format": "binary",
                                                                     "nullable": true,
                                                                     "readOnly": true
                                                                 }
@@ -3720,17 +3712,9 @@
                                                     "format": "url",
                                                     "nullable": true
                                                 },
-                                                "file": {
-                                                    "type": "string",
-                                                    "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                    "format": "binary",
-                                                    "nullable": true,
-                                                    "writeOnly": true
-                                                },
                                                 "file_url": {
                                                     "type": "string",
                                                     "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                    "format": "binary",
                                                     "nullable": true,
                                                     "readOnly": true
                                                 }
@@ -3851,17 +3835,9 @@
                                                                 "format": "url",
                                                                 "nullable": true
                                                             },
-                                                            "file": {
-                                                                "type": "string",
-                                                                "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                                "format": "binary",
-                                                                "nullable": true,
-                                                                "writeOnly": true
-                                                            },
                                                             "file_url": {
                                                                 "type": "string",
                                                                 "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                                "format": "binary",
                                                                 "nullable": true,
                                                                 "readOnly": true
                                                             }
@@ -4070,17 +4046,9 @@
                                                                 "format": "url",
                                                                 "nullable": true
                                                             },
-                                                            "file": {
-                                                                "type": "string",
-                                                                "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                                "format": "binary",
-                                                                "nullable": true,
-                                                                "writeOnly": true
-                                                            },
                                                             "file_url": {
                                                                 "type": "string",
                                                                 "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                                "format": "binary",
                                                                 "nullable": true,
                                                                 "readOnly": true
                                                             }
