@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleLightrApp", "sample\S
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E7A85A0A-9B5E-4AC0-A9DA-019A11E49350}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build-ci.yml = .github\workflows\build-ci.yml
+		.github\workflows\deploy.yml = .github\workflows\deploy.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
