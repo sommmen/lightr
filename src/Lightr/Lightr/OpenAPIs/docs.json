@@ -3477,101 +3477,110 @@
                                                     "updated_at"
                                                 ],
                                                 "type": "object",
-                                                "properties": {
-                                                    "id": {
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string",
+                                                  "format": "uuid",
+                                                  "readOnly": true
+                                                },
+                                                "organization_id": {
+                                                  "type": "string",
+                                                  "format": "uuid",
+                                                  "nullable": true,
+                                                  "readOnly": true
+                                                },
+                                                "font_id": {
+                                                  "type": "string",
+                                                  "format": "uuid",
+                                                  "nullable": true
+                                                },
+                                                "max_font_size": {
+                                                  "type": "integer"
+                                                },
+                                                "label": {
+                                                  "type": "string"
+                                                },
+                                                "format": {
+                                                  "enum": [
+                                                    "A5",
+                                                    "A6",
+                                                    "A7"
+                                                  ],
+                                                  "type": "string"
+                                                },
+                                                "base_template_id": {
+                                                  "type": "string",
+                                                  "format": "uuid"
+                                                },
+                                                "background_template_id": {
+                                                  "type": "string",
+                                                  "format": "uuid"
+                                                },
+                                                "qr_tracking_enabled": {
+                                                  "type": "boolean"
+                                                },
+                                                "images": {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "required": [
+                                                      "name",
+                                                      "width",
+                                                      "height",
+                                                      "is_qr"
+                                                    ],
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "name": {
+                                                        "type": "string"
+                                                      },
+                                                      "width": {
+                                                        "minimum": 0,
+                                                        "type": "number",
+                                                        "format": "float"
+                                                      },
+                                                      "height": {
+                                                        "minimum": 0,
+                                                        "type": "number",
+                                                        "format": "float"
+                                                      },
+                                                      "is_qr": {
+                                                        "type": "boolean"
+                                                      },
+                                                      "url": {
                                                         "type": "string",
-                                                        "format": "uuid",
-                                                        "readOnly": true
-                                                    },
-                                                    "organization_id": {
+                                                        "description": "- Required if `is_qr` is `true`\n- Prohibited if `is_qr` is `false`\n",
+                                                        "format": "url",
+                                                        "nullable": true
+                                                      },
+                                                      "file_url": {
                                                         "type": "string",
-                                                        "format": "uuid",
+                                                        "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
                                                         "nullable": true,
                                                         "readOnly": true
-                                                    },
-                                                    "font_id": {
-                                                        "type": "string",
-                                                        "format": "uuid",
-                                                        "nullable": true
-                                                    },
-                                                    "max_font_size": {
-                                                        "type": "integer"
-                                                    },
-                                                    "label": {
-                                                        "type": "string"
-                                                    },
-                                                    "format": {
-                                                        "enum": [
-                                                            "A5",
-                                                            "A6",
-                                                            "A7"
-                                                        ],
-                                                        "type": "string"
-                                                    },
-                                                    "base_template_id": {
-                                                        "type": "string",
-                                                        "format": "uuid"
-                                                    },
-                                                    "background_template_id": {
-                                                        "type": "string",
-                                                        "format": "uuid"
-                                                    },
-                                                    "qr_tracking_enabled": {
-                                                        "type": "boolean"
-                                                    },
-                                                    "images": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "required": [
-                                                                "name",
-                                                                "width",
-                                                                "height",
-                                                                "is_qr"
-                                                            ],
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "name": {
-                                                                    "type": "string"
-                                                                },
-                                                                "width": {
-                                                                    "minimum": 0,
-                                                                    "type": "number",
-                                                                    "format": "float"
-                                                                },
-                                                                "height": {
-                                                                    "minimum": 0,
-                                                                    "type": "number",
-                                                                    "format": "float"
-                                                                },
-                                                                "is_qr": {
-                                                                    "type": "boolean"
-                                                                },
-                                                                "url": {
-                                                                    "type": "string",
-                                                                    "description": "- Required if `is_qr` is `true`\n- Prohibited if `is_qr` is `false`\n",
-                                                                    "format": "url",
-                                                                    "nullable": true
-                                                                },
-                                                                "file_url": {
-                                                                    "type": "string",
-                                                                    "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                                    "nullable": true,
-                                                                    "readOnly": true
-                                                                }
-                                                            }
-                                                        }
-                                                    },
-                                                    "created_at": {
-                                                        "type": "string",
-                                                        "format": "date-time",
-                                                        "readOnly": true
-                                                    },
-                                                    "updated_at": {
-                                                        "type": "string",
-                                                        "format": "date-time",
-                                                        "readOnly": true
+                                                      }
                                                     }
+                                                  }
+                                                },
+                                                "has_multiline": {
+                                                  "type": "boolean"
+                                                },
+                                                "text_variables": {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "created_at": {
+                                                  "type": "string",
+                                                  "format": "date-time",
+                                                  "readOnly": true
+                                                },
+                                                "updated_at": {
+                                                  "type": "string",
+                                                  "format": "date-time",
+                                                  "readOnly": true
                                                 }
+                                              }
                                             }
                                         }
                                     }
@@ -4013,47 +4022,56 @@
                                                 "qr_tracking_enabled": {
                                                     "type": "boolean"
                                                 },
-                                                "images": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "required": [
-                                                            "name",
-                                                            "width",
-                                                            "height",
-                                                            "is_qr"
-                                                        ],
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "name": {
-                                                                "type": "string"
-                                                            },
-                                                            "width": {
-                                                                "minimum": 0,
-                                                                "type": "number",
-                                                                "format": "float"
-                                                            },
-                                                            "height": {
-                                                                "minimum": 0,
-                                                                "type": "number",
-                                                                "format": "float"
-                                                            },
-                                                            "is_qr": {
-                                                                "type": "boolean"
-                                                            },
-                                                            "url": {
-                                                                "type": "string",
-                                                                "description": "- Required if `is_qr` is `true`\n- Prohibited if `is_qr` is `false`\n",
-                                                                "format": "url",
-                                                                "nullable": true
-                                                            },
-                                                            "file_url": {
-                                                                "type": "string",
-                                                                "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                                "nullable": true,
-                                                                "readOnly": true
-                                                            }
-                                                        }
+                                              "images": {
+                                                "type": "array",
+                                                "items": {
+                                                  "required": [
+                                                    "name",
+                                                    "width",
+                                                    "height",
+                                                    "is_qr"
+                                                  ],
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "name": {
+                                                      "type": "string"
+                                                    },
+                                                    "width": {
+                                                      "minimum": 0,
+                                                      "type": "number",
+                                                      "format": "float"
+                                                    },
+                                                    "height": {
+                                                      "minimum": 0,
+                                                      "type": "number",
+                                                      "format": "float"
+                                                    },
+                                                    "is_qr": {
+                                                      "type": "boolean"
+                                                    },
+                                                    "url": {
+                                                      "type": "string",
+                                                      "description": "- Required if `is_qr` is `true`\n- Prohibited if `is_qr` is `false`\n",
+                                                      "format": "url",
+                                                      "nullable": true
+                                                    },
+                                                    "file_url": {
+                                                      "type": "string",
+                                                      "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
+                                                      "nullable": true,
+                                                      "readOnly": true
                                                     }
+                                                  }
+                                                }
+                                              },
+                                                "has_multiline": {
+                                                  "type": "boolean"
+                                                },
+                                                "text_variables": {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "string"
+                                                  }
                                                 },
                                                 "created_at": {
                                                     "type": "string",
@@ -5430,19 +5448,9 @@
                         "application\/json": {
                             "schema": {
                                 "required": [
-                                    "id",
                                     "preset_id",
-                                    "label",
-                                    "quantity",
-                                    "credits",
-                                    "open_rate_percentage",
-                                    "status",
-                                    "external_number",
-                                    "finalized_at",
-                                    "processed_at",
-                                    "type",
-                                    "created_at",
-                                    "updated_at"
+                                    "font_id",
+                                    "type"
                                 ],
                                 "type": "object",
                                 "properties": {
@@ -5452,6 +5460,10 @@
                                         "readOnly": true
                                     },
                                     "preset_id": {
+                                        "type": "string",
+                                        "format": "uuid"
+                                    },
+                                    "font_id": {
                                         "type": "string",
                                         "format": "uuid"
                                     },

@@ -29,6 +29,7 @@
 
 		<!-- If all members are not documented, you can disable the compiler warnings -->
 		<NoWarn>$(NoWarn);CS1591</NoWarn>
+		<UserSecretsId>443a02b3-bbf0-441c-9c90-5b05706857e3</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>

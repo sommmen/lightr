@@ -48,9 +48,11 @@ public class MyAwesomeApp
 }
 ```
 
+For more information check the sample.
+
 # Development
 
-The project should run out of the box.
+The project should build as-is.
 
 The library is basically a wrapper to an api document.
 It uses the .net open api integration.
