@@ -70,13 +70,3 @@ public class LightrOptions
         Token = token;
     }
 }
-
-internal class Test
-{
-    void t1()
-    {
-        var s = new ServiceCollection();
-
-        s.AddLightr((s, o) => o.UseToken(""));
-    }
-}
