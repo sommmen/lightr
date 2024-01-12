@@ -58,8 +58,6 @@ var countryId = new Guid("99d4d37a-0956-428c-9eb6-67e9b205cc09");
 
 // Add receivers:
 
-var multiline = "Dear {{Naam}} from {{Land}},\n This is a test card which you'll be receiving.\n\nYours truly,\n" + meResponse.Data.First_name;
-
 var receiverPostResponse1 = await client.ReceiversPOSTAsync(orderId, new()
 {
     Order_id = orderId,
@@ -78,7 +76,7 @@ var receiverPostResponse1 = await client.ReceiversPOSTAsync(orderId, new()
         Straat = "Voorbeeldstraat 1",
         Postcode = "Fantasiastad",
         Land = "Nederland",
-        Multiline = multiline
+        Multiline = "Dear {{Naam}} from {{Land}},\n This is a test card which you'll be receiving.\n\nYours truly,\n" + meResponse.Data.First_name
     }
 });
 
@@ -101,7 +99,7 @@ var receiverPostResponse2 = await client.ReceiversPOSTAsync(orderId, new()
         Straat = "Voorbeeldstraat 2",
         Postcode = "Fantasiastad",
         Land = "Nederland",
-        Multiline = multiline
+        Multiline = "Beste {{Naam}} van {{Land}},\n Dit is een testkaart die je gaat ontvangen.\n\nGroeten,\n" + meResponse.Data.First_name
     }
 });
 
