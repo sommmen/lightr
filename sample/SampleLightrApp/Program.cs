@@ -74,7 +74,7 @@ var receiverPostResponse1 = await client.ReceiversPOSTAsync(orderId, new()
         Bedrijf = "Smitt Smithy's",
         Naam = "Pepijn smitt",
         Straat = "Voorbeeldstraat 1",
-        Postcode = "Fantasiastad",
+        Postcode = "123XX Fantasiastad",
         Land = "Nederland",
         Multiline = "Dear {{Naam}} from {{Land}},\n This is a test card which you'll be receiving.\n\nYours truly,\n" + meResponse.Data.First_name
     }
@@ -83,21 +83,21 @@ var receiverPostResponse1 = await client.ReceiversPOSTAsync(orderId, new()
 var receiverPostResponse2 = await client.ReceiversPOSTAsync(orderId, new()
 {
     Order_id = orderId,
-    
+
+    // The following fields are used as reference by Lightr and won't show up on the card.
     Name = "Chiel de boer",
-    Country_id = countryId,
-    
     Address = "Voorbeeldstraat 2",
     City = "Fantasiastad",
     Postal_code = "1234AB",
-    
+    Country_id = countryId,
+
     Text_variables = new
     {
         // No 'Bedrijf' - but we need a value for the api.
         Bedrijf = "---",
         Naam = "Chiel de boer",
         Straat = "Voorbeeldstraat 2",
-        Postcode = "Fantasiastad",
+        Postcode = "123XX Fantasiastad",
         Land = "Nederland",
         Multiline = "Beste {{Naam}} van {{Land}},\n Dit is een testkaart die je gaat ontvangen.\n\nGroeten,\n" + meResponse.Data.First_name
     }
