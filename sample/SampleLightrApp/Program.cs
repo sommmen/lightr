@@ -19,11 +19,7 @@ if (string.IsNullOrWhiteSpace(apiKey))
 
 builder.Services.AddLightr(apiKey)
     // Below is just to demonstrate configuring the client further, in this case we'll be saving all request data to a .har file to inspect
-    .AddHttpRecorder("sample_lightr_client",
-        HttpRecorderMode.Record
-        //, anonymizer: RulesInteractionAnonymizer.Default.AnonymizeRequestHeader("Authorization") // TODO 1103024 the anonymizer breaks the post request somehow?
-        )
-    ;
+    .AddHttpRecorder("sample_lightr_client", HttpRecorderMode.Record);
 
 // We build and use a Host so that we can use DI, however we don't run it.
 var host = builder.Build();
