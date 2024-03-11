@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using HttpRecorder;
 using Lightr;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -12,9 +13,17 @@ if (!builder.Environment.IsDevelopment())
     throw new InvalidOperationException($"Environment is not {Environments.Development}, and thus secrets will not be loaded!");
 
 if (string.IsNullOrWhiteSpace(apiKey))
-    throw new InvalidOperationException(@"ApiKey is null or whitespace, please add an apiKey: dotnet user-secrets set ""ApiKey"" ""...""");
+    throw new InvalidOperationException("""
+                                        ApiKey is null or whitespace, please add an apiKey: dotnet user-secrets set "ApiKey" "..."
+                                        """);
 
-builder.Services.AddLightr(apiKey);
+builder.Services.AddLightr(apiKey)
+    // Below is just to demonstrate configuring the client further, in this case we'll be saving all request data to a .har file to inspect
+    .AddHttpRecorder("sample_lightr_client",
+        HttpRecorderMode.Record
+        //, anonymizer: RulesInteractionAnonymizer.Default.AnonymizeRequestHeader("Authorization") // TODO 1103024 the anonymizer breaks the post request somehow?
+        )
+    ;
 
 // We build and use a Host so that we can use DI, however we don't run it.
 var host = builder.Build();
@@ -45,7 +54,7 @@ var addOrderResponse = await client.OrdersPOSTAsync(new()
     Quantity = 1, // Needs to be >= 1
     Preset_id = presetDetails.Id,
     Font_id = font.Id,
-    Type = Body10Type.Send_multiple
+    Type = Body13Type.Send_multiple
 });
 
 // Check that the order exists
@@ -104,6 +113,9 @@ var receiverPostResponse2 = await client.ReceiversPOSTAsync(orderId, new()
 });
 
 // Check if the receivers have been added.
+
+var allOrders = await client.OrdersGETAsync(1, false);
+Debug.Assert(allOrders.Data.Select(c => c.Id).Contains(orderId));
 var receiversResponse = await client.ReceiversGETAsync(orderId);
 Debug.Assert(receiversResponse.Data.Any(c => c.Id == receiverPostResponse1.Data.Id));
 Debug.Assert(receiversResponse.Data.Any(c => c.Id == receiverPostResponse2.Data.Id));

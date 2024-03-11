@@ -1,15 +1,15 @@
 {
     "openapi": "3.0.0",
-    "servers": [
-      {
-        "url": "https://app.lightr.nl/",
-        "description": "Development server"
-      }
-    ],
     "info": {
         "title": "Lightr.nl API documentation",
         "version": "0.0.1"
     },
+    "servers": [
+        {
+            "url": "https:\/\/app.lightr.nl",
+            "description": "Production server"
+        }
+    ],
     "paths": {
         "\/api\/v1\/me": {
             "get": {
@@ -625,6 +625,13 @@
                                                             },
                                                             "country_id": {
                                                                 "type": "string"
+                                                            },
+                                                            "tags": {
+                                                                "type": "array",
+                                                                "example": [
+                                                                    "rood",
+                                                                    "geel"
+                                                                ]
                                                             }
                                                         }
                                                     },
@@ -723,6 +730,13 @@
                                             },
                                             "country_id": {
                                                 "type": "string"
+                                            },
+                                            "tags": {
+                                                "type": "array",
+                                                "example": [
+                                                    "rood",
+                                                    "geel"
+                                                ]
                                             }
                                         }
                                     },
@@ -780,6 +794,13 @@
                                                         },
                                                         "country_id": {
                                                             "type": "string"
+                                                        },
+                                                        "tags": {
+                                                            "type": "array",
+                                                            "example": [
+                                                                "rood",
+                                                                "geel"
+                                                            ]
                                                         }
                                                     }
                                                 },
@@ -928,6 +949,13 @@
                                                         },
                                                         "country_id": {
                                                             "type": "string"
+                                                        },
+                                                        "tags": {
+                                                            "type": "array",
+                                                            "example": [
+                                                                "rood",
+                                                                "geel"
+                                                            ]
                                                         }
                                                     }
                                                 },
@@ -1120,6 +1148,13 @@
                                             },
                                             "country_id": {
                                                 "type": "string"
+                                            },
+                                            "tags": {
+                                                "type": "array",
+                                                "example": [
+                                                    "rood",
+                                                    "geel"
+                                                ]
                                             }
                                         }
                                     }
@@ -1167,6 +1202,203 @@
                                                         },
                                                         "country_id": {
                                                             "type": "string"
+                                                        },
+                                                        "tags": {
+                                                            "type": "array",
+                                                            "example": [
+                                                                "rood",
+                                                                "geel"
+                                                            ]
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "properties": {
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "readOnly": true
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "readOnly": true
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not found."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "required": [
+                                        "message",
+                                        "errors"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The example attribute field is required. (and 2 more errors)."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "example_attribute": [
+                                                    "The example attribute field is required."
+                                                ]
+                                            },
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/v1\/organization-addresses\/{id}\/tags": {
+            "patch": {
+                "tags": [
+                    "Organization address"
+                ],
+                "summary": "Update a organization address tag.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "tags": {
+                                        "type": "array",
+                                        "example": [
+                                            "rood",
+                                            "geel"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated preset tags.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "allOf": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "readOnly": true
+                                                        },
+                                                        "organization_id": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": {
+                                                            "enum": [
+                                                                "billing",
+                                                                "shipping"
+                                                            ],
+                                                            "type": "string"
+                                                        },
+                                                        "address": {
+                                                            "type": "string"
+                                                        },
+                                                        "postal_code": {
+                                                            "type": "string"
+                                                        },
+                                                        "city": {
+                                                            "type": "string"
+                                                        },
+                                                        "country_id": {
+                                                            "type": "string"
+                                                        },
+                                                        "tags": {
+                                                            "type": "array",
+                                                            "example": [
+                                                                "rood",
+                                                                "geel"
+                                                            ]
                                                         }
                                                     }
                                                 },
@@ -2800,6 +3032,13 @@
                                                                 "items": {
                                                                     "type": "string"
                                                                 }
+                                                            },
+                                                            "tags": {
+                                                                "type": "array",
+                                                                "example": [
+                                                                    "rood",
+                                                                    "geel"
+                                                                ]
                                                             }
                                                         }
                                                     },
@@ -2955,6 +3194,13 @@
                                                     "items": {
                                                         "type": "string"
                                                     }
+                                                },
+                                                "tags": {
+                                                    "type": "array",
+                                                    "example": [
+                                                        "rood",
+                                                        "geel"
+                                                    ]
                                                 }
                                             }
                                         },
@@ -3122,6 +3368,13 @@
                                                             "items": {
                                                                 "type": "string"
                                                             }
+                                                        },
+                                                        "tags": {
+                                                            "type": "array",
+                                                            "example": [
+                                                                "rood",
+                                                                "geel"
+                                                            ]
                                                         }
                                                     }
                                                 },
@@ -3325,6 +3578,223 @@
                                                             "items": {
                                                                 "type": "string"
                                                             }
+                                                        },
+                                                        "tags": {
+                                                            "type": "array",
+                                                            "example": [
+                                                                "rood",
+                                                                "geel"
+                                                            ]
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "properties": {
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "readOnly": true
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "readOnly": true
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not found."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "required": [
+                                        "message",
+                                        "errors"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The example attribute field is required. (and 2 more errors)."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "example_attribute": [
+                                                    "The example attribute field is required."
+                                                ]
+                                            },
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/v1\/templates\/{id}\/tags": {
+            "patch": {
+                "tags": [
+                    "Template"
+                ],
+                "summary": "Update a template tag.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "tags": {
+                                        "type": "array",
+                                        "example": [
+                                            "rood",
+                                            "geel"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated template tags.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "allOf": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "readOnly": true
+                                                        },
+                                                        "organization_id": {
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "nullable": true
+                                                        },
+                                                        "agency_id": {
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "nullable": true
+                                                        },
+                                                        "label": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": {
+                                                            "enum": [
+                                                                "back",
+                                                                "base"
+                                                            ],
+                                                            "type": "string"
+                                                        },
+                                                        "format": {
+                                                            "enum": [
+                                                                "A5",
+                                                                "A6",
+                                                                "A7"
+                                                            ],
+                                                            "type": "string"
+                                                        },
+                                                        "file_url": {
+                                                            "type": "string",
+                                                            "readOnly": true
+                                                        },
+                                                        "image_variables": {
+                                                            "type": "object",
+                                                            "nullable": true
+                                                        },
+                                                        "text_variables": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "tags": {
+                                                            "type": "array",
+                                                            "example": [
+                                                                "rood",
+                                                                "geel"
+                                                            ]
                                                         }
                                                     }
                                                 },
@@ -3477,110 +3947,125 @@
                                                     "updated_at"
                                                 ],
                                                 "type": "object",
-                                              "properties": {
-                                                "id": {
-                                                  "type": "string",
-                                                  "format": "uuid",
-                                                  "readOnly": true
-                                                },
-                                                "organization_id": {
-                                                  "type": "string",
-                                                  "format": "uuid",
-                                                  "nullable": true,
-                                                  "readOnly": true
-                                                },
-                                                "font_id": {
-                                                  "type": "string",
-                                                  "format": "uuid",
-                                                  "nullable": true
-                                                },
-                                                "max_font_size": {
-                                                  "type": "integer"
-                                                },
-                                                "label": {
-                                                  "type": "string"
-                                                },
-                                                "format": {
-                                                  "enum": [
-                                                    "A5",
-                                                    "A6",
-                                                    "A7"
-                                                  ],
-                                                  "type": "string"
-                                                },
-                                                "base_template_id": {
-                                                  "type": "string",
-                                                  "format": "uuid"
-                                                },
-                                                "background_template_id": {
-                                                  "type": "string",
-                                                  "format": "uuid"
-                                                },
-                                                "qr_tracking_enabled": {
-                                                  "type": "boolean"
-                                                },
-                                                "images": {
-                                                  "type": "array",
-                                                  "items": {
-                                                    "required": [
-                                                      "name",
-                                                      "width",
-                                                      "height",
-                                                      "is_qr"
-                                                    ],
-                                                    "type": "object",
-                                                    "properties": {
-                                                      "name": {
-                                                        "type": "string"
-                                                      },
-                                                      "width": {
-                                                        "minimum": 0,
-                                                        "type": "number",
-                                                        "format": "float"
-                                                      },
-                                                      "height": {
-                                                        "minimum": 0,
-                                                        "type": "number",
-                                                        "format": "float"
-                                                      },
-                                                      "is_qr": {
-                                                        "type": "boolean"
-                                                      },
-                                                      "url": {
+                                                "properties": {
+                                                    "id": {
                                                         "type": "string",
-                                                        "description": "- Required if `is_qr` is `true`\n- Prohibited if `is_qr` is `false`\n",
-                                                        "format": "url",
-                                                        "nullable": true
-                                                      },
-                                                      "file_url": {
+                                                        "format": "uuid",
+                                                        "readOnly": true
+                                                    },
+                                                    "organization_id": {
                                                         "type": "string",
-                                                        "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
+                                                        "format": "uuid",
                                                         "nullable": true,
                                                         "readOnly": true
+                                                    },
+                                                    "font_id": {
+                                                        "type": "string",
+                                                        "format": "uuid",
+                                                        "nullable": true
+                                                    },
+                                                    "max_font_size": {
+                                                        "type": "integer"
+                                                    },
+                                                    "label": {
+                                                        "type": "string"
+                                                    },
+                                                    "format": {
+                                                        "enum": [
+                                                            "A5",
+                                                            "A6",
+                                                            "A7"
+                                                        ],
+                                                        "type": "string"
+                                                    },
+                                                    "base_template_id": {
+                                                        "type": "string",
+                                                        "format": "uuid"
+                                                    },
+                                                    "background_template_id": {
+                                                        "type": "string",
+                                                        "format": "uuid"
+                                                    },
+                                                    "qr_tracking_enabled": {
+                                                        "type": "boolean"
+                                                    },
+                                                  "images": {
+                                                    "type": "array",
+                                                    "items": {
+                                                      "required": [
+                                                        "name",
+                                                        "width",
+                                                        "height",
+                                                        "is_qr"
+                                                      ],
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "name": {
+                                                          "type": "string"
+                                                        },
+                                                        "width": {
+                                                          "minimum": 0,
+                                                          "type": "number",
+                                                          "format": "float"
+                                                        },
+                                                        "height": {
+                                                          "minimum": 0,
+                                                          "type": "number",
+                                                          "format": "float"
+                                                        },
+                                                        "is_qr": {
+                                                          "type": "boolean"
+                                                        },
+                                                        "url": {
+                                                          "type": "string",
+                                                          "description": "- Required if `is_qr` is `true`\n- Prohibited if `is_qr` is `false`\n",
+                                                          "format": "url",
+                                                          "nullable": true
+                                                        },
+                                                        "file": {
+                                                          "type": "string",
+                                                          "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
+                                                          "format": "binary",
+                                                          "nullable": true,
+                                                          "writeOnly": true
+                                                        },
+                                                        "file_url": {
+                                                          "type": "string",
+                                                          "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
+                                                          "format": "url",
+                                                          "nullable": true,
+                                                          "readOnly": true
+                                                        }
                                                       }
                                                     }
-                                                  }
-                                                },
-                                                "has_multiline": {
-                                                  "type": "boolean"
-                                                },
-                                                "text_variables": {
-                                                  "type": "array",
-                                                  "items": {
-                                                    "type": "string"
-                                                  }
-                                                },
-                                                "created_at": {
-                                                  "type": "string",
-                                                  "format": "date-time",
-                                                  "readOnly": true
-                                                },
-                                                "updated_at": {
-                                                  "type": "string",
-                                                  "format": "date-time",
-                                                  "readOnly": true
+                                                  },
+                                                    "has_multiline": {
+                                                      "type": "boolean"
+                                                    },
+                                                    "text_variables": {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "tags": {
+                                                        "type": "array",
+                                                        "example": [
+                                                            "rood",
+                                                            "geel"
+                                                        ]
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "readOnly": true
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "readOnly": true
+                                                    }
                                                 }
-                                              }
                                             }
                                         }
                                     }
@@ -3721,14 +4206,29 @@
                                                     "format": "url",
                                                     "nullable": true
                                                 },
+                                                "file": {
+                                                    "type": "string",
+                                                    "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
+                                                    "format": "binary",
+                                                    "nullable": true,
+                                                    "writeOnly": true
+                                                },
                                                 "file_url": {
                                                     "type": "string",
                                                     "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
+                                                    "format": "url",
                                                     "nullable": true,
                                                     "readOnly": true
                                                 }
                                             }
                                         }
+                                    },
+                                    "tags": {
+                                        "type": "array",
+                                        "example": [
+                                            "rood",
+                                            "geel"
+                                        ]
                                     },
                                     "created_at": {
                                         "type": "string",
@@ -3844,14 +4344,29 @@
                                                                 "format": "url",
                                                                 "nullable": true
                                                             },
+                                                            "file": {
+                                                                "type": "string",
+                                                                "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
+                                                                "format": "binary",
+                                                                "nullable": true,
+                                                                "writeOnly": true
+                                                            },
                                                             "file_url": {
                                                                 "type": "string",
                                                                 "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
+                                                                "format": "url",
                                                                 "nullable": true,
                                                                 "readOnly": true
                                                             }
                                                         }
                                                     }
+                                                },
+                                                "tags": {
+                                                    "type": "array",
+                                                    "example": [
+                                                        "rood",
+                                                        "geel"
+                                                    ]
                                                 },
                                                 "created_at": {
                                                     "type": "string",
@@ -4022,48 +4537,56 @@
                                                 "qr_tracking_enabled": {
                                                     "type": "boolean"
                                                 },
-                                              "images": {
-                                                "type": "array",
-                                                "items": {
-                                                  "required": [
-                                                    "name",
-                                                    "width",
-                                                    "height",
-                                                    "is_qr"
-                                                  ],
-                                                  "type": "object",
-                                                  "properties": {
-                                                    "name": {
-                                                      "type": "string"
-                                                    },
-                                                    "width": {
-                                                      "minimum": 0,
-                                                      "type": "number",
-                                                      "format": "float"
-                                                    },
-                                                    "height": {
-                                                      "minimum": 0,
-                                                      "type": "number",
-                                                      "format": "float"
-                                                    },
-                                                    "is_qr": {
-                                                      "type": "boolean"
-                                                    },
-                                                    "url": {
-                                                      "type": "string",
-                                                      "description": "- Required if `is_qr` is `true`\n- Prohibited if `is_qr` is `false`\n",
-                                                      "format": "url",
-                                                      "nullable": true
-                                                    },
-                                                    "file_url": {
-                                                      "type": "string",
-                                                      "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                      "nullable": true,
-                                                      "readOnly": true
+                                                "images": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "required": [
+                                                            "name",
+                                                            "width",
+                                                            "height",
+                                                            "is_qr"
+                                                        ],
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "width": {
+                                                                "minimum": 0,
+                                                                "type": "number",
+                                                                "format": "float"
+                                                            },
+                                                            "height": {
+                                                                "minimum": 0,
+                                                                "type": "number",
+                                                                "format": "float"
+                                                            },
+                                                            "is_qr": {
+                                                                "type": "boolean"
+                                                            },
+                                                            "url": {
+                                                                "type": "string",
+                                                                "description": "- Required if `is_qr` is `true`\n- Prohibited if `is_qr` is `false`\n",
+                                                                "format": "url",
+                                                                "nullable": true
+                                                            },
+                                                            "file": {
+                                                                "type": "string",
+                                                                "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
+                                                                "format": "binary",
+                                                                "nullable": true,
+                                                                "writeOnly": true
+                                                            },
+                                                            "file_url": {
+                                                                "type": "string",
+                                                                "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
+                                                                "format": "url",
+                                                                "nullable": true,
+                                                                "readOnly": true
+                                                            }
+                                                        }
                                                     }
-                                                  }
-                                                }
-                                              },
+                                                },
                                                 "has_multiline": {
                                                   "type": "boolean"
                                                 },
@@ -4072,6 +4595,13 @@
                                                   "items": {
                                                     "type": "string"
                                                   }
+                                                },
+                                                "tags": {
+                                                    "type": "array",
+                                                    "example": [
+                                                        "rood",
+                                                        "geel"
+                                                    ]
                                                 },
                                                 "created_at": {
                                                     "type": "string",
@@ -4304,6 +4834,284 @@
                 }
             }
         },
+        "\/api\/v1\/presets\/{id}\/tags": {
+            "patch": {
+                "tags": [
+                    "Preset"
+                ],
+                "summary": "Update a preset tag.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "tags": {
+                                        "type": "array",
+                                        "example": [
+                                            "rood",
+                                            "geel"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated preset tags.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "allOf": [
+                                                {
+                                                    "required": [
+                                                        "id",
+                                                        "organization_id",
+                                                        "font_id",
+                                                        "max_font_size",
+                                                        "label",
+                                                        "format",
+                                                        "base_template_id",
+                                                        "background_template_id",
+                                                        "qr_tracking_enabled",
+                                                        "images",
+                                                        "created_at",
+                                                        "updated_at"
+                                                    ],
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "readOnly": true
+                                                        },
+                                                        "organization_id": {
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "nullable": true,
+                                                            "readOnly": true
+                                                        },
+                                                        "font_id": {
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "nullable": true
+                                                        },
+                                                        "max_font_size": {
+                                                            "type": "integer"
+                                                        },
+                                                        "label": {
+                                                            "type": "string"
+                                                        },
+                                                        "format": {
+                                                            "enum": [
+                                                                "A5",
+                                                                "A6",
+                                                                "A7"
+                                                            ],
+                                                            "type": "string"
+                                                        },
+                                                        "base_template_id": {
+                                                            "type": "string",
+                                                            "format": "uuid"
+                                                        },
+                                                        "background_template_id": {
+                                                            "type": "string",
+                                                            "format": "uuid"
+                                                        },
+                                                        "qr_tracking_enabled": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "images": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "required": [
+                                                                    "name",
+                                                                    "width",
+                                                                    "height",
+                                                                    "is_qr"
+                                                                ],
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "name": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "width": {
+                                                                        "minimum": 0,
+                                                                        "type": "number",
+                                                                        "format": "float"
+                                                                    },
+                                                                    "height": {
+                                                                        "minimum": 0,
+                                                                        "type": "number",
+                                                                        "format": "float"
+                                                                    },
+                                                                    "is_qr": {
+                                                                        "type": "boolean"
+                                                                    },
+                                                                    "url": {
+                                                                        "type": "string",
+                                                                        "description": "- Required if `is_qr` is `true`\n- Prohibited if `is_qr` is `false`\n",
+                                                                        "format": "url",
+                                                                        "nullable": true
+                                                                    },
+                                                                    "file": {
+                                                                        "type": "string",
+                                                                        "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
+                                                                        "format": "binary",
+                                                                        "nullable": true,
+                                                                        "writeOnly": true
+                                                                    },
+                                                                    "file_url": {
+                                                                        "type": "string",
+                                                                        "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
+                                                                        "format": "url",
+                                                                        "nullable": true,
+                                                                        "readOnly": true
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "tags": {
+                                                            "type": "array",
+                                                            "example": [
+                                                                "rood",
+                                                                "geel"
+                                                            ]
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "readOnly": true
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "readOnly": true
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "properties": {
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "readOnly": true
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "readOnly": true
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not found."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "required": [
+                                        "message",
+                                        "errors"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The example attribute field is required. (and 2 more errors)."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "example_attribute": [
+                                                    "The example attribute field is required."
+                                                ]
+                                            },
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "\/api\/v1\/fonts": {
             "get": {
                 "tags": [
@@ -4489,6 +5297,10 @@
                                                             "city": {
                                                                 "type": "string",
                                                                 "nullable": true
+                                                            },
+                                                            "allow_empty_text_variables": {
+                                                                "type": "boolean",
+                                                                "nullable": true
                                                             }
                                                         }
                                                     },
@@ -4615,6 +5427,10 @@
                                     "city": {
                                         "type": "string",
                                         "nullable": true
+                                    },
+                                    "allow_empty_text_variables": {
+                                        "type": "boolean",
+                                        "nullable": true
                                     }
                                 }
                             }
@@ -4676,6 +5492,10 @@
                                                 },
                                                 "city": {
                                                     "type": "string",
+                                                    "nullable": true
+                                                },
+                                                "allow_empty_text_variables": {
+                                                    "type": "boolean",
                                                     "nullable": true
                                                 }
                                             }
@@ -4837,6 +5657,10 @@
                                                         },
                                                         "city": {
                                                             "type": "string",
+                                                            "nullable": true
+                                                        },
+                                                        "allow_empty_text_variables": {
+                                                            "type": "boolean",
                                                             "nullable": true
                                                         }
                                                     }
@@ -5057,6 +5881,10 @@
                                                         },
                                                         "city": {
                                                             "type": "string",
+                                                            "nullable": true
+                                                        },
+                                                        "allow_empty_text_variables": {
+                                                            "type": "boolean",
                                                             "nullable": true
                                                         }
                                                     }
@@ -5297,6 +6125,7 @@
                                                             "preset_id",
                                                             "label",
                                                             "quantity",
+                                                            "font_id",
                                                             "credits",
                                                             "open_rate_percentage",
                                                             "status",
@@ -5325,6 +6154,11 @@
                                                             "quantity": {
                                                                 "type": "integer",
                                                                 "description": "The number of cards per recipient"
+                                                            },
+                                                            "font_id": {
+                                                                "type": "string",
+                                                                "description": "The font used for the order, which can be found in the fonts endpoint",
+                                                                "format": "uuid"
                                                             },
                                                             "total_cards": {
                                                                 "type": "integer",
@@ -5448,7 +6282,7 @@
                         "application\/json": {
                             "schema": {
                                 "required": [
-                                    "preset_id",
+                                      "preset_id",
                                     "font_id",
                                     "type"
                                 ],
@@ -5463,10 +6297,6 @@
                                         "type": "string",
                                         "format": "uuid"
                                     },
-                                    "font_id": {
-                                        "type": "string",
-                                        "format": "uuid"
-                                    },
                                     "label": {
                                         "type": "string",
                                         "readOnly": true
@@ -5474,6 +6304,11 @@
                                     "quantity": {
                                         "type": "integer",
                                         "description": "The number of cards per recipient"
+                                    },
+                                    "font_id": {
+                                        "type": "string",
+                                        "description": "The font used for the order, which can be found in the fonts endpoint",
+                                        "format": "uuid"
                                     },
                                     "total_cards": {
                                         "type": "integer",
@@ -5562,6 +6397,7 @@
                                                 "preset_id",
                                                 "label",
                                                 "quantity",
+                                                "font_id",
                                                 "credits",
                                                 "open_rate_percentage",
                                                 "status",
@@ -5590,6 +6426,11 @@
                                                 "quantity": {
                                                     "type": "integer",
                                                     "description": "The number of cards per recipient"
+                                                },
+                                                "font_id": {
+                                                    "type": "string",
+                                                    "description": "The font used for the order, which can be found in the fonts endpoint",
+                                                    "format": "uuid"
                                                 },
                                                 "total_cards": {
                                                     "type": "integer",
@@ -5765,6 +6606,7 @@
                                                 "preset_id",
                                                 "label",
                                                 "quantity",
+                                                "font_id",
                                                 "credits",
                                                 "open_rate_percentage",
                                                 "status",
@@ -5793,6 +6635,11 @@
                                                 "quantity": {
                                                     "type": "integer",
                                                     "description": "The number of cards per recipient"
+                                                },
+                                                "font_id": {
+                                                    "type": "string",
+                                                    "description": "The font used for the order, which can be found in the fonts endpoint",
+                                                    "format": "uuid"
                                                 },
                                                 "total_cards": {
                                                     "type": "integer",
@@ -6019,6 +6866,7 @@
                                                 "preset_id",
                                                 "label",
                                                 "quantity",
+                                                "font_id",
                                                 "credits",
                                                 "open_rate_percentage",
                                                 "status",
@@ -6047,6 +6895,11 @@
                                                 "quantity": {
                                                     "type": "integer",
                                                     "description": "The number of cards per recipient"
+                                                },
+                                                "font_id": {
+                                                    "type": "string",
+                                                    "description": "The font used for the order, which can be found in the fonts endpoint",
+                                                    "format": "uuid"
                                                 },
                                                 "total_cards": {
                                                     "type": "integer",
@@ -6495,6 +7348,7 @@
                                                 "preset_id",
                                                 "label",
                                                 "quantity",
+                                                "font_id",
                                                 "credits",
                                                 "open_rate_percentage",
                                                 "status",
@@ -6523,6 +7377,11 @@
                                                 "quantity": {
                                                     "type": "integer",
                                                     "description": "The number of cards per recipient"
+                                                },
+                                                "font_id": {
+                                                    "type": "string",
+                                                    "description": "The font used for the order, which can be found in the fonts endpoint",
+                                                    "format": "uuid"
                                                 },
                                                 "total_cards": {
                                                     "type": "integer",
@@ -6790,7 +7649,7 @@
             }
         },
         "\/api\/v1\/orders\/{id}\/import-template": {
-            "post": {
+            "get": {
                 "tags": [
                     "Order",
                     "Receiver"
@@ -8349,6 +9208,440 @@
                                         "message": {
                                             "type": "string",
                                             "example": "Not found."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/v1\/tags": {
+            "get": {
+                "tags": [
+                    "Tag"
+                ],
+                "summary": "Get a list of tags.",
+                "responses": {
+                    "200": {
+                        "description": "List of tags.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "allOf": [
+                                                    {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "readOnly": true
+                                                            },
+                                                            "organization_id": {
+                                                                "type": "string",
+                                                                "format": "uuid",
+                                                                "nullable": true
+                                                            },
+                                                            "name": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "properties": {
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "readOnly": true
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "readOnly": true
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/v1\/tags\/{id}": {
+            "get": {
+                "tags": [
+                    "Tag"
+                ],
+                "summary": "Find a tag.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Found tag.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "allOf": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string",
+                                                            "readOnly": true
+                                                        },
+                                                        "organization_id": {
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "nullable": true
+                                                        },
+                                                        "name": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "properties": {
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "readOnly": true
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "readOnly": true
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Tag"
+                ],
+                "summary": "Delete a tag.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Record deleted."
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not found."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Tag"
+                ],
+                "summary": "Update a tag.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "readOnly": true
+                                            },
+                                            "organization_id": {
+                                                "type": "string",
+                                                "format": "uuid",
+                                                "nullable": true
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated Tag.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "allOf": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string",
+                                                            "readOnly": true
+                                                        },
+                                                        "organization_id": {
+                                                            "type": "string",
+                                                            "format": "uuid",
+                                                            "nullable": true
+                                                        },
+                                                        "name": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "properties": {
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "readOnly": true
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "readOnly": true
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not found."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "required": [
+                                        "message",
+                                        "errors"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The example attribute field is required. (and 2 more errors)."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "example_attribute": [
+                                                    "The example attribute field is required."
+                                                ]
+                                            },
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
                                         }
                                     }
                                 }
