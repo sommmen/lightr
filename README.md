@@ -48,7 +48,7 @@ public class MyAwesomeApp
 }
 ```
 
-For more information check the sample.
+For more information check the [sample](https://github.com/sommmen/lightr/tree/main/sample).
 
 # Development
 
