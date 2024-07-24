@@ -50,7 +50,7 @@ var addOrderResponse = await client.OrdersPOSTAsync(new()
     Quantity = 1, // Needs to be >= 1
     Preset_id = presetDetails.Id,
     Font_id = font.Id,
-    Type = Body13Type.Send_multiple
+    Type = Body15Type.Send_multiple
 });
 
 // Check that the order exists

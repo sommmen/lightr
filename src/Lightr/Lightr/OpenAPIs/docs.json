@@ -82,6 +82,23 @@
                                                                         "name": {
                                                                             "type": "string"
                                                                         },
+                                                                        "auto_add_credits": {
+                                                                            "type": "boolean"
+                                                                        },
+                                                                        "lower_limit": {
+                                                                            "type": "integer"
+                                                                        },
+                                                                        "replenishment_method": {
+                                                                            "enum": [
+                                                                                "add_until",
+                                                                                "add_with"
+                                                                            ],
+                                                                            "type": "string",
+                                                                            "nullable": true
+                                                                        },
+                                                                        "amount": {
+                                                                            "type": "integer"
+                                                                        },
                                                                         "onboarding_steps_completed": {
                                                                             "required": [
                                                                                 "billing_address",
@@ -102,7 +119,29 @@
                                                                             "readOnly": true
                                                                         },
                                                                         "credits": {
-                                                                            "type": "integer",
+                                                                            "readOnly": true
+                                                                        },
+                                                                        "agency": {
+                                                                            "allOf": [
+                                                                                {
+                                                                                    "required": [
+                                                                                        "id",
+                                                                                        "name"
+                                                                                    ],
+                                                                                    "type": "object",
+                                                                                    "properties": {
+                                                                                        "id": {
+                                                                                            "type": "string",
+                                                                                            "format": "uuid",
+                                                                                            "readOnly": true
+                                                                                        },
+                                                                                        "name": {
+                                                                                            "type": "string"
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            ],
+                                                                            "nullable": true,
                                                                             "readOnly": true
                                                                         }
                                                                     }
@@ -242,14 +281,14 @@
                                                                         "type": "string"
                                                                     },
                                                                     "price": {
-                                                                        "type": "integer",
+                                                                        "type": "string",
                                                                         "description": "Price in credits.",
-                                                                        "example": 675
+                                                                        "example": "6,75"
                                                                     },
                                                                     "postage_fee": {
-                                                                        "type": "integer",
+                                                                        "type": "string",
                                                                         "description": "Postage fee in credits.",
-                                                                        "example": 101
+                                                                        "example": "1,01"
                                                                     }
                                                                 }
                                                             }
@@ -263,14 +302,14 @@
                                                                         "type": "string"
                                                                     },
                                                                     "price": {
-                                                                        "type": "integer",
+                                                                        "type": "string",
                                                                         "description": "Price in credits.",
-                                                                        "example": 675
+                                                                        "example": "6,75"
                                                                     },
                                                                     "postage_fee": {
-                                                                        "type": "integer",
+                                                                        "type": "string",
                                                                         "description": "Postage fee in credits.",
-                                                                        "example": 101
+                                                                        "example": "1,01"
                                                                     }
                                                                 }
                                                             }
@@ -284,14 +323,14 @@
                                                                         "type": "string"
                                                                     },
                                                                     "price": {
-                                                                        "type": "integer",
+                                                                        "type": "string",
                                                                         "description": "Price in credits.",
-                                                                        "example": 675
+                                                                        "example": "6,75"
                                                                     },
                                                                     "postage_fee": {
-                                                                        "type": "integer",
+                                                                        "type": "string",
                                                                         "description": "Postage fee in credits.",
-                                                                        "example": 101
+                                                                        "example": "1,01"
                                                                     }
                                                                 }
                                                             }
@@ -441,6 +480,289 @@
                 "responses": {
                     "200": {
                         "description": "Password is reset"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "required": [
+                                        "message",
+                                        "errors"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The example attribute field is required. (and 2 more errors)."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "example_attribute": [
+                                                    "The example attribute field is required."
+                                                ]
+                                            },
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": []
+            }
+        },
+        "\/api\/v1\/login": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "summary": "Fetch request access token using credentials.",
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "maxLength": 255,
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "minLength": 8,
+                                        "type": "string",
+                                        "format": "password"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "example": "1|tAtcUP0Ngbz9VadtldoYj2lljQiB4CAxrVMmVTsO"
+                                        },
+                                        "expires": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2021-01-01T00:00:00Z"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "required": [
+                                        "message",
+                                        "errors"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The example attribute field is required. (and 2 more errors)."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "example_attribute": [
+                                                    "The example attribute field is required."
+                                                ]
+                                            },
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": []
+            }
+        },
+        "\/api\/v1\/register": {
+            "post": {
+                "tags": [
+                    "Register"
+                ],
+                "summary": "Register.",
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password",
+                                    "organization_name",
+                                    "first_name",
+                                    "last_name"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "maxLength": 255,
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "minLength": 8,
+                                        "type": "string",
+                                        "format": "password"
+                                    },
+                                    "password_confirmation": {
+                                        "minLength": 8,
+                                        "type": "string",
+                                        "format": "password"
+                                    },
+                                    "organization_name": {
+                                        "maxLength": 255,
+                                        "type": "string"
+                                    },
+                                    "first_name": {
+                                        "maxLength": 255,
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "maxLength": 255,
+                                        "type": "string"
+                                    },
+                                    "api_url": {
+                                        "type": "boolean"
+                                    },
+                                    "agency_id": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "nullable": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "The server successfully processed the request and is not returning any content"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "required": [
+                                        "message",
+                                        "errors"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The example attribute field is required. (and 2 more errors)."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "example_attribute": [
+                                                    "The example attribute field is required."
+                                                ]
+                                            },
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": []
+            }
+        },
+        "\/api\/v1\/register\/{organizationUser}": {
+            "get": {
+                "tags": [
+                    "Register"
+                ],
+                "summary": "Verify.",
+                "parameters": [
+                    {
+                        "name": "organizationUser",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "expires",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "signature",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "The server successfully processed the request and is not returning any content"
                     },
                     "422": {
                         "description": "Unprocessable Entity.",
@@ -1618,7 +1940,6 @@
                                                     "last_name",
                                                     "email",
                                                     "phone_number",
-                                                    "password",
                                                     "created_at",
                                                     "updated_at",
                                                     "organization"
@@ -1646,10 +1967,6 @@
                                                         "type": "string",
                                                         "nullable": true
                                                     },
-                                                    "password": {
-                                                        "type": "string",
-                                                        "writeOnly": true
-                                                    },
                                                     "created_at": {
                                                         "type": "string",
                                                         "format": "date-time",
@@ -1673,6 +1990,23 @@
                                                                     "name": {
                                                                         "type": "string"
                                                                     },
+                                                                    "auto_add_credits": {
+                                                                        "type": "boolean"
+                                                                    },
+                                                                    "lower_limit": {
+                                                                        "type": "integer"
+                                                                    },
+                                                                    "replenishment_method": {
+                                                                        "enum": [
+                                                                            "add_until",
+                                                                            "add_with"
+                                                                        ],
+                                                                        "type": "string",
+                                                                        "nullable": true
+                                                                    },
+                                                                    "amount": {
+                                                                        "type": "integer"
+                                                                    },
                                                                     "onboarding_steps_completed": {
                                                                         "required": [
                                                                             "billing_address",
@@ -1693,7 +2027,29 @@
                                                                         "readOnly": true
                                                                     },
                                                                     "credits": {
-                                                                        "type": "integer",
+                                                                        "readOnly": true
+                                                                    },
+                                                                    "agency": {
+                                                                        "allOf": [
+                                                                            {
+                                                                                "required": [
+                                                                                    "id",
+                                                                                    "name"
+                                                                                ],
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "id": {
+                                                                                        "type": "string",
+                                                                                        "format": "uuid",
+                                                                                        "readOnly": true
+                                                                                    },
+                                                                                    "name": {
+                                                                                        "type": "string"
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        ],
+                                                                        "nullable": true,
                                                                         "readOnly": true
                                                                     }
                                                                 }
@@ -1846,6 +2202,23 @@
                                                     "name": {
                                                         "type": "string"
                                                     },
+                                                    "auto_add_credits": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "lower_limit": {
+                                                        "type": "integer"
+                                                    },
+                                                    "replenishment_method": {
+                                                        "enum": [
+                                                            "add_until",
+                                                            "add_with"
+                                                        ],
+                                                        "type": "string",
+                                                        "nullable": true
+                                                    },
+                                                    "amount": {
+                                                        "type": "integer"
+                                                    },
                                                     "onboarding_steps_completed": {
                                                         "required": [
                                                             "billing_address",
@@ -1866,7 +2239,29 @@
                                                         "readOnly": true
                                                     },
                                                     "credits": {
-                                                        "type": "integer",
+                                                        "readOnly": true
+                                                    },
+                                                    "agency": {
+                                                        "allOf": [
+                                                            {
+                                                                "required": [
+                                                                    "id",
+                                                                    "name"
+                                                                ],
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "format": "uuid",
+                                                                        "readOnly": true
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string"
+                                                                    }
+                                                                }
+                                                            }
+                                                        ],
+                                                        "nullable": true,
                                                         "readOnly": true
                                                     }
                                                 }
@@ -1982,6 +2377,23 @@
                                                                 "name": {
                                                                     "type": "string"
                                                                 },
+                                                                "auto_add_credits": {
+                                                                    "type": "boolean"
+                                                                },
+                                                                "lower_limit": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "replenishment_method": {
+                                                                    "enum": [
+                                                                        "add_until",
+                                                                        "add_with"
+                                                                    ],
+                                                                    "type": "string",
+                                                                    "nullable": true
+                                                                },
+                                                                "amount": {
+                                                                    "type": "integer"
+                                                                },
                                                                 "onboarding_steps_completed": {
                                                                     "required": [
                                                                         "billing_address",
@@ -2002,7 +2414,29 @@
                                                                     "readOnly": true
                                                                 },
                                                                 "credits": {
-                                                                    "type": "integer",
+                                                                    "readOnly": true
+                                                                },
+                                                                "agency": {
+                                                                    "allOf": [
+                                                                        {
+                                                                            "required": [
+                                                                                "id",
+                                                                                "name"
+                                                                            ],
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "id": {
+                                                                                    "type": "string",
+                                                                                    "format": "uuid",
+                                                                                    "readOnly": true
+                                                                                },
+                                                                                "name": {
+                                                                                    "type": "string"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    ],
+                                                                    "nullable": true,
                                                                     "readOnly": true
                                                                 }
                                                             }
@@ -2205,6 +2639,23 @@
                                                                 "name": {
                                                                     "type": "string"
                                                                 },
+                                                                "auto_add_credits": {
+                                                                    "type": "boolean"
+                                                                },
+                                                                "lower_limit": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "replenishment_method": {
+                                                                    "enum": [
+                                                                        "add_until",
+                                                                        "add_with"
+                                                                    ],
+                                                                    "type": "string",
+                                                                    "nullable": true
+                                                                },
+                                                                "amount": {
+                                                                    "type": "integer"
+                                                                },
                                                                 "onboarding_steps_completed": {
                                                                     "required": [
                                                                         "billing_address",
@@ -2225,7 +2676,29 @@
                                                                     "readOnly": true
                                                                 },
                                                                 "credits": {
-                                                                    "type": "integer",
+                                                                    "readOnly": true
+                                                                },
+                                                                "agency": {
+                                                                  "allOf": [
+                                                                    {
+                                                                      "required": [
+                                                                        "id",
+                                                                        "name"
+                                                                      ],
+                                                                      "type": "object",
+                                                                      "properties": {
+                                                                        "id": {
+                                                                          "type": "string",
+                                                                          "format": "uuid",
+                                                                          "readOnly": true
+                                                                        },
+                                                                        "name": {
+                                                                          "type": "string"
+                                                                        }
+                                                                      }
+                                                                    }
+                                                                  ],
+                                                                    "nullable": true,
                                                                     "readOnly": true
                                                                 }
                                                             }
@@ -2507,6 +2980,23 @@
                                                                 "name": {
                                                                     "type": "string"
                                                                 },
+                                                                "auto_add_credits": {
+                                                                    "type": "boolean"
+                                                                },
+                                                                "lower_limit": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "replenishment_method": {
+                                                                    "enum": [
+                                                                        "add_until",
+                                                                        "add_with"
+                                                                    ],
+                                                                    "type": "string",
+                                                                    "nullable": true
+                                                                },
+                                                                "amount": {
+                                                                    "type": "integer"
+                                                                },
                                                                 "onboarding_steps_completed": {
                                                                     "required": [
                                                                         "billing_address",
@@ -2527,7 +3017,29 @@
                                                                     "readOnly": true
                                                                 },
                                                                 "credits": {
-                                                                    "type": "integer",
+                                                                    "readOnly": true
+                                                                },
+                                                                "agency": {
+                                                                    "allOf": [
+                                                                        {
+                                                                            "required": [
+                                                                                "id",
+                                                                                "name"
+                                                                            ],
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "id": {
+                                                                                    "type": "string",
+                                                                                    "format": "uuid",
+                                                                                    "readOnly": true
+                                                                                },
+                                                                                "name": {
+                                                                                    "type": "string"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    ],
+                                                                    "nullable": true,
                                                                     "readOnly": true
                                                                 }
                                                             }
@@ -2694,6 +3206,23 @@
                                                 "name": {
                                                     "type": "string"
                                                 },
+                                                "auto_add_credits": {
+                                                    "type": "boolean"
+                                                },
+                                                "lower_limit": {
+                                                    "type": "integer"
+                                                },
+                                                "replenishment_method": {
+                                                    "enum": [
+                                                        "add_until",
+                                                        "add_with"
+                                                    ],
+                                                    "type": "string",
+                                                    "nullable": true
+                                                },
+                                                "amount": {
+                                                    "type": "integer"
+                                                },
                                                 "onboarding_steps_completed": {
                                                     "required": [
                                                         "billing_address",
@@ -2714,7 +3243,29 @@
                                                     "readOnly": true
                                                 },
                                                 "credits": {
-                                                    "type": "integer",
+                                                    "readOnly": true
+                                                },
+                                                "agency": {
+                                                    "allOf": [
+                                                        {
+                                                            "required": [
+                                                                "id",
+                                                                "name"
+                                                            ],
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "string",
+                                                                    "format": "uuid",
+                                                                    "readOnly": true
+                                                                },
+                                                                "name": {
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    ],
+                                                    "nullable": true,
                                                     "readOnly": true
                                                 }
                                             }
@@ -2803,6 +3354,23 @@
                                     "name": {
                                         "type": "string"
                                     },
+                                    "auto_add_credits": {
+                                        "type": "boolean"
+                                    },
+                                    "lower_limit": {
+                                        "type": "integer"
+                                    },
+                                    "replenishment_method": {
+                                        "enum": [
+                                            "add_until",
+                                            "add_with"
+                                        ],
+                                        "type": "string",
+                                        "nullable": true
+                                    },
+                                    "amount": {
+                                        "type": "integer"
+                                    },
                                     "onboarding_steps_completed": {
                                         "required": [
                                             "billing_address",
@@ -2823,7 +3391,29 @@
                                         "readOnly": true
                                     },
                                     "credits": {
-                                        "type": "integer",
+                                        "readOnly": true
+                                    },
+                                    "agency": {
+                                        "allOf": [
+                                            {
+                                                "required": [
+                                                    "id",
+                                                    "name"
+                                                ],
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "format": "uuid",
+                                                        "readOnly": true
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "nullable": true,
                                         "readOnly": true
                                     }
                                 }
@@ -2850,6 +3440,23 @@
                                                 "name": {
                                                     "type": "string"
                                                 },
+                                                "auto_add_credits": {
+                                                    "type": "boolean"
+                                                },
+                                                "lower_limit": {
+                                                    "type": "integer"
+                                                },
+                                                "replenishment_method": {
+                                                    "enum": [
+                                                        "add_until",
+                                                        "add_with"
+                                                    ],
+                                                    "type": "string",
+                                                    "nullable": true
+                                                },
+                                                "amount": {
+                                                    "type": "integer"
+                                                },
                                                 "onboarding_steps_completed": {
                                                     "required": [
                                                         "billing_address",
@@ -2870,7 +3477,29 @@
                                                     "readOnly": true
                                                 },
                                                 "credits": {
-                                                    "type": "integer",
+                                                    "readOnly": true
+                                                },
+                                                "agency": {
+                                                    "allOf": [
+                                                        {
+                                                            "required": [
+                                                                "id",
+                                                                "name"
+                                                            ],
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "string",
+                                                                    "format": "uuid",
+                                                                    "readOnly": true
+                                                                },
+                                                                "name": {
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    ],
+                                                    "nullable": true,
                                                     "readOnly": true
                                                 }
                                             }
@@ -4048,6 +4677,14 @@
                                                         "type": "string"
                                                       }
                                                     },
+                                                    "printlane_template_id": {
+                                                        "type": "integer",
+                                                        "nullable": true
+                                                    },
+                                                    "printlane_template_token": {
+                                                        "type": "string",
+                                                        "nullable": true
+                                                    },
                                                     "tags": {
                                                         "type": "array",
                                                         "example": [
@@ -4223,6 +4860,14 @@
                                             }
                                         }
                                     },
+                                    "printlane_template_id": {
+                                        "type": "integer",
+                                        "nullable": true
+                                    },
+                                    "printlane_template_token": {
+                                        "type": "string",
+                                        "nullable": true
+                                    },
                                     "tags": {
                                         "type": "array",
                                         "example": [
@@ -4360,6 +5005,14 @@
                                                             }
                                                         }
                                                     }
+                                                },
+                                                "printlane_template_id": {
+                                                    "type": "integer",
+                                                    "nullable": true
+                                                },
+                                                "printlane_template_token": {
+                                                    "type": "string",
+                                                    "nullable": true
                                                 },
                                                 "tags": {
                                                     "type": "array",
@@ -4595,6 +5248,14 @@
                                                   "items": {
                                                     "type": "string"
                                                   }
+                                                },
+                                                "printlane_template_id": {
+                                                    "type": "integer",
+                                                    "nullable": true
+                                                },
+                                                "printlane_template_token": {
+                                                    "type": "string",
+                                                    "nullable": true
                                                 },
                                                 "tags": {
                                                     "type": "array",
@@ -4986,6 +5647,14 @@
                                                                     }
                                                                 }
                                                             }
+                                                        },
+                                                        "printlane_template_id": {
+                                                            "type": "integer",
+                                                            "nullable": true
+                                                        },
+                                                        "printlane_template_token": {
+                                                            "type": "string",
+                                                            "nullable": true
                                                         },
                                                         "tags": {
                                                             "type": "array",
@@ -6166,7 +6835,7 @@
                                                                 "readOnly": true
                                                             },
                                                             "credits": {
-                                                                "type": "integer",
+                                                                "type": "string",
                                                                 "readOnly": true
                                                             },
                                                             "open_rate_percentage": {
@@ -6227,6 +6896,10 @@
                                                                 "type": "string",
                                                                 "format": "date-time",
                                                                 "readOnly": true
+                                                            },
+                                                            "shipping_date": {
+                                                                "type": "string",
+                                                                "nullable": true
                                                             }
                                                         }
                                                     }
@@ -6282,7 +6955,7 @@
                         "application\/json": {
                             "schema": {
                                 "required": [
-                                      "preset_id",
+                                    "preset_id",
                                     "font_id",
                                     "type"
                                 ],
@@ -6316,7 +6989,7 @@
                                         "readOnly": true
                                     },
                                     "credits": {
-                                        "type": "integer",
+                                        "type": "string",
                                         "readOnly": true
                                     },
                                     "open_rate_percentage": {
@@ -6377,6 +7050,10 @@
                                         "type": "string",
                                         "format": "date-time",
                                         "readOnly": true
+                                    },
+                                    "shipping_date": {
+                                        "type": "string",
+                                        "nullable": true
                                     }
                                 }
                             }
@@ -6438,7 +7115,7 @@
                                                     "readOnly": true
                                                 },
                                                 "credits": {
-                                                    "type": "integer",
+                                                    "type": "string",
                                                     "readOnly": true
                                                 },
                                                 "open_rate_percentage": {
@@ -6499,6 +7176,10 @@
                                                     "type": "string",
                                                     "format": "date-time",
                                                     "readOnly": true
+                                                },
+                                                "shipping_date": {
+                                                    "type": "string",
+                                                    "nullable": true
                                                 }
                                             }
                                         }
@@ -6647,7 +7328,7 @@
                                                     "readOnly": true
                                                 },
                                                 "credits": {
-                                                    "type": "integer",
+                                                    "type": "string",
                                                     "readOnly": true
                                                 },
                                                 "open_rate_percentage": {
@@ -6708,6 +7389,10 @@
                                                     "type": "string",
                                                     "format": "date-time",
                                                     "readOnly": true
+                                                },
+                                                "shipping_date": {
+                                                    "type": "string",
+                                                    "nullable": true
                                                 }
                                             }
                                         }
@@ -6852,6 +7537,127 @@
                         }
                     }
                 ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "preset_id",
+                                    "label",
+                                    "quantity",
+                                    "font_id",
+                                    "credits",
+                                    "open_rate_percentage",
+                                    "status",
+                                    "external_number",
+                                    "finalized_at",
+                                    "processed_at",
+                                    "type",
+                                    "created_at",
+                                    "updated_at"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "readOnly": true
+                                    },
+                                    "preset_id": {
+                                        "type": "string",
+                                        "format": "uuid"
+                                    },
+                                    "label": {
+                                        "type": "string",
+                                        "readOnly": true
+                                    },
+                                    "quantity": {
+                                        "type": "integer",
+                                        "description": "The number of cards per recipient"
+                                    },
+                                    "font_id": {
+                                        "type": "string",
+                                        "description": "The font used for the order, which can be found in the fonts endpoint",
+                                        "format": "uuid"
+                                    },
+                                    "total_cards": {
+                                        "type": "integer",
+                                        "description": "The total number of cards in the order",
+                                        "readOnly": true
+                                    },
+                                    "credits": {
+                                        "type": "string",
+                                        "readOnly": true
+                                    },
+                                    "open_rate_percentage": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "nullable": true,
+                                        "readOnly": true
+                                    },
+                                    "status": {
+                                        "enum": [
+                                            "draft",
+                                            "failed",
+                                            "finalized",
+                                            "processing",
+                                            "processed"
+                                        ],
+                                        "type": "string",
+                                        "readOnly": true
+                                    },
+                                    "external_number": {
+                                        "type": "string",
+                                        "readOnly": true,
+                                        "example": "202300001"
+                                    },
+                                    "failed_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "nullable": true,
+                                        "readOnly": true
+                                    },
+                                    "finalized_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "nullable": true,
+                                        "readOnly": true
+                                    },
+                                    "processed_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "nullable": true,
+                                        "readOnly": true
+                                    },
+                                    "type": {
+                                        "enum": [
+                                            "send_multiple",
+                                            "send_single",
+                                            "order_single",
+                                            "order_multiple"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    "created_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "readOnly": true
+                                    },
+                                    "updated_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "readOnly": true
+                                    },
+                                    "shipping_date": {
+                                        "type": "string",
+                                        "nullable": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Updated order.",
@@ -6907,7 +7713,7 @@
                                                     "readOnly": true
                                                 },
                                                 "credits": {
-                                                    "type": "integer",
+                                                    "type": "string",
                                                     "readOnly": true
                                                 },
                                                 "open_rate_percentage": {
@@ -6968,6 +7774,10 @@
                                                     "type": "string",
                                                     "format": "date-time",
                                                     "readOnly": true
+                                                },
+                                                "shipping_date": {
+                                                    "type": "string",
+                                                    "nullable": true
                                                 }
                                             }
                                         }
@@ -7205,6 +8015,12 @@
                                                 "additionalProperties": {
                                                     "type": "string"
                                                 }
+                                            },
+                                            "allow_empty_template_variables": {
+                                                "type": "boolean",
+                                                "description": "If true, the template will be rendered even if there are missing variables. Default is false.\n",
+                                                "default": false,
+                                                "nullable": true
                                             }
                                         }
                                     },
@@ -7389,7 +8205,7 @@
                                                     "readOnly": true
                                                 },
                                                 "credits": {
-                                                    "type": "integer",
+                                                    "type": "string",
                                                     "readOnly": true
                                                 },
                                                 "open_rate_percentage": {
@@ -7450,6 +8266,10 @@
                                                     "type": "string",
                                                     "format": "date-time",
                                                     "readOnly": true
+                                                },
+                                                "shipping_date": {
+                                                    "type": "string",
+                                                    "nullable": true
                                                 }
                                             }
                                         }
@@ -8382,6 +9202,110 @@
                 }
             }
         },
+        "\/api\/v1\/subscriptions\/{id}\/swap\/{subscriptionPlan}": {
+            "post": {
+                "tags": [
+                    "Subscription"
+                ],
+                "summary": "Swap a subscription.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "subscriptionPlan",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Subscription resumed."
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not found."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "\/api\/v1\/credits": {
             "post": {
                 "tags": [
@@ -8403,12 +9327,6 @@
                                         "type": "string",
                                         "description": "URL to redirect to if the user cancels the checkout.",
                                         "format": "url"
-                                    },
-                                    "amount": {
-                                        "maximum": 100,
-                                        "minimum": 1,
-                                        "type": "integer",
-                                        "example": 5
                                     }
                                 }
                             }
@@ -8553,8 +9471,8 @@
                                             "type": "boolean"
                                         },
                                         "credits": {
-                                            "type": "integer",
-                                            "example": 5000
+                                            "type": "string",
+                                            "example": "50,00"
                                         }
                                     }
                                 }
@@ -9223,6 +10141,23 @@
                     "Tag"
                 ],
                 "summary": "Get a list of tags.",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Filter on type of tags",
+                        "required": false,
+                        "schema": {
+                            "enum": [
+                                "template",
+                                "preset",
+                                "organization-address",
+                                "address"
+                            ],
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "List of tags.",
@@ -9542,6 +10477,1048 @@
                                                         },
                                                         "name": {
                                                             "type": "string"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "properties": {
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "readOnly": true
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "readOnly": true
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not found."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "required": [
+                                        "message",
+                                        "errors"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The example attribute field is required. (and 2 more errors)."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "example_attribute": [
+                                                    "The example attribute field is required."
+                                                ]
+                                            },
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/v1\/addresses": {
+            "get": {
+                "tags": [
+                    "Address"
+                ],
+                "summary": "Return list of addresses.",
+                "parameters": [
+                    {
+                        "name": "tag",
+                        "in": "query",
+                        "description": "Filter on tag name",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of addresses.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "required": [
+                                                "current_page",
+                                                "data",
+                                                "first_page_url",
+                                                "from",
+                                                "last_page",
+                                                "last_page_url",
+                                                "links",
+                                                "next_page_url",
+                                                "path",
+                                                "per_page",
+                                                "prev_page_url",
+                                                "to",
+                                                "total"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "total": {
+                                                    "type": "number"
+                                                },
+                                                "per_page": {
+                                                    "type": "number"
+                                                },
+                                                "current_page": {
+                                                    "type": "number"
+                                                },
+                                                "last_page": {
+                                                    "type": "number"
+                                                },
+                                                "first_page_url": {
+                                                    "type": "string",
+                                                    "format": "url"
+                                                },
+                                                "last_page_url": {
+                                                    "type": "string",
+                                                    "format": "url"
+                                                },
+                                                "next_page_url": {
+                                                    "type": "string",
+                                                    "format": "url",
+                                                    "nullable": true
+                                                },
+                                                "prev_page_url": {
+                                                    "type": "string",
+                                                    "format": "url",
+                                                    "nullable": true
+                                                },
+                                                "path": {
+                                                    "type": "string",
+                                                    "format": "url"
+                                                },
+                                                "from": {
+                                                    "type": "number",
+                                                    "nullable": true
+                                                },
+                                                "to": {
+                                                    "type": "number",
+                                                    "nullable": true
+                                                },
+                                                "links": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "required": [
+                                                            "url",
+                                                            "label",
+                                                            "active"
+                                                        ],
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "url": {
+                                                                "type": "string",
+                                                                "format": "url",
+                                                                "nullable": true
+                                                            },
+                                                            "label": {
+                                                                "type": "string",
+                                                                "example": "Next"
+                                                            },
+                                                            "active": {
+                                                                "type": "boolean"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "data": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "readOnly": true
+                                                            },
+                                                            "organisation_id": {
+                                                                "type": "string",
+                                                                "readOnly": true
+                                                            },
+                                                            "first_name": {
+                                                                "type": "string"
+                                                            },
+                                                            "last_name": {
+                                                                "type": "string"
+                                                            },
+                                                            "address": {
+                                                                "type": "string"
+                                                            },
+                                                            "postal_code": {
+                                                                "type": "string"
+                                                            },
+                                                            "city": {
+                                                                "type": "string"
+                                                            },
+                                                            "country_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "date_birthday": {
+                                                                "type": "string",
+                                                                "format": "date",
+                                                                "nullable": true
+                                                            },
+                                                            "date_jubilee": {
+                                                                "type": "string",
+                                                                "format": "date",
+                                                                "nullable": true
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "readOnly": true
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "readOnly": true
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Address"
+                ],
+                "summary": "Add a new address.",
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "readOnly": true
+                                            },
+                                            "organisation_id": {
+                                                "type": "string",
+                                                "readOnly": true
+                                            },
+                                            "first_name": {
+                                                "type": "string"
+                                            },
+                                            "last_name": {
+                                                "type": "string"
+                                            },
+                                            "address": {
+                                                "type": "string"
+                                            },
+                                            "postal_code": {
+                                                "type": "string"
+                                            },
+                                            "city": {
+                                                "type": "string"
+                                            },
+                                            "country_id": {
+                                                "type": "string"
+                                            },
+                                            "date_birthday": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "nullable": true
+                                            },
+                                            "date_jubilee": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "nullable": true
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "readOnly": true
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "readOnly": true
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "required": [
+                                            "first_name",
+                                            "last_name",
+                                            "address",
+                                            "postal_code",
+                                            "city",
+                                            "country_id"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Added address.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "readOnly": true
+                                                },
+                                                "organisation_id": {
+                                                    "type": "string",
+                                                    "readOnly": true
+                                                },
+                                                "first_name": {
+                                                    "type": "string"
+                                                },
+                                                "last_name": {
+                                                    "type": "string"
+                                                },
+                                                "address": {
+                                                    "type": "string"
+                                                },
+                                                "postal_code": {
+                                                    "type": "string"
+                                                },
+                                                "city": {
+                                                    "type": "string"
+                                                },
+                                                "country_id": {
+                                                    "type": "string"
+                                                },
+                                                "date_birthday": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "nullable": true
+                                                },
+                                                "date_jubilee": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "nullable": true
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "readOnly": true
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "readOnly": true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "required": [
+                                        "message",
+                                        "errors"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The example attribute field is required. (and 2 more errors)."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "example_attribute": [
+                                                    "The example attribute field is required."
+                                                ]
+                                            },
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/v1\/addresses\/{id}": {
+            "get": {
+                "tags": [
+                    "Address"
+                ],
+                "summary": "Find an address.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Found address.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "readOnly": true
+                                                },
+                                                "organisation_id": {
+                                                    "type": "string",
+                                                    "readOnly": true
+                                                },
+                                                "first_name": {
+                                                    "type": "string"
+                                                },
+                                                "last_name": {
+                                                    "type": "string"
+                                                },
+                                                "address": {
+                                                    "type": "string"
+                                                },
+                                                "postal_code": {
+                                                    "type": "string"
+                                                },
+                                                "city": {
+                                                    "type": "string"
+                                                },
+                                                "country_id": {
+                                                    "type": "string"
+                                                },
+                                                "date_birthday": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "nullable": true
+                                                },
+                                                "date_jubilee": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "nullable": true
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "readOnly": true
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "readOnly": true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not found."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Address"
+                ],
+                "summary": "Delete an address.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Record deleted."
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not found."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Address"
+                ],
+                "summary": "Update an address.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "readOnly": true
+                                    },
+                                    "organisation_id": {
+                                        "type": "string",
+                                        "readOnly": true
+                                    },
+                                    "first_name": {
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "postal_code": {
+                                        "type": "string"
+                                    },
+                                    "city": {
+                                        "type": "string"
+                                    },
+                                    "country_id": {
+                                        "type": "string"
+                                    },
+                                    "date_birthday": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "nullable": true
+                                    },
+                                    "date_jubilee": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "nullable": true
+                                    },
+                                    "created_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "readOnly": true
+                                    },
+                                    "updated_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "readOnly": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated address.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "readOnly": true
+                                                },
+                                                "organisation_id": {
+                                                    "type": "string",
+                                                    "readOnly": true
+                                                },
+                                                "first_name": {
+                                                    "type": "string"
+                                                },
+                                                "last_name": {
+                                                    "type": "string"
+                                                },
+                                                "address": {
+                                                    "type": "string"
+                                                },
+                                                "postal_code": {
+                                                    "type": "string"
+                                                },
+                                                "city": {
+                                                    "type": "string"
+                                                },
+                                                "country_id": {
+                                                    "type": "string"
+                                                },
+                                                "date_birthday": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "nullable": true
+                                                },
+                                                "date_jubilee": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "nullable": true
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "readOnly": true
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "readOnly": true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not found."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "required": [
+                                        "message",
+                                        "errors"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The example attribute field is required. (and 2 more errors)."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "example_attribute": [
+                                                    "The example attribute field is required."
+                                                ]
+                                            },
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/v1\/addresses\/{id}\/tags": {
+            "patch": {
+                "tags": [
+                    "Address"
+                ],
+                "summary": "Update an address tag.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "tags": {
+                                        "type": "array",
+                                        "example": [
+                                            "rood",
+                                            "geel"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated address tags.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "allOf": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string",
+                                                            "readOnly": true
+                                                        },
+                                                        "organisation_id": {
+                                                            "type": "string",
+                                                            "readOnly": true
+                                                        },
+                                                        "first_name": {
+                                                            "type": "string"
+                                                        },
+                                                        "last_name": {
+                                                            "type": "string"
+                                                        },
+                                                        "address": {
+                                                            "type": "string"
+                                                        },
+                                                        "postal_code": {
+                                                            "type": "string"
+                                                        },
+                                                        "city": {
+                                                            "type": "string"
+                                                        },
+                                                        "country_id": {
+                                                            "type": "string"
+                                                        },
+                                                        "date_birthday": {
+                                                            "type": "string",
+                                                            "format": "date",
+                                                            "nullable": true
+                                                        },
+                                                        "date_jubilee": {
+                                                            "type": "string",
+                                                            "format": "date",
+                                                            "nullable": true
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "readOnly": true
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "readOnly": true
                                                         }
                                                     }
                                                 },
