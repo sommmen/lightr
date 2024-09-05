@@ -829,17 +829,13 @@
                                                             "name": {
                                                                 "type": "string"
                                                             },
-                                                            "postage_costs_card_a5": {
-                                                                "type": "string",
-                                                                "format": "decimal"
-                                                            },
-                                                            "postage_costs_card_a6": {
-                                                                "type": "string",
-                                                                "format": "decimal"
-                                                            },
-                                                            "postage_costs_card_a7": {
-                                                                "type": "string",
-                                                                "format": "decimal"
+                                                            "shipping_rates_region": {
+                                                                "enum": [
+                                                                    "nl",
+                                                                    "eu",
+                                                                    "world"
+                                                                ],
+                                                                "type": "string"
                                                             }
                                                         }
                                                     },
@@ -2679,25 +2675,25 @@
                                                                     "readOnly": true
                                                                 },
                                                                 "agency": {
-                                                                  "allOf": [
-                                                                    {
-                                                                      "required": [
-                                                                        "id",
-                                                                        "name"
-                                                                      ],
-                                                                      "type": "object",
-                                                                      "properties": {
-                                                                        "id": {
-                                                                          "type": "string",
-                                                                          "format": "uuid",
-                                                                          "readOnly": true
-                                                                        },
-                                                                        "name": {
-                                                                          "type": "string"
+                                                                    "allOf": [
+                                                                        {
+                                                                            "required": [
+                                                                                "id",
+                                                                                "name"
+                                                                            ],
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "id": {
+                                                                                    "type": "string",
+                                                                                    "format": "uuid",
+                                                                                    "readOnly": true
+                                                                                },
+                                                                                "name": {
+                                                                                    "type": "string"
+                                                                                }
+                                                                            }
                                                                         }
-                                                                      }
-                                                                    }
-                                                                  ],
+                                                                    ],
                                                                     "nullable": true,
                                                                     "readOnly": true
                                                                 }
@@ -4618,56 +4614,56 @@
                                                     "qr_tracking_enabled": {
                                                         "type": "boolean"
                                                     },
-                                                  "images": {
-                                                    "type": "array",
-                                                    "items": {
-                                                      "required": [
-                                                        "name",
-                                                        "width",
-                                                        "height",
-                                                        "is_qr"
-                                                      ],
-                                                      "type": "object",
-                                                      "properties": {
-                                                        "name": {
-                                                          "type": "string"
-                                                        },
-                                                        "width": {
-                                                          "minimum": 0,
-                                                          "type": "number",
-                                                          "format": "float"
-                                                        },
-                                                        "height": {
-                                                          "minimum": 0,
-                                                          "type": "number",
-                                                          "format": "float"
-                                                        },
-                                                        "is_qr": {
-                                                          "type": "boolean"
-                                                        },
-                                                        "url": {
-                                                          "type": "string",
-                                                          "description": "- Required if `is_qr` is `true`\n- Prohibited if `is_qr` is `false`\n",
-                                                          "format": "url",
-                                                          "nullable": true
-                                                        },
-                                                        "file": {
-                                                          "type": "string",
-                                                          "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                          "format": "binary",
-                                                          "nullable": true,
-                                                          "writeOnly": true
-                                                        },
-                                                        "file_url": {
-                                                          "type": "string",
-                                                          "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
-                                                          "format": "url",
-                                                          "nullable": true,
-                                                          "readOnly": true
+                                                    "images": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "required": [
+                                                                "name",
+                                                                "width",
+                                                                "height",
+                                                                "is_qr"
+                                                            ],
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "width": {
+                                                                    "minimum": 0,
+                                                                    "type": "number",
+                                                                    "format": "float"
+                                                                },
+                                                                "height": {
+                                                                    "minimum": 0,
+                                                                    "type": "number",
+                                                                    "format": "float"
+                                                                },
+                                                                "is_qr": {
+                                                                    "type": "boolean"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string",
+                                                                    "description": "- Required if `is_qr` is `true`\n- Prohibited if `is_qr` is `false`\n",
+                                                                    "format": "url",
+                                                                    "nullable": true
+                                                                },
+                                                                "file": {
+                                                                    "type": "string",
+                                                                    "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
+                                                                    "format": "binary",
+                                                                    "nullable": true,
+                                                                    "writeOnly": true
+                                                                },
+                                                                "file_url": {
+                                                                    "type": "string",
+                                                                    "description": "- Required if `is_qr` is `false`\n- Prohibited if `is_qr` is `true`\n",
+                                                                    "format": "url",
+                                                                    "nullable": true,
+                                                                    "readOnly": true
+                                                                }
+                                                            }
                                                         }
-                                                      }
-                                                    }
-                                                  },
+                                                    },
                                                     "has_multiline": {
                                                       "type": "boolean"
                                                     },
@@ -5949,6 +5945,28 @@
                                                             "text_variables": {
                                                                 "type": "object"
                                                             },
+                                                            "qr_variables": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "required": [
+                                                                        "index",
+                                                                        "value",
+                                                                        "trackable"
+                                                                    ],
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "index": {
+                                                                            "type": "integer"
+                                                                        },
+                                                                        "value": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "trackable": {
+                                                                            "type": "boolean"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
                                                             "received_by_extractor_at": {
                                                                 "type": "string",
                                                                 "format": "date-time",
@@ -5970,6 +5988,34 @@
                                                             "allow_empty_text_variables": {
                                                                 "type": "boolean",
                                                                 "nullable": true
+                                                            },
+                                                            "open_rates": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "required": [
+                                                                        "preset_image_id",
+                                                                        "count",
+                                                                        "last_scan"
+                                                                    ],
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "preset_image_id": {
+                                                                            "type": "string",
+                                                                            "format": "uuid",
+                                                                            "readOnly": true
+                                                                        },
+                                                                        "count": {
+                                                                            "type": "integer",
+                                                                            "nullable": true
+                                                                        },
+                                                                        "last_scan": {
+                                                                            "type": "string",
+                                                                            "format": "date-time",
+                                                                            "nullable": true
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "readOnly": true
                                                             }
                                                         }
                                                     },
@@ -6079,6 +6125,28 @@
                                     "text_variables": {
                                         "type": "object"
                                     },
+                                    "qr_variables": {
+                                        "type": "array",
+                                        "items": {
+                                            "required": [
+                                                "index",
+                                                "value",
+                                                "trackable"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "index": {
+                                                    "type": "integer"
+                                                },
+                                                "value": {
+                                                    "type": "string"
+                                                },
+                                                "trackable": {
+                                                    "type": "boolean"
+                                                }
+                                            }
+                                        }
+                                    },
                                     "received_by_extractor_at": {
                                         "type": "string",
                                         "format": "date-time",
@@ -6100,6 +6168,34 @@
                                     "allow_empty_text_variables": {
                                         "type": "boolean",
                                         "nullable": true
+                                    },
+                                    "open_rates": {
+                                        "type": "array",
+                                        "items": {
+                                            "required": [
+                                                "preset_image_id",
+                                                "count",
+                                                "last_scan"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "preset_image_id": {
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "readOnly": true
+                                                },
+                                                "count": {
+                                                    "type": "integer",
+                                                    "nullable": true
+                                                },
+                                                "last_scan": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "nullable": true
+                                                }
+                                            }
+                                        },
+                                        "readOnly": true
                                     }
                                 }
                             }
@@ -6145,6 +6241,28 @@
                                                 "text_variables": {
                                                     "type": "object"
                                                 },
+                                                "qr_variables": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "required": [
+                                                            "index",
+                                                            "value",
+                                                            "trackable"
+                                                        ],
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "index": {
+                                                                "type": "integer"
+                                                            },
+                                                            "value": {
+                                                                "type": "string"
+                                                            },
+                                                            "trackable": {
+                                                                "type": "boolean"
+                                                            }
+                                                        }
+                                                    }
+                                                },
                                                 "received_by_extractor_at": {
                                                     "type": "string",
                                                     "format": "date-time",
@@ -6166,6 +6284,34 @@
                                                 "allow_empty_text_variables": {
                                                     "type": "boolean",
                                                     "nullable": true
+                                                },
+                                                "open_rates": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "required": [
+                                                            "preset_image_id",
+                                                            "count",
+                                                            "last_scan"
+                                                        ],
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "preset_image_id": {
+                                                                "type": "string",
+                                                                "format": "uuid",
+                                                                "readOnly": true
+                                                            },
+                                                            "count": {
+                                                                "type": "integer",
+                                                                "nullable": true
+                                                            },
+                                                            "last_scan": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "nullable": true
+                                                            }
+                                                        }
+                                                    },
+                                                    "readOnly": true
                                                 }
                                             }
                                         }
@@ -6310,6 +6456,28 @@
                                                         "text_variables": {
                                                             "type": "object"
                                                         },
+                                                        "qr_variables": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "required": [
+                                                                    "index",
+                                                                    "value",
+                                                                    "trackable"
+                                                                ],
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "index": {
+                                                                        "type": "integer"
+                                                                    },
+                                                                    "value": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "trackable": {
+                                                                        "type": "boolean"
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
                                                         "received_by_extractor_at": {
                                                             "type": "string",
                                                             "format": "date-time",
@@ -6331,6 +6499,34 @@
                                                         "allow_empty_text_variables": {
                                                             "type": "boolean",
                                                             "nullable": true
+                                                        },
+                                                        "open_rates": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "required": [
+                                                                    "preset_image_id",
+                                                                    "count",
+                                                                    "last_scan"
+                                                                ],
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "preset_image_id": {
+                                                                        "type": "string",
+                                                                        "format": "uuid",
+                                                                        "readOnly": true
+                                                                    },
+                                                                    "count": {
+                                                                        "type": "integer",
+                                                                        "nullable": true
+                                                                    },
+                                                                    "last_scan": {
+                                                                        "type": "string",
+                                                                        "format": "date-time",
+                                                                        "nullable": true
+                                                                    }
+                                                                }
+                                                            },
+                                                            "readOnly": true
                                                         }
                                                     }
                                                 },
@@ -6534,6 +6730,28 @@
                                                         "text_variables": {
                                                             "type": "object"
                                                         },
+                                                        "qr_variables": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "required": [
+                                                                    "index",
+                                                                    "value",
+                                                                    "trackable"
+                                                                ],
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "index": {
+                                                                        "type": "integer"
+                                                                    },
+                                                                    "value": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "trackable": {
+                                                                        "type": "boolean"
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
                                                         "received_by_extractor_at": {
                                                             "type": "string",
                                                             "format": "date-time",
@@ -6555,6 +6773,34 @@
                                                         "allow_empty_text_variables": {
                                                             "type": "boolean",
                                                             "nullable": true
+                                                        },
+                                                        "open_rates": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "required": [
+                                                                    "preset_image_id",
+                                                                    "count",
+                                                                    "last_scan"
+                                                                ],
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "preset_image_id": {
+                                                                        "type": "string",
+                                                                        "format": "uuid",
+                                                                        "readOnly": true
+                                                                    },
+                                                                    "count": {
+                                                                        "type": "integer",
+                                                                        "nullable": true
+                                                                    },
+                                                                    "last_scan": {
+                                                                        "type": "string",
+                                                                        "format": "date-time",
+                                                                        "nullable": true
+                                                                    }
+                                                                }
+                                                            },
+                                                            "readOnly": true
                                                         }
                                                     }
                                                 },
@@ -6953,110 +7199,110 @@
                 "requestBody": {
                     "content": {
                         "application\/json": {
-                            "schema": {
-                                "required": [
-                                    "preset_id",
-                                    "font_id",
-                                    "type"
+                          "schema": {
+                            "required": [
+                              "preset_id",
+                              "font_id",
+                              "type"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "format": "uuid",
+                                "readOnly": true
+                              },
+                              "preset_id": {
+                                "type": "string",
+                                "format": "uuid"
+                              },
+                              "label": {
+                                "type": "string",
+                                "readOnly": true
+                              },
+                              "quantity": {
+                                "type": "integer",
+                                "description": "The number of cards per recipient"
+                              },
+                              "font_id": {
+                                "type": "string",
+                                "description": "The font used for the order, which can be found in the fonts endpoint",
+                                "format": "uuid"
+                              },
+                              "total_cards": {
+                                "type": "integer",
+                                "description": "The total number of cards in the order",
+                                "readOnly": true
+                              },
+                              "credits": {
+                                "type": "string",
+                                "readOnly": true
+                              },
+                              "open_rate_percentage": {
+                                "type": "number",
+                                "format": "float",
+                                "nullable": true,
+                                "readOnly": true
+                              },
+                              "status": {
+                                "enum": [
+                                  "draft",
+                                  "failed",
+                                  "finalized",
+                                  "processing",
+                                  "processed"
                                 ],
-                                "type": "object",
-                                "properties": {
-                                    "id": {
-                                        "type": "string",
-                                        "format": "uuid",
-                                        "readOnly": true
-                                    },
-                                    "preset_id": {
-                                        "type": "string",
-                                        "format": "uuid"
-                                    },
-                                    "label": {
-                                        "type": "string",
-                                        "readOnly": true
-                                    },
-                                    "quantity": {
-                                        "type": "integer",
-                                        "description": "The number of cards per recipient"
-                                    },
-                                    "font_id": {
-                                        "type": "string",
-                                        "description": "The font used for the order, which can be found in the fonts endpoint",
-                                        "format": "uuid"
-                                    },
-                                    "total_cards": {
-                                        "type": "integer",
-                                        "description": "The total number of cards in the order",
-                                        "readOnly": true
-                                    },
-                                    "credits": {
-                                        "type": "string",
-                                        "readOnly": true
-                                    },
-                                    "open_rate_percentage": {
-                                        "type": "number",
-                                        "format": "float",
-                                        "nullable": true,
-                                        "readOnly": true
-                                    },
-                                    "status": {
-                                        "enum": [
-                                            "draft",
-                                            "failed",
-                                            "finalized",
-                                            "processing",
-                                            "processed"
-                                        ],
-                                        "type": "string",
-                                        "readOnly": true
-                                    },
-                                    "external_number": {
-                                        "type": "string",
-                                        "readOnly": true,
-                                        "example": "202300001"
-                                    },
-                                    "failed_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "nullable": true,
-                                        "readOnly": true
-                                    },
-                                    "finalized_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "nullable": true,
-                                        "readOnly": true
-                                    },
-                                    "processed_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "nullable": true,
-                                        "readOnly": true
-                                    },
-                                    "type": {
-                                        "enum": [
-                                            "send_multiple",
-                                            "send_single",
-                                            "order_single",
-                                            "order_multiple"
-                                        ],
-                                        "type": "string"
-                                    },
-                                    "created_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "readOnly": true
-                                    },
-                                    "updated_at": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "readOnly": true
-                                    },
-                                    "shipping_date": {
-                                        "type": "string",
-                                        "nullable": true
-                                    }
-                                }
+                                "type": "string",
+                                "readOnly": true
+                              },
+                              "external_number": {
+                                "type": "string",
+                                "readOnly": true,
+                                "example": "202300001"
+                              },
+                              "failed_at": {
+                                "type": "string",
+                                "format": "date-time",
+                                "nullable": true,
+                                "readOnly": true
+                              },
+                              "finalized_at": {
+                                "type": "string",
+                                "format": "date-time",
+                                "nullable": true,
+                                "readOnly": true
+                              },
+                              "processed_at": {
+                                "type": "string",
+                                "format": "date-time",
+                                "nullable": true,
+                                "readOnly": true
+                              },
+                              "type": {
+                                "enum": [
+                                  "send_multiple",
+                                  "send_single",
+                                  "order_single",
+                                  "order_multiple"
+                                ],
+                                "type": "string"
+                              },
+                              "created_at": {
+                                "type": "string",
+                                "format": "date-time",
+                                "readOnly": true
+                              },
+                              "updated_at": {
+                                "type": "string",
+                                "format": "date-time",
+                                "readOnly": true
+                              },
+                              "shipping_date": {
+                                "type": "string",
+                                "nullable": true
+                              }
                             }
+                          }
                         }
                     }
                 },
@@ -8554,6 +8800,127 @@
                                         "message": {
                                             "type": "string",
                                             "example": "Not found."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/v1\/orders\/{id}\/import-receivers": {
+            "post": {
+                "tags": [
+                    "Order",
+                    "Receiver"
+                ],
+                "summary": "Import receivers from a file",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart\/form-data": {
+                            "schema": {
+                                "required": [
+                                    "file"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "description": "The file to import. Accepted formats are CSV, XLS and XLSX.",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Import uploaded."
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not found."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "required": [
+                                        "message",
+                                        "errors"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The example attribute field is required. (and 2 more errors)."
+                                        },
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string",
+                                                    "example": "There was an error on row 2. The country_code field is required."
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -11619,6 +11986,115 @@
                                                     "type": "string"
                                                 }
                                             }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/v1\/tier-prices": {
+            "get": {
+                "tags": [
+                    "TierPrices"
+                ],
+                "summary": "Get a list of tier prices.",
+                "responses": {
+                    "200": {
+                        "description": "List of Tier Prices.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "allOf": [
+                                                    {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "format": "uuid",
+                                                                "readOnly": true
+                                                            },
+                                                            "tier_id": {
+                                                                "type": "string",
+                                                                "format": "uuid",
+                                                                "nullable": true
+                                                            },
+                                                            "tier": {
+                                                                "type": "string"
+                                                            },
+                                                            "subscription": {
+                                                                "type": "string"
+                                                            },
+                                                            "size_a5": {
+                                                                "type": "string"
+                                                            },
+                                                            "size_a6": {
+                                                                "type": "string"
+                                                            },
+                                                            "size_a7": {
+                                                                "type": "string"
+                                                            },
+                                                            "shipping_nl": {
+                                                                "type": "string"
+                                                            },
+                                                            "shipping_eu": {
+                                                                "type": "string"
+                                                            },
+                                                            "shipping_world": {
+                                                                "type": "string"
+                                                            },
+                                                            "shipping_package_nl": {
+                                                                "type": "string"
+                                                            },
+                                                            "shipping_package_eu": {
+                                                                "type": "string"
+                                                            },
+                                                            "shipping_package_world": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
                                         }
                                     }
                                 }

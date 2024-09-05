@@ -43,7 +43,7 @@ var presetDetailsResponse = await client.PresetsGET2Async(preset.Id);
 var presetDetails = presetDetailsResponse.Data;
 
 // Create a new order
-logger.LogInformation("Attempting to create an order with font: {FontLabel} and preset {Preset} with text variables: {TextVariables}", font.Label, presetDetails.Label, string.Join(", ", presetDetails.Text_variables));
+logger.LogInformation("Attempting to create an order with font: {FontLabel} and preset {Preset} with text variables: {TextVariables}", font.Label, presetDetails.Label, string.Join(", ", presetDetails));
 
 var addOrderResponse = await client.OrdersPOSTAsync(new()
 {
@@ -105,7 +105,17 @@ var receiverPostResponse2 = await client.ReceiversPOSTAsync(orderId, new()
         Postcode = "123XX Fantasiastad",
         Land = "Nederland",
         Multiline = "Beste {{Naam}} van {{Land}},\n Dit is een testkaart die je gaat ontvangen.\n\nGroeten,\n" + meResponse.Data.First_name
-    }
+    },
+
+    // If your card is setup to use a QR-code:
+    //Qr_variables = [
+    //    new()
+    //    {
+    //        Index = 0,
+    //        Trackable = true,
+    //        Value = "httsp://example.com/"
+    //    }
+    //]
 });
 
 // Check if the receivers have been added.
