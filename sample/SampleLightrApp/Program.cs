@@ -77,12 +77,22 @@ var receiverPostResponse1 = await client.ReceiversPOSTAsync(orderId, new()
     Text_variables = new
     {
         Bedrijf = "Smitt Smithy's",
-        Naam = "Pepijn smitt",
-        Straat = "Voorbeeldstraat 1",
-        Postcode = "123XX Fantasiastad",
+        Voor_achternaam = "Pepijn smitt",
+        Straat_nr = "Voorbeeldstraat 1",
+        Postcode_plaats = "123XX Fantasiastad",
         Land = "Nederland",
+
         Multiline = "Dear {{Naam}} from {{Land}},\n This is a test card which you'll be receiving.\n\nYours truly,\n" + meResponse.Data.First_name
-    }
+    },
+
+    Qr_variables = [
+        new()
+        {
+            Index = 0,
+            Trackable = true,
+            Value = "https://example.com/card1"
+        }
+    ]
 });
 
 var receiverPostResponse2 = await client.ReceiversPOSTAsync(orderId, new()
@@ -100,22 +110,22 @@ var receiverPostResponse2 = await client.ReceiversPOSTAsync(orderId, new()
     {
         // No 'Bedrijf' - but we need a value for the api.
         Bedrijf = "---",
-        Naam = "Chiel de boer",
-        Straat = "Voorbeeldstraat 2",
-        Postcode = "123XX Fantasiastad",
+        Voor_achternaam = "Chiel de boer",
+        Straat_nr = "Voorbeeldstraat 2",
+        Postcode_plaats = "123XX Fantasiastad",
         Land = "Nederland",
         Multiline = "Beste {{Naam}} van {{Land}},\n Dit is een testkaart die je gaat ontvangen.\n\nGroeten,\n" + meResponse.Data.First_name
     },
 
     // If your card is setup to use a QR-code:
-    //Qr_variables = [
-    //    new()
-    //    {
-    //        Index = 0,
-    //        Trackable = true,
-    //        Value = "httsp://example.com/"
-    //    }
-    //]
+    Qr_variables = [
+        new()
+        {
+            Index = 0,
+            Trackable = true,
+            Value = "https://example.com/card2"
+        }
+    ]
 });
 
 // Check if the receivers have been added.
