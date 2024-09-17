@@ -37,7 +37,7 @@ var fontsResponse = await client.FontsAsync();
 var font = fontsResponse.Data.First();
 
 var presetsResponse = await client.PresetsGETAsync();
-var preset = presetsResponse.Data.First();
+var preset = presetsResponse.Data.Last();
 
 var presetDetailsResponse = await client.PresetsGET2Async(preset.Id);
 var presetDetails = presetDetailsResponse.Data;
