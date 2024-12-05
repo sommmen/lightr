@@ -136,7 +136,7 @@ var receiversResponse = await client.ReceiversGETAsync(orderId);
 Debug.Assert(receiversResponse.Data.Any(c => c.Id == receiverPostResponse1.Data.Id));
 Debug.Assert(receiversResponse.Data.Any(c => c.Id == receiverPostResponse2.Data.Id));
 
-logger.LogInformation("Inspect the order online: {Url}", $"https://app.lightr.nl/dashboard/presets/{presetDetails.Id}/order?o={orderResponse.Data.Id}");
+logger.LogInformation("Inspect the order online: {Url}", $"https://lightr.app/shoppingcart?orderid={orderResponse.Data.Id}");
 
 // Wait before deleting, so you can inspect the order online.
 Debugger.Break();
