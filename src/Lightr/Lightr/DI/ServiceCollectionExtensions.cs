@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.RateLimiting;
 using Lightr;
 using Microsoft.Extensions.Logging;
 
@@ -9,6 +10,15 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {
+    private static readonly FixedWindowRateLimiterOptions RateLimiterOptions = new()
+    {
+        Window = TimeSpan.FromSeconds(60.250), // 120 p/m, with some margin (client/server delay etc.).
+        AutoReplenishment = true,
+        PermitLimit = 120,
+        QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+        QueueLimit = 120
+    };
+
     /// <summary>
     /// Registers the <see cref="ILightrClient"/> named HTTP client.
     /// </summary>
@@ -18,11 +28,13 @@ public static class ServiceCollectionExtensions
     /// <returns>The <see cref="IHttpClientBuilder"/> for any further http client configuration needs.</returns>
     public static IHttpClientBuilder AddLightr(this IServiceCollection services, string token, Action<IServiceProvider, HttpClient>? configureClient = null)
     {
-        return services.AddHttpClient<ILightrClient, LightrClient>("lightr", (s, c) =>
-        {
-            c.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            configureClient?.Invoke(s, c);
-        });
+        return services
+            .AddHttpClient<ILightrClient, LightrClient>("lightr", (s, c) =>
+            {
+                c.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                configureClient?.Invoke(s, c);
+            })
+            .AddHttpMessageHandler(() => new LightrRateLimitedHandler(limiter: new FixedWindowRateLimiter(RateLimiterOptions)));
     }
 
     /// <summary>
@@ -33,24 +45,26 @@ public static class ServiceCollectionExtensions
     /// <returns>The <see cref="IHttpClientBuilder"/> for any further http client configuration needs.</returns>
     public static IHttpClientBuilder AddLightr(this IServiceCollection services, Action<IServiceProvider, LightrOptions> configureLightr)
     {
-        return services.AddHttpClient<ILightrClient, LightrClient>("lightr", (s, c) =>
-        {
-            var options = new LightrOptions
+        return services
+            .AddHttpClient<ILightrClient, LightrClient>("lightr", (s, c) =>
             {
-                HttpClient = c
-            };
+                var options = new LightrOptions
+                {
+                    HttpClient = c
+                };
 
-            configureLightr(s, options);
+                configureLightr(s, options);
 
-            // We don't validate that we have a valid token, because that way the DI construction would crash.
-            // Instead, we just crash on the first API call because we have no token (not very fail-fast, but more user-friendly).
-            if (string.IsNullOrWhiteSpace(options.Token))
-            {
-                s.GetService<ILogger<LightrClient>>()?.LogWarning("Lightr has an empty or missing token (Api Key)");
-            }
+                // We don't validate that we have a valid token, because that way the DI construction would crash.
+                // Instead, we just crash on the first API call because we have no token (not very fail-fast, but more user-friendly).
+                if (string.IsNullOrWhiteSpace(options.Token))
+                {
+                    s.GetService<ILogger<LightrClient>>()?.LogWarning("Lightr has an empty or missing token (Api Key)");
+                }
 
-            c.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", options.Token);
-        });
+                c.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", options.Token);
+            })
+            .AddHttpMessageHandler(() => new LightrRateLimitedHandler(limiter: new FixedWindowRateLimiter(RateLimiterOptions)));
     }
 }
 

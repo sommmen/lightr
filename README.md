@@ -50,6 +50,11 @@ public class MyAwesomeApp
 
 For more information check the [sample](https://github.com/sommmen/lightr/tree/main/sample).
 
+# Rate Limits
+
+A `LightrRateLimitedHandler` is added by default which handles the rate limits of the API. 
+Requests are delayed when the limit is reached. See the `ServiceCollectionExtensions` for the precise configuration.
+
 # Development
 
 The project should build as-is.
@@ -61,3 +66,6 @@ To update the open api document follow the steps below.
  - Within visual studio open the connected services tab for the project.
  - Open the dropdown menu for the openapi document, and press refresh.
  - Rebuild the project.
+
+ The generator can be quite strict, throwing on unexpected results so the api document may need some post processing.
+ For example, some properties are marked required when in practice they're not.
