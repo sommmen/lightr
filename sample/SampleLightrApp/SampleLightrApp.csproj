@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
-    <PackageReference Include="VCR.HttpRecorder" Version="0.2.2" />
+    <PackageReference Include="VCR.HttpRecorder" Version="3.0.9" />
   </ItemGroup>
 
   <ItemGroup>
