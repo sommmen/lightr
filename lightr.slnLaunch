@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "Sample",
+    "Projects": [
+      {
+        "Path": "sample\\SampleLightrApp\\SampleLightrApp.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

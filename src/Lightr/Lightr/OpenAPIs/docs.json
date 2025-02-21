@@ -4755,6 +4755,14 @@
                         "schema": {
                             "type": "boolean"
                         }
+                    },
+                    {
+                        "name": "is_visible",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean",
+                            "nullable": true
+                        }
                     }
                 ],
                 "responses": {
@@ -7480,6 +7488,10 @@
                                                                 "type": "string",
                                                                 "readOnly": true
                                                             },
+                                                            "qr_default_value": {
+                                                                "type": "string",
+                                                                "nullable": true
+                                                            },
                                                             "open_rate_percentage": {
                                                                 "type": "number",
                                                                 "format": "float",
@@ -7635,6 +7647,10 @@
                                         "type": "string",
                                         "readOnly": true
                                     },
+                                    "qr_default_value": {
+                                        "type": "string",
+                                        "nullable": true
+                                    },
                                     "open_rate_percentage": {
                                         "type": "number",
                                         "format": "float",
@@ -7760,6 +7776,10 @@
                                                 "credits": {
                                                     "type": "string",
                                                     "readOnly": true
+                                                },
+                                                "qr_default_value": {
+                                                    "type": "string",
+                                                    "nullable": true
                                                 },
                                                 "open_rate_percentage": {
                                                     "type": "number",
@@ -7973,6 +7993,10 @@
                                                 "credits": {
                                                     "type": "string",
                                                     "readOnly": true
+                                                },
+                                                "qr_default_value": {
+                                                    "type": "string",
+                                                    "nullable": true
                                                 },
                                                 "open_rate_percentage": {
                                                     "type": "number",
@@ -8233,6 +8257,10 @@
                                         "type": "string",
                                         "readOnly": true
                                     },
+                                    "qr_default_value": {
+                                        "type": "string",
+                                        "nullable": true
+                                    },
                                     "open_rate_percentage": {
                                         "type": "number",
                                         "format": "float",
@@ -8358,6 +8386,10 @@
                                                 "credits": {
                                                     "type": "string",
                                                     "readOnly": true
+                                                },
+                                                "qr_default_value": {
+                                                    "type": "string",
+                                                    "nullable": true
                                                 },
                                                 "open_rate_percentage": {
                                                     "type": "number",
@@ -8664,6 +8696,21 @@
                                                 "description": "If true, the template will be rendered even if there are missing variables. Default is false.\n",
                                                 "default": false,
                                                 "nullable": true
+                                            },
+                                            "qr_variables": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "index": {
+                                                            "type": "integer"
+                                                        },
+                                                        "value": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "An array of QR variables. Each item contains an index and a value.\n"
                                             }
                                         }
                                     },
@@ -8850,6 +8897,10 @@
                                                 "credits": {
                                                     "type": "string",
                                                     "readOnly": true
+                                                },
+                                                "qr_default_value": {
+                                                    "type": "string",
+                                                    "nullable": true
                                                 },
                                                 "open_rate_percentage": {
                                                     "type": "number",
