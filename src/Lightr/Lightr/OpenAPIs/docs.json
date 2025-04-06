@@ -4904,6 +4904,76 @@
                                                                         "type": "string",
                                                                         "format": "date-time",
                                                                         "readOnly": true
+                                                                    },
+                                                                    "add_ons": {
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "required": [
+                                                                                "id",
+                                                                                "price",
+                                                                                "add_on"
+                                                                            ],
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "id": {
+                                                                                    "type": "string",
+                                                                                    "format": "uuid"
+                                                                                },
+                                                                                "price": {
+                                                                                    "type": "number",
+                                                                                    "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                                                    "format": "float",
+                                                                                    "nullable": true,
+                                                                                    "example": 10
+                                                                                },
+                                                                                "add_on": {
+                                                                                    "allOf": [
+                                                                                        {
+                                                                                            "required": [
+                                                                                                "id",
+                                                                                                "name",
+                                                                                                "template_format",
+                                                                                                "order_type",
+                                                                                                "apply_tier_pricing"
+                                                                                            ],
+                                                                                            "type": "object",
+                                                                                            "properties": {
+                                                                                                "id": {
+                                                                                                    "type": "string",
+                                                                                                    "format": "uuid",
+                                                                                                    "readOnly": true
+                                                                                                },
+                                                                                                "name": {
+                                                                                                    "type": "string",
+                                                                                                    "example": "Cadeaubon"
+                                                                                                },
+                                                                                                "template_format": {
+                                                                                                    "enum": [
+                                                                                                        "A5",
+                                                                                                        "A6",
+                                                                                                        "A7"
+                                                                                                    ],
+                                                                                                    "type": "string"
+                                                                                                },
+                                                                                                "order_type": {
+                                                                                                    "enum": [
+                                                                                                        "send_multiple",
+                                                                                                        "send_single",
+                                                                                                        "order_single",
+                                                                                                        "order_multiple"
+                                                                                                    ],
+                                                                                                    "type": "string"
+                                                                                                },
+                                                                                                "apply_tier_pricing": {
+                                                                                                    "type": "boolean"
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    ],
+                                                                                    "readOnly": true
+                                                                                }
+                                                                            }
+                                                                        }
                                                                     }
                                                                 }
                                                             },
@@ -5137,6 +5207,76 @@
                                                 "type": "string",
                                                 "format": "date-time",
                                                 "readOnly": true
+                                            },
+                                            "add_ons": {
+                                                "type": "array",
+                                                "items": {
+                                                    "required": [
+                                                        "id",
+                                                        "price",
+                                                        "add_on"
+                                                    ],
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string",
+                                                            "format": "uuid"
+                                                        },
+                                                        "price": {
+                                                            "type": "number",
+                                                            "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                            "format": "float",
+                                                            "nullable": true,
+                                                            "example": 10
+                                                        },
+                                                        "add_on": {
+                                                            "allOf": [
+                                                                {
+                                                                    "required": [
+                                                                        "id",
+                                                                        "name",
+                                                                        "template_format",
+                                                                        "order_type",
+                                                                        "apply_tier_pricing"
+                                                                    ],
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "string",
+                                                                            "format": "uuid",
+                                                                            "readOnly": true
+                                                                        },
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "example": "Cadeaubon"
+                                                                        },
+                                                                        "template_format": {
+                                                                            "enum": [
+                                                                                "A5",
+                                                                                "A6",
+                                                                                "A7"
+                                                                            ],
+                                                                            "type": "string"
+                                                                        },
+                                                                        "order_type": {
+                                                                            "enum": [
+                                                                                "send_multiple",
+                                                                                "send_single",
+                                                                                "order_single",
+                                                                                "order_multiple"
+                                                                            ],
+                                                                            "type": "string"
+                                                                        },
+                                                                        "apply_tier_pricing": {
+                                                                            "type": "boolean"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            ],
+                                                            "readOnly": true
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     },
@@ -5294,6 +5434,76 @@
                                                             "type": "string",
                                                             "format": "date-time",
                                                             "readOnly": true
+                                                        },
+                                                        "add_ons": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "required": [
+                                                                    "id",
+                                                                    "price",
+                                                                    "add_on"
+                                                                ],
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "format": "uuid"
+                                                                    },
+                                                                    "price": {
+                                                                        "type": "number",
+                                                                        "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                                        "format": "float",
+                                                                        "nullable": true,
+                                                                        "example": 10
+                                                                    },
+                                                                    "add_on": {
+                                                                        "allOf": [
+                                                                            {
+                                                                                "required": [
+                                                                                    "id",
+                                                                                    "name",
+                                                                                    "template_format",
+                                                                                    "order_type",
+                                                                                    "apply_tier_pricing"
+                                                                                ],
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "id": {
+                                                                                        "type": "string",
+                                                                                        "format": "uuid",
+                                                                                        "readOnly": true
+                                                                                    },
+                                                                                    "name": {
+                                                                                        "type": "string",
+                                                                                        "example": "Cadeaubon"
+                                                                                    },
+                                                                                    "template_format": {
+                                                                                        "enum": [
+                                                                                            "A5",
+                                                                                            "A6",
+                                                                                            "A7"
+                                                                                        ],
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "order_type": {
+                                                                                        "enum": [
+                                                                                            "send_multiple",
+                                                                                            "send_single",
+                                                                                            "order_single",
+                                                                                            "order_multiple"
+                                                                                        ],
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "apply_tier_pricing": {
+                                                                                        "type": "boolean"
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        ],
+                                                                        "readOnly": true
+                                                                    }
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 },
@@ -5539,6 +5749,76 @@
                                                             "type": "string",
                                                             "format": "date-time",
                                                             "readOnly": true
+                                                        },
+                                                        "add_ons": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "required": [
+                                                                    "id",
+                                                                    "price",
+                                                                    "add_on"
+                                                                ],
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "format": "uuid"
+                                                                    },
+                                                                    "price": {
+                                                                        "type": "number",
+                                                                        "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                                        "format": "float",
+                                                                        "nullable": true,
+                                                                        "example": 10
+                                                                    },
+                                                                    "add_on": {
+                                                                        "allOf": [
+                                                                            {
+                                                                                "required": [
+                                                                                    "id",
+                                                                                    "name",
+                                                                                    "template_format",
+                                                                                    "order_type",
+                                                                                    "apply_tier_pricing"
+                                                                                ],
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "id": {
+                                                                                        "type": "string",
+                                                                                        "format": "uuid",
+                                                                                        "readOnly": true
+                                                                                    },
+                                                                                    "name": {
+                                                                                        "type": "string",
+                                                                                        "example": "Cadeaubon"
+                                                                                    },
+                                                                                    "template_format": {
+                                                                                        "enum": [
+                                                                                            "A5",
+                                                                                            "A6",
+                                                                                            "A7"
+                                                                                        ],
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "order_type": {
+                                                                                        "enum": [
+                                                                                            "send_multiple",
+                                                                                            "send_single",
+                                                                                            "order_single",
+                                                                                            "order_multiple"
+                                                                                        ],
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "apply_tier_pricing": {
+                                                                                        "type": "boolean"
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        ],
+                                                                        "readOnly": true
+                                                                    }
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 },
@@ -5950,6 +6230,76 @@
                                                             "type": "string",
                                                             "format": "date-time",
                                                             "readOnly": true
+                                                        },
+                                                        "add_ons": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "required": [
+                                                                    "id",
+                                                                    "price",
+                                                                    "add_on"
+                                                                ],
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "string",
+                                                                        "format": "uuid"
+                                                                    },
+                                                                    "price": {
+                                                                        "type": "number",
+                                                                        "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                                        "format": "float",
+                                                                        "nullable": true,
+                                                                        "example": 10
+                                                                    },
+                                                                    "add_on": {
+                                                                        "allOf": [
+                                                                            {
+                                                                                "required": [
+                                                                                    "id",
+                                                                                    "name",
+                                                                                    "template_format",
+                                                                                    "order_type",
+                                                                                    "apply_tier_pricing"
+                                                                                ],
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "id": {
+                                                                                        "type": "string",
+                                                                                        "format": "uuid",
+                                                                                        "readOnly": true
+                                                                                    },
+                                                                                    "name": {
+                                                                                        "type": "string",
+                                                                                        "example": "Cadeaubon"
+                                                                                    },
+                                                                                    "template_format": {
+                                                                                        "enum": [
+                                                                                            "A5",
+                                                                                            "A6",
+                                                                                            "A7"
+                                                                                        ],
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "order_type": {
+                                                                                        "enum": [
+                                                                                            "send_multiple",
+                                                                                            "send_single",
+                                                                                            "order_single",
+                                                                                            "order_multiple"
+                                                                                        ],
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "apply_tier_pricing": {
+                                                                                        "type": "boolean"
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        ],
+                                                                        "readOnly": true
+                                                                    }
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 },
@@ -7554,6 +7904,76 @@
                                                             "shipping_date": {
                                                                 "type": "string",
                                                                 "nullable": true
+                                                            },
+                                                            "add_ons": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "required": [
+                                                                        "id",
+                                                                        "price",
+                                                                        "add_on"
+                                                                    ],
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "string",
+                                                                            "format": "uuid"
+                                                                        },
+                                                                        "price": {
+                                                                            "type": "number",
+                                                                            "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                                            "format": "float",
+                                                                            "nullable": true,
+                                                                            "example": 10
+                                                                        },
+                                                                        "add_on": {
+                                                                            "allOf": [
+                                                                                {
+                                                                                    "required": [
+                                                                                        "id",
+                                                                                        "name",
+                                                                                        "template_format",
+                                                                                        "order_type",
+                                                                                        "apply_tier_pricing"
+                                                                                    ],
+                                                                                    "type": "object",
+                                                                                    "properties": {
+                                                                                        "id": {
+                                                                                            "type": "string",
+                                                                                            "format": "uuid",
+                                                                                            "readOnly": true
+                                                                                        },
+                                                                                        "name": {
+                                                                                            "type": "string",
+                                                                                            "example": "Cadeaubon"
+                                                                                        },
+                                                                                        "template_format": {
+                                                                                            "enum": [
+                                                                                                "A5",
+                                                                                                "A6",
+                                                                                                "A7"
+                                                                                            ],
+                                                                                            "type": "string"
+                                                                                        },
+                                                                                        "order_type": {
+                                                                                            "enum": [
+                                                                                                "send_multiple",
+                                                                                                "send_single",
+                                                                                                "order_single",
+                                                                                                "order_multiple"
+                                                                                            ],
+                                                                                            "type": "string"
+                                                                                        },
+                                                                                        "apply_tier_pricing": {
+                                                                                            "type": "boolean"
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            ],
+                                                                            "readOnly": true
+                                                                        }
+                                                                    }
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -7713,6 +8133,76 @@
                                     "shipping_date": {
                                         "type": "string",
                                         "nullable": true
+                                    },
+                                    "add_ons": {
+                                        "type": "array",
+                                        "items": {
+                                            "required": [
+                                                "id",
+                                                "price",
+                                                "add_on"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "format": "uuid"
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                    "format": "float",
+                                                    "nullable": true,
+                                                    "example": 10
+                                                },
+                                                "add_on": {
+                                                    "allOf": [
+                                                        {
+                                                            "required": [
+                                                                "id",
+                                                                "name",
+                                                                "template_format",
+                                                                "order_type",
+                                                                "apply_tier_pricing"
+                                                            ],
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "string",
+                                                                    "format": "uuid",
+                                                                    "readOnly": true
+                                                                },
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "example": "Cadeaubon"
+                                                                },
+                                                                "template_format": {
+                                                                    "enum": [
+                                                                        "A5",
+                                                                        "A6",
+                                                                        "A7"
+                                                                    ],
+                                                                    "type": "string"
+                                                                },
+                                                                "order_type": {
+                                                                    "enum": [
+                                                                        "send_multiple",
+                                                                        "send_single",
+                                                                        "order_single",
+                                                                        "order_multiple"
+                                                                    ],
+                                                                    "type": "string"
+                                                                },
+                                                                "apply_tier_pricing": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            }
+                                                        }
+                                                    ],
+                                                    "readOnly": true
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -7843,6 +8333,76 @@
                                                 "shipping_date": {
                                                     "type": "string",
                                                     "nullable": true
+                                                },
+                                                "add_ons": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "required": [
+                                                            "id",
+                                                            "price",
+                                                            "add_on"
+                                                        ],
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "format": "uuid"
+                                                            },
+                                                            "price": {
+                                                                "type": "number",
+                                                                "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                                "format": "float",
+                                                                "nullable": true,
+                                                                "example": 10
+                                                            },
+                                                            "add_on": {
+                                                                "allOf": [
+                                                                    {
+                                                                        "required": [
+                                                                            "id",
+                                                                            "name",
+                                                                            "template_format",
+                                                                            "order_type",
+                                                                            "apply_tier_pricing"
+                                                                        ],
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "id": {
+                                                                                "type": "string",
+                                                                                "format": "uuid",
+                                                                                "readOnly": true
+                                                                            },
+                                                                            "name": {
+                                                                                "type": "string",
+                                                                                "example": "Cadeaubon"
+                                                                            },
+                                                                            "template_format": {
+                                                                                "enum": [
+                                                                                    "A5",
+                                                                                    "A6",
+                                                                                    "A7"
+                                                                                ],
+                                                                                "type": "string"
+                                                                            },
+                                                                            "order_type": {
+                                                                                "enum": [
+                                                                                    "send_multiple",
+                                                                                    "send_single",
+                                                                                    "order_single",
+                                                                                    "order_multiple"
+                                                                                ],
+                                                                                "type": "string"
+                                                                            },
+                                                                            "apply_tier_pricing": {
+                                                                                "type": "boolean"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                ],
+                                                                "readOnly": true
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -8060,6 +8620,76 @@
                                                 "shipping_date": {
                                                     "type": "string",
                                                     "nullable": true
+                                                },
+                                                "add_ons": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "required": [
+                                                            "id",
+                                                            "price",
+                                                            "add_on"
+                                                        ],
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "format": "uuid"
+                                                            },
+                                                            "price": {
+                                                                "type": "number",
+                                                                "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                                "format": "float",
+                                                                "nullable": true,
+                                                                "example": 10
+                                                            },
+                                                            "add_on": {
+                                                                "allOf": [
+                                                                    {
+                                                                        "required": [
+                                                                            "id",
+                                                                            "name",
+                                                                            "template_format",
+                                                                            "order_type",
+                                                                            "apply_tier_pricing"
+                                                                        ],
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "id": {
+                                                                                "type": "string",
+                                                                                "format": "uuid",
+                                                                                "readOnly": true
+                                                                            },
+                                                                            "name": {
+                                                                                "type": "string",
+                                                                                "example": "Cadeaubon"
+                                                                            },
+                                                                            "template_format": {
+                                                                                "enum": [
+                                                                                    "A5",
+                                                                                    "A6",
+                                                                                    "A7"
+                                                                                ],
+                                                                                "type": "string"
+                                                                            },
+                                                                            "order_type": {
+                                                                                "enum": [
+                                                                                    "send_multiple",
+                                                                                    "send_single",
+                                                                                    "order_single",
+                                                                                    "order_multiple"
+                                                                                ],
+                                                                                "type": "string"
+                                                                            },
+                                                                            "apply_tier_pricing": {
+                                                                                "type": "boolean"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                ],
+                                                                "readOnly": true
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -8323,6 +8953,76 @@
                                     "shipping_date": {
                                         "type": "string",
                                         "nullable": true
+                                    },
+                                    "add_ons": {
+                                        "type": "array",
+                                        "items": {
+                                            "required": [
+                                                "id",
+                                                "price",
+                                                "add_on"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "format": "uuid"
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                    "format": "float",
+                                                    "nullable": true,
+                                                    "example": 10
+                                                },
+                                                "add_on": {
+                                                    "allOf": [
+                                                        {
+                                                            "required": [
+                                                                "id",
+                                                                "name",
+                                                                "template_format",
+                                                                "order_type",
+                                                                "apply_tier_pricing"
+                                                            ],
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "string",
+                                                                    "format": "uuid",
+                                                                    "readOnly": true
+                                                                },
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "example": "Cadeaubon"
+                                                                },
+                                                                "template_format": {
+                                                                    "enum": [
+                                                                        "A5",
+                                                                        "A6",
+                                                                        "A7"
+                                                                    ],
+                                                                    "type": "string"
+                                                                },
+                                                                "order_type": {
+                                                                    "enum": [
+                                                                        "send_multiple",
+                                                                        "send_single",
+                                                                        "order_single",
+                                                                        "order_multiple"
+                                                                    ],
+                                                                    "type": "string"
+                                                                },
+                                                                "apply_tier_pricing": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            }
+                                                        }
+                                                    ],
+                                                    "readOnly": true
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -8453,6 +9153,76 @@
                                                 "shipping_date": {
                                                     "type": "string",
                                                     "nullable": true
+                                                },
+                                                "add_ons": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "required": [
+                                                            "id",
+                                                            "price",
+                                                            "add_on"
+                                                        ],
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "format": "uuid"
+                                                            },
+                                                            "price": {
+                                                                "type": "number",
+                                                                "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                                "format": "float",
+                                                                "nullable": true,
+                                                                "example": 10
+                                                            },
+                                                            "add_on": {
+                                                                "allOf": [
+                                                                    {
+                                                                        "required": [
+                                                                            "id",
+                                                                            "name",
+                                                                            "template_format",
+                                                                            "order_type",
+                                                                            "apply_tier_pricing"
+                                                                        ],
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "id": {
+                                                                                "type": "string",
+                                                                                "format": "uuid",
+                                                                                "readOnly": true
+                                                                            },
+                                                                            "name": {
+                                                                                "type": "string",
+                                                                                "example": "Cadeaubon"
+                                                                            },
+                                                                            "template_format": {
+                                                                                "enum": [
+                                                                                    "A5",
+                                                                                    "A6",
+                                                                                    "A7"
+                                                                                ],
+                                                                                "type": "string"
+                                                                            },
+                                                                            "order_type": {
+                                                                                "enum": [
+                                                                                    "send_multiple",
+                                                                                    "send_single",
+                                                                                    "order_single",
+                                                                                    "order_multiple"
+                                                                                ],
+                                                                                "type": "string"
+                                                                            },
+                                                                            "apply_tier_pricing": {
+                                                                                "type": "boolean"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                ],
+                                                                "readOnly": true
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -8964,6 +9734,76 @@
                                                 "shipping_date": {
                                                     "type": "string",
                                                     "nullable": true
+                                                },
+                                                "add_ons": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "required": [
+                                                            "id",
+                                                            "price",
+                                                            "add_on"
+                                                        ],
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "format": "uuid"
+                                                            },
+                                                            "price": {
+                                                                "type": "number",
+                                                                "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                                "format": "float",
+                                                                "nullable": true,
+                                                                "example": 10
+                                                            },
+                                                            "add_on": {
+                                                                "allOf": [
+                                                                    {
+                                                                        "required": [
+                                                                            "id",
+                                                                            "name",
+                                                                            "template_format",
+                                                                            "order_type",
+                                                                            "apply_tier_pricing"
+                                                                        ],
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "id": {
+                                                                                "type": "string",
+                                                                                "format": "uuid",
+                                                                                "readOnly": true
+                                                                            },
+                                                                            "name": {
+                                                                                "type": "string",
+                                                                                "example": "Cadeaubon"
+                                                                            },
+                                                                            "template_format": {
+                                                                                "enum": [
+                                                                                    "A5",
+                                                                                    "A6",
+                                                                                    "A7"
+                                                                                ],
+                                                                                "type": "string"
+                                                                            },
+                                                                            "order_type": {
+                                                                                "enum": [
+                                                                                    "send_multiple",
+                                                                                    "send_single",
+                                                                                    "order_single",
+                                                                                    "order_multiple"
+                                                                                ],
+                                                                                "type": "string"
+                                                                            },
+                                                                            "apply_tier_pricing": {
+                                                                                "type": "boolean"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                ],
+                                                                "readOnly": true
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -12640,6 +13480,161 @@
                                         "message": {
                                             "type": "string",
                                             "example": "This action is unauthorized."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/v1\/add-ons": {
+            "get": {
+                "tags": [
+                    "AddOns"
+                ],
+                "summary": "Get a list of add ons.",
+                "parameters": [
+                    {
+                        "name": "template_format",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "enum": [
+                                "A5",
+                                "A6",
+                                "A7"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "order_type",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "enum": [
+                                "send_multiple",
+                                "send_single",
+                                "order_single",
+                                "order_multiple"
+                            ],
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of add ons.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "allOf": [
+                                                    {
+                                                        "required": [
+                                                            "id",
+                                                            "name",
+                                                            "template_format",
+                                                            "order_type",
+                                                            "apply_tier_pricing"
+                                                        ],
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "format": "uuid",
+                                                                "readOnly": true
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Cadeaubon"
+                                                            },
+                                                            "template_format": {
+                                                                "enum": [
+                                                                    "A5",
+                                                                    "A6",
+                                                                    "A7"
+                                                                ],
+                                                                "type": "string"
+                                                            },
+                                                            "order_type": {
+                                                                "enum": [
+                                                                    "send_multiple",
+                                                                    "send_single",
+                                                                    "order_single",
+                                                                    "order_multiple"
+                                                                ],
+                                                                "type": "string"
+                                                            },
+                                                            "apply_tier_pricing": {
+                                                                "type": "boolean"
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This action is unauthorized."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
                                         }
                                     }
                                 }
