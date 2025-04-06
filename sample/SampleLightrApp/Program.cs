@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
-using HttpRecorder;
 using Lightr;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Vcr.HttpRecorder;
 
 var builder = Host.CreateApplicationBuilder(args);
 
