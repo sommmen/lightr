@@ -58,11 +58,11 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="9.0.3">
+		<PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="9.0.4">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.Extensions.Http" Version="9.0.3" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="9.0.4" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="NSwag.ApiDescription.Client" Version="14.3.0">
 			<PrivateAssets>all</PrivateAssets>
@@ -70,7 +70,7 @@
 		</PackageReference>
 		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
 		<PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
-		<PackageReference Include="System.Threading.RateLimiting" Version="9.0.3" />
+		<PackageReference Include="System.Threading.RateLimiting" Version="9.0.4" />
 	</ItemGroup>
 
 </Project>
