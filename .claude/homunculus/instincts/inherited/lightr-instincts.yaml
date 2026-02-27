@@ -1,0 +1,509 @@
+# Instincts generated from https://github.com/sommmen/lightr
+# Generated: 2026-02-27T22:31:28.771Z
+# Version: 2.0
+
+---
+id: lightr-commit-conventional
+trigger: "when writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: https://github.com/sommmen/lightr
+---
+
+# Lightr Commit Conventional
+
+## Action
+
+Use conventional commit format with prefixes: chore, fix, build, feat
+
+## Evidence
+
+- 88 commits analyzed
+- Detected conventional commit pattern
+- Examples: chore(deps): Update all to latest, use net10 for sample package., feat: Update to latest swagger docs
+
+---
+id: lightr-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/sommmen/lightr
+---
+
+# Lightr Commit Length
+
+## Action
+
+Keep commit messages concise (under 50 characters)
+
+## Evidence
+
+- Average commit message length: 47 chars
+- Based on 88 commits
+
+---
+id: lightr-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/sommmen/lightr
+---
+
+# Lightr Naming Files
+
+## Action
+
+Use camelCase naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: camelCase
+
+---
+id: lightr-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/sommmen/lightr
+---
+
+# Lightr Export Style
+
+## Action
+
+Prefer mixed exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: mixed
+
+---
+id: lightr-test-separate
+trigger: "when writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/sommmen/lightr
+---
+
+# Lightr Test Separate
+
+## Action
+
+Place tests in the tests/ or __tests__/ directory, mirroring src structure
+
+## Evidence
+
+- Separate test directory pattern detected
+- Tests live in dedicated test folders
+
+---
+id: lightr-workflow-feature-development
+trigger: "when implementing a new feature"
+confidence: 0.75
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/sommmen/lightr
+---
+
+# Lightr Workflow Feature Development
+
+## Action
+
+Follow the feature-development workflow:
+1. Add feature implementation
+2. Add tests for feature
+3. Update documentation
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~5x per month
+- Files: **/api/**
+
+---
+id: lightr-workflow-dotnet-monorepo-update
+trigger: "when doing dotnet monorepo update"
+confidence: 0.7
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/sommmen/lightr
+---
+
+# Lightr Workflow Dotnet Monorepo Update
+
+## Action
+
+Follow the dotnet-monorepo-update workflow:
+1. Update TargetFramework in main library project
+2. Update TargetFramework in sample application project
+3. Ensure compatibility across both projects
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~4x per month
+- Files: sample/SampleLightrApp/SampleLightrApp.csproj, src/Lightr/Lightr/Lightr.csproj
+
+---
+id: lightr-workflow-dependency-update-single
+trigger: "when doing dependency update single"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/sommmen/lightr
+---
+
+# Lightr Workflow Dependency Update Single
+
+## Action
+
+Follow the dependency-update-single workflow:
+1. Update package version in .csproj file
+2. Commit with conventional commit message
+3. Include dependency update metadata
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~8x per month
+- Files: src/Lightr/Lightr/Lightr.csproj, sample/SampleLightrApp/SampleLightrApp.csproj
+
+---
+id: lightr-workflow-swagger-api-update
+trigger: "when doing swagger api update"
+confidence: 0.7
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/sommmen/lightr
+---
+
+# Lightr Workflow Swagger Api Update
+
+## Action
+
+Follow the swagger-api-update workflow:
+1. Update OpenAPI JSON specification
+2. Modify sample application Program.cs to work with new API
+3. Test compatibility
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~4x per month
+- Files: src/Lightr/Lightr/OpenAPIs/docs.json, sample/SampleLightrApp/Program.cs
+
+---
+id: lightr-workflow-ci-build-configuration
+trigger: "when doing ci build configuration"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/sommmen/lightr
+---
+
+# Lightr Workflow Ci Build Configuration
+
+## Action
+
+Follow the ci-build-configuration workflow:
+1. Update workflow YAML files
+2. Update build target versions
+3. Ensure compatibility with new tooling
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: .github/workflows/build-ci.yml, .github/workflows/deploy.yml
+
+---
+id: lightr-workflow-sample-app-fixes
+trigger: "when doing sample app fixes"
+confidence: 0.65
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/sommmen/lightr
+---
+
+# Lightr Workflow Sample App Fixes
+
+## Action
+
+Follow the sample-app-fixes workflow:
+1. Identify compatibility issues
+2. Update Program.cs configuration
+3. Test sample application functionality
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~3x per month
+- Files: sample/SampleLightrApp/Program.cs
+
+---
+id: lightr-camelcase-files
+trigger: "When creating new TypeScript files"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: sommmen/lightr
+---
+
+# Lightr Camelcase Files
+
+## Action
+
+Use camelCase naming convention for file names
+
+## Evidence
+
+- Naming conventions pattern shows camelCase for files
+- TypeScript language detected
+
+---
+id: lightr-pascalcase-classes
+trigger: "When defining new classes"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: sommmen/lightr
+---
+
+# Lightr Pascalcase Classes
+
+## Action
+
+Use PascalCase naming convention for class names
+
+## Evidence
+
+- Naming conventions pattern shows PascalCase for classes
+- TypeScript codebase structure
+
+---
+id: lightr-screaming-snake-constants
+trigger: "When defining constants"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: sommmen/lightr
+---
+
+# Lightr Screaming Snake Constants
+
+## Action
+
+Use SCREAMING_SNAKE_CASE naming convention
+
+## Evidence
+
+- Naming conventions pattern shows SCREAMING_SNAKE_CASE for constants
+
+---
+id: lightr-conventional-commits
+trigger: "When creating commit messages"
+confidence: 0.9
+domain: git
+source: repo-analysis
+source_repo: sommmen/lightr
+---
+
+# Lightr Conventional Commits
+
+## Action
+
+Use conventional commit format with prefixes: chore, fix, build, feat
+
+## Evidence
+
+- All commit examples follow conventional format
+- Average length 47 chars
+- 8 example commits all use prefixes
+
+---
+id: lightr-chore-deps-format
+trigger: "When updating dependencies"
+confidence: 0.9
+domain: git
+source: repo-analysis
+source_repo: sommmen/lightr
+---
+
+# Lightr Chore Deps Format
+
+## Action
+
+Use 'chore(deps): update' format with package name and version
+
+## Evidence
+
+- chore(deps): update dependency gitversion.msbuild to 6.4.0
+- chore(deps): update dotnet monorepo to 9.0.8
+- Multiple similar patterns
+
+---
+id: lightr-build-deps-bump
+trigger: "When automated dependency updates occur"
+confidence: 0.8
+domain: git
+source: repo-analysis
+source_repo: sommmen/lightr
+---
+
+# Lightr Build Deps Bump
+
+## Action
+
+Use 'build(deps): bump [package] from [old] to [new] (#PR)' format
+
+## Evidence
+
+- build(deps): bump VCR.HttpRecorder from 0.2.2 to 3.0.9 (#34)
+
+---
+id: lightr-dotnet-framework-sync
+trigger: "When updating .NET framework version"
+confidence: 0.95
+domain: workflow
+source: repo-analysis
+source_repo: sommmen/lightr
+---
+
+# Lightr Dotnet Framework Sync
+
+## Action
+
+Update TargetFramework in both main library and sample app .csproj files simultaneously
+
+## Evidence
+
+- dotnet-monorepo-update workflow frequency 4
+- Files: sample/SampleLightrApp/SampleLightrApp.csproj, src/Lightr/Lightr/Lightr.csproj
+
+---
+id: lightr-single-dependency-update
+trigger: "When individual NuGet package updates are available"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: sommmen/lightr
+---
+
+# Lightr Single Dependency Update
+
+## Action
+
+Update package version in .csproj file with conventional commit message
+
+## Evidence
+
+- dependency-update-single workflow frequency 8
+- Multiple chore(deps) commits
+
+---
+id: lightr-swagger-api-sync
+trigger: "When OpenAPI specification changes"
+confidence: 0.85
+domain: workflow
+source: repo-analysis
+source_repo: sommmen/lightr
+---
+
+# Lightr Swagger Api Sync
+
+## Action
+
+Update docs.json and modify sample app Program.cs for compatibility
+
+## Evidence
+
+- swagger-api-update workflow frequency 4
+- Files: src/Lightr/Lightr/OpenAPIs/docs.json, sample/SampleLightrApp/Program.cs
+
+---
+id: lightr-ci-workflow-updates
+trigger: "When build system needs updates"
+confidence: 0.8
+domain: workflow
+source: repo-analysis
+source_repo: sommmen/lightr
+---
+
+# Lightr Ci Workflow Updates
+
+## Action
+
+Update workflow YAML files and build target versions together
+
+## Evidence
+
+- ci-build-configuration workflow frequency 2
+- Files: .github/workflows/build-ci.yml, .github/workflows/deploy.yml
+
+---
+id: lightr-sample-app-fix
+trigger: "When sample application breaks due to API changes"
+confidence: 0.75
+domain: workflow
+source: repo-analysis
+source_repo: sommmen/lightr
+---
+
+# Lightr Sample App Fix
+
+## Action
+
+Update Program.cs configuration to restore functionality
+
+## Evidence
+
+- sample-app-fixes workflow frequency 3
+- File: sample/SampleLightrApp/Program.cs
+
+---
+id: lightr-separate-test-location
+trigger: "When creating test files"
+confidence: 0.7
+domain: testing
+source: repo-analysis
+source_repo: sommmen/lightr
+---
+
+# Lightr Separate Test Location
+
+## Action
+
+Place tests in separate location from source code
+
+## Evidence
+
+- Architecture shows testLocation: separate
+- Folder structure has distinct src layout
+
+---
+id: lightr-single-package-structure
+trigger: "When organizing code modules"
+confidence: 0.8
+domain: architecture
+source: repo-analysis
+source_repo: sommmen/lightr
+---
+
+# Lightr Single Package Structure
+
+## Action
+
+Use single-package structure with Lightr as main module
+
+## Evidence
+
+- Architecture type: single-package
+- srcLayout: [Lightr]
+
