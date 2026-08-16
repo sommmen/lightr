@@ -32,6 +32,7 @@
                                                         "last_name",
                                                         "email",
                                                         "phone_number",
+                                                        "password",
                                                         "created_at",
                                                         "updated_at",
                                                         "organization"
@@ -79,7 +80,11 @@
                                                                     "required": [
                                                                         "name",
                                                                         "onboarding_steps_completed",
-                                                                        "credits"
+                                                                        "credits",
+                                                                        "match_domain_for_new_users",
+                                                                        "pay_on_account",
+                                                                        "pay_on_account_limit",
+                                                                        "anonymize_active_orders"
                                                                     ],
                                                                     "type": "object",
                                                                     "properties": {
@@ -90,6 +95,9 @@
                                                                         },
                                                                         "name": {
                                                                             "type": "string"
+                                                                        },
+                                                                        "match_domain_for_new_users": {
+                                                                            "type": "boolean"
                                                                         },
                                                                         "auto_add_credits": {
                                                                             "type": "boolean"
@@ -107,6 +115,37 @@
                                                                         },
                                                                         "amount": {
                                                                             "type": "integer"
+                                                                        },
+                                                                        "pay_on_account": {
+                                                                            "type": "boolean"
+                                                                        },
+                                                                        "pay_on_account_limit": {
+                                                                            "type": "integer"
+                                                                        },
+                                                                        "annual_volume": {
+                                                                            "type": "integer",
+                                                                            "nullable": true
+                                                                        },
+                                                                        "annual_volume_shipped": {
+                                                                            "type": "integer",
+                                                                            "nullable": true,
+                                                                            "readOnly": true
+                                                                        },
+                                                                        "annual_volume_tier": {
+                                                                            "type": "string",
+                                                                            "nullable": true,
+                                                                            "readOnly": true
+                                                                        },
+                                                                        "anonymize_active_orders": {
+                                                                            "type": "boolean",
+                                                                            "readOnly": true
+                                                                        },
+                                                                        "anonymize_active_orders_after_days": {
+                                                                            "minimum": 20,
+                                                                            "type": "integer",
+                                                                            "format": "int32",
+                                                                            "nullable": true,
+                                                                            "readOnly": true
                                                                         },
                                                                         "onboarding_steps_completed": {
                                                                             "required": [
@@ -150,7 +189,6 @@
                                                                                     }
                                                                                 }
                                                                             ],
-                                                                            "nullable": true,
                                                                             "readOnly": true
                                                                         }
                                                                     }
@@ -2063,7 +2101,11 @@
                                                                 "required": [
                                                                     "name",
                                                                     "onboarding_steps_completed",
-                                                                    "credits"
+                                                                    "credits",
+                                                                    "match_domain_for_new_users",
+                                                                    "pay_on_account",
+                                                                    "pay_on_account_limit",
+                                                                    "anonymize_active_orders"
                                                                 ],
                                                                 "type": "object",
                                                                 "properties": {
@@ -2074,6 +2116,9 @@
                                                                     },
                                                                     "name": {
                                                                         "type": "string"
+                                                                    },
+                                                                    "match_domain_for_new_users": {
+                                                                        "type": "boolean"
                                                                     },
                                                                     "auto_add_credits": {
                                                                         "type": "boolean"
@@ -2091,6 +2136,37 @@
                                                                     },
                                                                     "amount": {
                                                                         "type": "integer"
+                                                                    },
+                                                                    "pay_on_account": {
+                                                                        "type": "boolean"
+                                                                    },
+                                                                    "pay_on_account_limit": {
+                                                                        "type": "integer"
+                                                                    },
+                                                                    "annual_volume": {
+                                                                        "type": "integer",
+                                                                        "nullable": true
+                                                                    },
+                                                                    "annual_volume_shipped": {
+                                                                        "type": "integer",
+                                                                        "nullable": true,
+                                                                        "readOnly": true
+                                                                    },
+                                                                    "annual_volume_tier": {
+                                                                        "type": "string",
+                                                                        "nullable": true,
+                                                                        "readOnly": true
+                                                                    },
+                                                                    "anonymize_active_orders": {
+                                                                        "type": "boolean",
+                                                                        "readOnly": true
+                                                                    },
+                                                                    "anonymize_active_orders_after_days": {
+                                                                        "minimum": 20,
+                                                                        "type": "integer",
+                                                                        "format": "int32",
+                                                                        "nullable": true,
+                                                                        "readOnly": true
                                                                     },
                                                                     "onboarding_steps_completed": {
                                                                         "required": [
@@ -2279,7 +2355,11 @@
                                                 "required": [
                                                     "name",
                                                     "onboarding_steps_completed",
-                                                    "credits"
+                                                    "credits",
+                                                    "match_domain_for_new_users",
+                                                    "pay_on_account",
+                                                    "pay_on_account_limit",
+                                                    "anonymize_active_orders"
                                                 ],
                                                 "type": "object",
                                                 "properties": {
@@ -2290,6 +2370,9 @@
                                                     },
                                                     "name": {
                                                         "type": "string"
+                                                    },
+                                                    "match_domain_for_new_users": {
+                                                        "type": "boolean"
                                                     },
                                                     "auto_add_credits": {
                                                         "type": "boolean"
@@ -2307,6 +2390,37 @@
                                                     },
                                                     "amount": {
                                                         "type": "integer"
+                                                    },
+                                                    "pay_on_account": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "pay_on_account_limit": {
+                                                        "type": "integer"
+                                                    },
+                                                    "annual_volume": {
+                                                        "type": "integer",
+                                                        "nullable": true
+                                                    },
+                                                    "annual_volume_shipped": {
+                                                        "type": "integer",
+                                                        "nullable": true,
+                                                        "readOnly": true
+                                                    },
+                                                    "annual_volume_tier": {
+                                                        "type": "string",
+                                                        "nullable": true,
+                                                        "readOnly": true
+                                                    },
+                                                    "anonymize_active_orders": {
+                                                        "type": "boolean",
+                                                        "readOnly": true
+                                                    },
+                                                    "anonymize_active_orders_after_days": {
+                                                        "minimum": 20,
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "nullable": true,
+                                                        "readOnly": true
                                                     },
                                                     "onboarding_steps_completed": {
                                                         "required": [
@@ -2458,7 +2572,11 @@
                                                             "required": [
                                                                 "name",
                                                                 "onboarding_steps_completed",
-                                                                "credits"
+                                                                "credits",
+                                                                "match_domain_for_new_users",
+                                                                "pay_on_account",
+                                                                "pay_on_account_limit",
+                                                                "anonymize_active_orders"
                                                             ],
                                                             "type": "object",
                                                             "properties": {
@@ -2469,6 +2587,9 @@
                                                                 },
                                                                 "name": {
                                                                     "type": "string"
+                                                                },
+                                                                "match_domain_for_new_users": {
+                                                                    "type": "boolean"
                                                                 },
                                                                 "auto_add_credits": {
                                                                     "type": "boolean"
@@ -2486,6 +2607,37 @@
                                                                 },
                                                                 "amount": {
                                                                     "type": "integer"
+                                                                },
+                                                                "pay_on_account": {
+                                                                    "type": "boolean"
+                                                                },
+                                                                "pay_on_account_limit": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "annual_volume": {
+                                                                    "type": "integer",
+                                                                    "nullable": true
+                                                                },
+                                                                "annual_volume_shipped": {
+                                                                    "type": "integer",
+                                                                    "nullable": true,
+                                                                    "readOnly": true
+                                                                },
+                                                                "annual_volume_tier": {
+                                                                    "type": "string",
+                                                                    "nullable": true,
+                                                                    "readOnly": true
+                                                                },
+                                                                "anonymize_active_orders": {
+                                                                    "type": "boolean",
+                                                                    "readOnly": true
+                                                                },
+                                                                "anonymize_active_orders_after_days": {
+                                                                    "minimum": 20,
+                                                                    "type": "integer",
+                                                                    "format": "int32",
+                                                                    "nullable": true,
+                                                                    "readOnly": true
                                                                 },
                                                                 "onboarding_steps_completed": {
                                                                     "required": [
@@ -2724,7 +2876,11 @@
                                                             "required": [
                                                                 "name",
                                                                 "onboarding_steps_completed",
-                                                                "credits"
+                                                                "credits",
+                                                                "match_domain_for_new_users",
+                                                                "pay_on_account",
+                                                                "pay_on_account_limit",
+                                                                "anonymize_active_orders"
                                                             ],
                                                             "type": "object",
                                                             "properties": {
@@ -2735,6 +2891,9 @@
                                                                 },
                                                                 "name": {
                                                                     "type": "string"
+                                                                },
+                                                                "match_domain_for_new_users": {
+                                                                    "type": "boolean"
                                                                 },
                                                                 "auto_add_credits": {
                                                                     "type": "boolean"
@@ -2752,6 +2911,37 @@
                                                                 },
                                                                 "amount": {
                                                                     "type": "integer"
+                                                                },
+                                                                "pay_on_account": {
+                                                                    "type": "boolean"
+                                                                },
+                                                                "pay_on_account_limit": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "annual_volume": {
+                                                                    "type": "integer",
+                                                                    "nullable": true
+                                                                },
+                                                                "annual_volume_shipped": {
+                                                                    "type": "integer",
+                                                                    "nullable": true,
+                                                                    "readOnly": true
+                                                                },
+                                                                "annual_volume_tier": {
+                                                                    "type": "string",
+                                                                    "nullable": true,
+                                                                    "readOnly": true
+                                                                },
+                                                                "anonymize_active_orders": {
+                                                                    "type": "boolean",
+                                                                    "readOnly": true
+                                                                },
+                                                                "anonymize_active_orders_after_days": {
+                                                                    "minimum": 20,
+                                                                    "type": "integer",
+                                                                    "format": "int32",
+                                                                    "nullable": true,
+                                                                    "readOnly": true
                                                                 },
                                                                 "onboarding_steps_completed": {
                                                                     "required": [
@@ -3069,7 +3259,11 @@
                                                             "required": [
                                                                 "name",
                                                                 "onboarding_steps_completed",
-                                                                "credits"
+                                                                "credits",
+                                                                "match_domain_for_new_users",
+                                                                "pay_on_account",
+                                                                "pay_on_account_limit",
+                                                                "anonymize_active_orders"
                                                             ],
                                                             "type": "object",
                                                             "properties": {
@@ -3080,6 +3274,9 @@
                                                                 },
                                                                 "name": {
                                                                     "type": "string"
+                                                                },
+                                                                "match_domain_for_new_users": {
+                                                                    "type": "boolean"
                                                                 },
                                                                 "auto_add_credits": {
                                                                     "type": "boolean"
@@ -3097,6 +3294,37 @@
                                                                 },
                                                                 "amount": {
                                                                     "type": "integer"
+                                                                },
+                                                                "pay_on_account": {
+                                                                    "type": "boolean"
+                                                                },
+                                                                "pay_on_account_limit": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "annual_volume": {
+                                                                    "type": "integer",
+                                                                    "nullable": true
+                                                                },
+                                                                "annual_volume_shipped": {
+                                                                    "type": "integer",
+                                                                    "nullable": true,
+                                                                    "readOnly": true
+                                                                },
+                                                                "annual_volume_tier": {
+                                                                    "type": "string",
+                                                                    "nullable": true,
+                                                                    "readOnly": true
+                                                                },
+                                                                "anonymize_active_orders": {
+                                                                    "type": "boolean",
+                                                                    "readOnly": true
+                                                                },
+                                                                "anonymize_active_orders_after_days": {
+                                                                    "minimum": 20,
+                                                                    "type": "integer",
+                                                                    "format": "int32",
+                                                                    "nullable": true,
+                                                                    "readOnly": true
                                                                 },
                                                                 "onboarding_steps_completed": {
                                                                     "required": [
@@ -3299,7 +3527,11 @@
                                             "required": [
                                                 "name",
                                                 "onboarding_steps_completed",
-                                                "credits"
+                                                "credits",
+                                                "match_domain_for_new_users",
+                                                "pay_on_account",
+                                                "pay_on_account_limit",
+                                                "anonymize_active_orders"
                                             ],
                                             "type": "object",
                                             "properties": {
@@ -3310,6 +3542,9 @@
                                                 },
                                                 "name": {
                                                     "type": "string"
+                                                },
+                                                "match_domain_for_new_users": {
+                                                    "type": "boolean"
                                                 },
                                                 "auto_add_credits": {
                                                     "type": "boolean"
@@ -3327,6 +3562,37 @@
                                                 },
                                                 "amount": {
                                                     "type": "integer"
+                                                },
+                                                "pay_on_account": {
+                                                    "type": "boolean"
+                                                },
+                                                "pay_on_account_limit": {
+                                                    "type": "integer"
+                                                },
+                                                "annual_volume": {
+                                                    "type": "integer",
+                                                    "nullable": true
+                                                },
+                                                "annual_volume_shipped": {
+                                                    "type": "integer",
+                                                    "nullable": true,
+                                                    "readOnly": true
+                                                },
+                                                "annual_volume_tier": {
+                                                    "type": "string",
+                                                    "nullable": true,
+                                                    "readOnly": true
+                                                },
+                                                "anonymize_active_orders": {
+                                                    "type": "boolean",
+                                                    "readOnly": true
+                                                },
+                                                "anonymize_active_orders_after_days": {
+                                                    "minimum": 20,
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "nullable": true,
+                                                    "readOnly": true
                                                 },
                                                 "onboarding_steps_completed": {
                                                     "required": [
@@ -3451,7 +3717,11 @@
                                 "required": [
                                     "name",
                                     "onboarding_steps_completed",
-                                    "credits"
+                                    "credits",
+                                    "match_domain_for_new_users",
+                                    "pay_on_account",
+                                    "pay_on_account_limit",
+                                    "anonymize_active_orders"
                                 ],
                                 "type": "object",
                                 "properties": {
@@ -3462,6 +3732,9 @@
                                     },
                                     "name": {
                                         "type": "string"
+                                    },
+                                    "match_domain_for_new_users": {
+                                        "type": "boolean"
                                     },
                                     "auto_add_credits": {
                                         "type": "boolean"
@@ -3479,6 +3752,37 @@
                                     },
                                     "amount": {
                                         "type": "integer"
+                                    },
+                                    "pay_on_account": {
+                                        "type": "boolean"
+                                    },
+                                    "pay_on_account_limit": {
+                                        "type": "integer"
+                                    },
+                                    "annual_volume": {
+                                        "type": "integer",
+                                        "nullable": true
+                                    },
+                                    "annual_volume_shipped": {
+                                        "type": "integer",
+                                        "nullable": true,
+                                        "readOnly": true
+                                    },
+                                    "annual_volume_tier": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "readOnly": true
+                                    },
+                                    "anonymize_active_orders": {
+                                        "type": "boolean",
+                                        "readOnly": true
+                                    },
+                                    "anonymize_active_orders_after_days": {
+                                        "minimum": 20,
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "nullable": true,
+                                        "readOnly": true
                                     },
                                     "onboarding_steps_completed": {
                                         "required": [
@@ -3541,7 +3845,11 @@
                                             "required": [
                                                 "name",
                                                 "onboarding_steps_completed",
-                                                "credits"
+                                                "credits",
+                                                "match_domain_for_new_users",
+                                                "pay_on_account",
+                                                "pay_on_account_limit",
+                                                "anonymize_active_orders"
                                             ],
                                             "type": "object",
                                             "properties": {
@@ -3552,6 +3860,9 @@
                                                 },
                                                 "name": {
                                                     "type": "string"
+                                                },
+                                                "match_domain_for_new_users": {
+                                                    "type": "boolean"
                                                 },
                                                 "auto_add_credits": {
                                                     "type": "boolean"
@@ -3569,6 +3880,37 @@
                                                 },
                                                 "amount": {
                                                     "type": "integer"
+                                                },
+                                                "pay_on_account": {
+                                                    "type": "boolean"
+                                                },
+                                                "pay_on_account_limit": {
+                                                    "type": "integer"
+                                                },
+                                                "annual_volume": {
+                                                    "type": "integer",
+                                                    "nullable": true
+                                                },
+                                                "annual_volume_shipped": {
+                                                    "type": "integer",
+                                                    "nullable": true,
+                                                    "readOnly": true
+                                                },
+                                                "annual_volume_tier": {
+                                                    "type": "string",
+                                                    "nullable": true,
+                                                    "readOnly": true
+                                                },
+                                                "anonymize_active_orders": {
+                                                    "type": "boolean",
+                                                    "readOnly": true
+                                                },
+                                                "anonymize_active_orders_after_days": {
+                                                    "minimum": 20,
+                                                    "type": "integer",
+                                                    "format": "int32",
+                                                    "nullable": true,
+                                                    "readOnly": true
                                                 },
                                                 "onboarding_steps_completed": {
                                                     "required": [
@@ -4921,7 +5263,7 @@
                                                                                 },
                                                                                 "price": {
                                                                                     "type": "number",
-                                                                                    "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                                                    "description": "This field is required when tier_pricing is disabled on the add-on.<br\/><br\/>Returns the total amount when attached to an order, except on index.",
                                                                                     "format": "float",
                                                                                     "nullable": true,
                                                                                     "example": 10
@@ -5224,7 +5566,7 @@
                                                         },
                                                         "price": {
                                                             "type": "number",
-                                                            "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                            "description": "This field is required when tier_pricing is disabled on the add-on.<br\/><br\/>Returns the total amount when attached to an order, except on index.",
                                                             "format": "float",
                                                             "nullable": true,
                                                             "example": 10
@@ -5451,7 +5793,7 @@
                                                                     },
                                                                     "price": {
                                                                         "type": "number",
-                                                                        "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                                        "description": "This field is required when tier_pricing is disabled on the add-on.<br\/><br\/>Returns the total amount when attached to an order, except on index.",
                                                                         "format": "float",
                                                                         "nullable": true,
                                                                         "example": 10
@@ -5766,7 +6108,7 @@
                                                                     },
                                                                     "price": {
                                                                         "type": "number",
-                                                                        "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                                        "description": "This field is required when tier_pricing is disabled on the add-on.<br\/><br\/>Returns the total amount when attached to an order, except on index.",
                                                                         "format": "float",
                                                                         "nullable": true,
                                                                         "example": 10
@@ -6247,7 +6589,7 @@
                                                                     },
                                                                     "price": {
                                                                         "type": "number",
-                                                                        "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                                        "description": "This field is required when tier_pricing is disabled on the add-on.<br\/><br\/>Returns the total amount when attached to an order, except on index.",
                                                                         "format": "float",
                                                                         "nullable": true,
                                                                         "example": 10
@@ -6637,6 +6979,10 @@
                                                                         "type": "string",
                                                                         "nullable": true
                                                                     },
+                                                                    "company": {
+                                                                        "type": "string",
+                                                                        "nullable": true
+                                                                    },
                                                                     "allow_empty_text_variables": {
                                                                         "type": "boolean",
                                                                         "nullable": true
@@ -6906,6 +7252,10 @@
                                         "type": "string",
                                         "nullable": true
                                     },
+                                    "company": {
+                                        "type": "string",
+                                        "nullable": true
+                                    },
                                     "allow_empty_text_variables": {
                                         "type": "boolean",
                                         "nullable": true
@@ -7021,6 +7371,10 @@
                                                             "nullable": true
                                                         },
                                                         "city": {
+                                                            "type": "string",
+                                                            "nullable": true
+                                                        },
+                                                        "company": {
                                                             "type": "string",
                                                             "nullable": true
                                                         },
@@ -7238,6 +7592,10 @@
                                                             "nullable": true
                                                         },
                                                         "city": {
+                                                            "type": "string",
+                                                            "nullable": true
+                                                        },
+                                                        "company": {
                                                             "type": "string",
                                                             "nullable": true
                                                         },
@@ -7512,6 +7870,10 @@
                                                             "nullable": true
                                                         },
                                                         "city": {
+                                                            "type": "string",
+                                                            "nullable": true
+                                                        },
+                                                        "company": {
                                                             "type": "string",
                                                             "nullable": true
                                                         },
@@ -7921,7 +8283,7 @@
                                                                         },
                                                                         "price": {
                                                                             "type": "number",
-                                                                            "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                                            "description": "This field is required when tier_pricing is disabled on the add-on.<br\/><br\/>Returns the total amount when attached to an order, except on index.",
                                                                             "format": "float",
                                                                             "nullable": true,
                                                                             "example": 10
@@ -8029,10 +8391,20 @@
                         "application\/json": {
                             "schema": {
                                 "required": [
+                                    "id",
                                     "preset_id",
+                                    "label",
                                     "quantity",
                                     "font_id",
-                                    "type"
+                                    "credits",
+                                    "open_rate_percentage",
+                                    "status",
+                                    "external_number",
+                                    "finalized_at",
+                                    "processed_at",
+                                    "type",
+                                    "created_at",
+                                    "updated_at"
                                 ],
                                 "type": "object",
                                 "properties": {
@@ -8150,7 +8522,7 @@
                                                 },
                                                 "price": {
                                                     "type": "number",
-                                                    "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                    "description": "This field is required when tier_pricing is disabled on the add-on.<br\/><br\/>Returns the total amount when attached to an order, except on index.",
                                                     "format": "float",
                                                     "nullable": true,
                                                     "example": 10
@@ -8350,7 +8722,7 @@
                                                             },
                                                             "price": {
                                                                 "type": "number",
-                                                                "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                                "description": "This field is required when tier_pricing is disabled on the add-on.<br\/><br\/>Returns the total amount when attached to an order, except on index.",
                                                                 "format": "float",
                                                                 "nullable": true,
                                                                 "example": 10
@@ -8637,7 +9009,7 @@
                                                             },
                                                             "price": {
                                                                 "type": "number",
-                                                                "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                                "description": "This field is required when tier_pricing is disabled on the add-on.<br\/><br\/>Returns the total amount when attached to an order, except on index.",
                                                                 "format": "float",
                                                                 "nullable": true,
                                                                 "example": 10
@@ -8970,7 +9342,7 @@
                                                 },
                                                 "price": {
                                                     "type": "number",
-                                                    "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                    "description": "This field is required when tier_pricing is disabled on the add-on.<br\/><br\/>Returns the total amount when attached to an order, except on index.",
                                                     "format": "float",
                                                     "nullable": true,
                                                     "example": 10
@@ -9170,7 +9542,7 @@
                                                             },
                                                             "price": {
                                                                 "type": "number",
-                                                                "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                                "description": "This field is required when tier_pricing is disabled on the add-on.<br\/><br\/>Returns the total amount when attached to an order, except on index.",
                                                                 "format": "float",
                                                                 "nullable": true,
                                                                 "example": 10
@@ -9514,6 +9886,10 @@
                                                         "preview_back_url": {
                                                             "type": "string",
                                                             "nullable": true
+                                                        },
+                                                        "font_size": {
+                                                            "type": "integer",
+                                                            "nullable": true
                                                         }
                                                     }
                                                 }
@@ -9751,7 +10127,7 @@
                                                             },
                                                             "price": {
                                                                 "type": "number",
-                                                                "description": "This field is required when tier_pricing is disabled on the add-on.Returns the total amount when attached to an order, except on index.",
+                                                                "description": "This field is required when tier_pricing is disabled on the add-on.<br\/><br\/>Returns the total amount when attached to an order, except on index.",
                                                                 "format": "float",
                                                                 "nullable": true,
                                                                 "example": 10
@@ -10506,15 +10882,13 @@
                     "Subscription"
                 ],
                 "summary": "Subscribe to a subscription plan.",
-                "description": "An organization must have a billing address and payment method set up before subscribing to a payed plan. If the organization is already subscribed to a plan, it is unable to subscribe to another plan.",
+                "description": "An organization must have a billing address and payment method set up before subscribing to a payed plan. If the organization is already subscribed to a plan, it is unable to subscribe to another plan. For the free Basic plan it returns true. For paid plans, a Stripe checkout URL is returned.",
                 "requestBody": {
                     "content": {
                         "application\/json": {
                             "schema": {
                                 "required": [
-                                    "subscription_plan_id",
-                                    "success_url",
-                                    "cancel_url"
+                                    "subscription_plan_id"
                                 ],
                                 "type": "object",
                                 "properties": {
@@ -10525,12 +10899,12 @@
                                     },
                                     "success_url": {
                                         "type": "string",
-                                        "description": "The URL to redirect to after a successful checkout.",
+                                        "description": "The URL to redirect to after a successful checkout. Required for paid plans.",
                                         "format": "url"
                                     },
                                     "cancel_url": {
                                         "type": "string",
-                                        "description": "The URL to redirect to after a canceled checkout",
+                                        "description": "The URL to redirect to after a canceled checkout. Required for paid plans.",
                                         "format": "url"
                                     }
                                 }
@@ -10540,7 +10914,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Subscription request completed.",
+                        "description": "Subscription request completed. Returns checkout URL for paid plans, or true for free plans.",
                         "content": {
                             "application\/json": {
                                 "schema": {
@@ -11033,6 +11407,11 @@
                                         "type": "string",
                                         "description": "URL to redirect to if the user cancels the checkout.",
                                         "format": "url"
+                                    },
+                                    "amount": {
+                                        "type": "integer",
+                                        "description": "Amount of credits to purchase. If not provided, the customer can chose his own amount in stripe but can't use promotion codes",
+                                        "nullable": true
                                     }
                                 }
                             }

@@ -1,0 +1,17 @@
+overlay: 1.1.0
+info:
+  title: Correct upstream OpenAPI schema defects
+  version: 1.0.0
+  description: Correct inaccurate required and nullability declarations in the upstream document.
+extends: https://app.lightr.nl/api/docs.json
+actions:
+  - target: $.paths.*.*.responses.*.content.*.schema..required[?@ == 'password']
+    description: Response payloads do not contain write-only passwords.
+    remove: true
+  - target: $.paths.*.*.responses.*.content.*.schema..properties.agency
+    description: Response payloads may omit the organization agency.
+    update:
+      nullable: true
+  - target: $.paths['/api/v1/orders'].post.requestBody.content.*.schema.required[?@ == 'id' || @ == 'label' || @ == 'credits' || @ == 'open_rate_percentage' || @ == 'status' || @ == 'external_number' || @ == 'finalized_at' || @ == 'processed_at' || @ == 'created_at' || @ == 'updated_at']
+    description: Server-generated order fields are not required request inputs.
+    remove: true

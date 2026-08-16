@@ -31,6 +31,9 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+build/
+dist/
+.cache/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -396,3 +399,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# HTTP archive recordings can include credentials and customer data.
+*.har

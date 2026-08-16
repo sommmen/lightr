@@ -44,10 +44,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<OpenApiReference Include="OpenAPIs\docs.json" CodeGenerator="NSwagCSharp" Options="/GenerateClientInterfaces:true /GenerateOptionalParameters:true" ClassName="LightrClient">
-			<SourceUri>https://app.lightr.nl/api/docs.json</SourceUri>
+		<OpenApiReference Include="OpenAPIs/docs.json" CodeGenerator="NSwagCSharp" Options="/GenerateClientInterfaces:true /GenerateOptionalParameters:true" ClassName="LightrClient">
+			<SourceUrl>https://app.lightr.nl/api/docs.json</SourceUrl>
 		</OpenApiReference>
 	</ItemGroup>
+
+	<Target Name="GenerateLightrOverlaidOpenApiDocument"
+			Inputs="$(MSBuildProjectDirectory)/OpenAPIs/docs.json;$(MSBuildProjectDirectory)/OpenAPIs/schema-corrections.overlay.yaml"
+			Outputs="$(BaseIntermediateOutputPath)docs.overlaid.json">
+		<MakeDir Directories="$(BaseIntermediateOutputPath)" />
+		<Exec Command="dotnet tool run clio apply &quot;$(MSBuildProjectDirectory)/OpenAPIs/docs.json&quot; --overlay &quot;$(MSBuildProjectDirectory)/OpenAPIs/schema-corrections.overlay.yaml&quot; --output &quot;$(BaseIntermediateOutputPath)docs.overlaid.json&quot; --force --strict" />
+	</Target>
+
+	<Target Name="ApplyLightrOpenApiOverlay" BeforeTargets="_GetMetadataForOpenApiReferences" DependsOnTargets="GenerateLightrOverlaidOpenApiDocument">
+		<ItemGroup>
+			<OpenApiReference Remove="OpenAPIs/docs.json" />
+			<OpenApiReference Include="$(BaseIntermediateOutputPath)docs.overlaid.json" CodeGenerator="NSwagCSharp" Options="/GenerateClientInterfaces:true /GenerateOptionalParameters:true" ClassName="LightrClient" />
+		</ItemGroup>
+	</Target>
 
 	<ItemGroup>
 		<PackageReference Include="DotNet.ReproducibleBuilds" Version="2.0.2">
