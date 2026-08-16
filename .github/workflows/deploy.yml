@@ -18,6 +18,8 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
     steps:
     - uses: actions/checkout@v7
       with:
@@ -36,10 +38,15 @@ jobs:
       run: dotnet test --no-build --no-restore --verbosity normal --configuration Release
     - name: pack
       run: dotnet pack --include-symbols --include-source --no-build --no-restore --configuration Release --output ${{ env.NuGetDirectory }}
+    - name: NuGet login (OIDC to temporary API key)
+      uses: NuGet/login@v1
+      id: nuget-login
+      with:
+        user: ${{ secrets.NUGET_USER }}
     - name: Publish NuGet package
       run: |
         foreach($file in (Get-ChildItem "${{ env.NuGetDirectory }}" -Recurse -Include *.nupkg)) {
-            dotnet nuget push $file --api-key "${{ secrets.NUGET_APIKEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate --no-symbols
+            dotnet nuget push $file --api-key "${{ steps.nuget-login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate --no-symbols
         }
     - name: Publish NuGet package (Github)
       run: |
