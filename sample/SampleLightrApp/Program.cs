@@ -1,8 +1,10 @@
-﻿using System.Diagnostics;
-using Lightr;
+﻿using Lightr;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System.Diagnostics;
+using System.Text.Json.Serialization;
 using Vcr.HttpRecorder;
 
 var builder = Host.CreateApplicationBuilder(args);
@@ -37,10 +39,14 @@ var fontsResponse = await client.FontsAsync();
 var font = fontsResponse.Data.First();
 
 var presetsResponse = await client.PresetsGETAsync();
-var preset = presetsResponse.Data.Last();
+var preset = presetsResponse.Data
+    .OrderBy(c => c.Created_at)
+    .Last(c => c.Label == "OPG met QR");
 
 var presetDetailsResponse = await client.PresetsGET2Async(preset.Id);
 var presetDetails = presetDetailsResponse.Data;
+
+var presetTemplate = await client.TemplatesGET2Async(preset.Base_template_id);
 
 // Create a new order
 logger.LogInformation("Attempting to create an order with font: {FontLabel} and preset {Preset} with text variables: {TextVariables}", font.Label, presetDetails.Label, string.Join(", ", presetDetails));
@@ -67,22 +73,23 @@ var receiverPostResponse1 = await client.ReceiversPOSTAsync(orderId, new()
 {
     Order_id = orderId,
     
-    Name = "Pepijn smitt",
+    Name = "Tinus Tester",
     Country_id = countryId,
     
-    Address = "Voorbeeldstraat 1",
-    City = "Fantasiastad",
-    Postal_code = "1234AB",
-    
-    Text_variables = new
-    {
-        Bedrijf = "Smitt Smithy's",
-        Voor_achternaam = "Pepijn smitt",
-        Straat_nr = "Voorbeeldstraat 1",
-        Postcode_plaats = "123XX Fantasiastad",
-        Land = "Nederland",
+    Address = "Meander 1101",
+    City = "Arnhem",
+    Postal_code = "6825MJ",
 
-        Multiline = "Dear {{Naam}} from {{Land}},\n This is a test card which you'll be receiving.\n\nYours truly,\n" + meResponse.Data.First_name
+    Allow_empty_text_variables = true,
+
+    Text_variables = new TextVariables
+    {
+        Bedrijf = "Smitt Smithy's", 
+        VoorAchternaam = "Pepijn smitt", 
+        StraatNr = "Voorbeeldstraat 1",
+        PostcodePlaats = "123XX Fantasiastad",
+        Land = "Nederland",
+        Multiline = "Dear {{Voor_achternaam}} from {{Land}},\n This is a test card which you'll be receiving.\n\nYours truly,\n" + meResponse.Data.First_name
     },
 
     Qr_variables = [
@@ -106,15 +113,17 @@ var receiverPostResponse2 = await client.ReceiversPOSTAsync(orderId, new()
     Postal_code = "1234AB",
     Country_id = countryId,
 
-    Text_variables = new
+    Allow_empty_text_variables = true,
+
+    Text_variables = new TextVariables
     {
         // No 'Bedrijf' - but we need a value for the api.
-        Bedrijf = "---",
-        Voor_achternaam = "Chiel de boer",
-        Straat_nr = "Voorbeeldstraat 2",
-        Postcode_plaats = "123XX Fantasiastad",
+        Bedrijf = "---", // TODO we have Allow_empty_text_variables = true, now.
+        VoorAchternaam = "Chiel de boer",
+        StraatNr = "Voorbeeldstraat 2",
+        PostcodePlaats = "123XX Fantasiastad",
         Land = "Nederland",
-        Multiline = "Beste {{Naam}} van {{Land}},\n Dit is een testkaart die je gaat ontvangen.\n\nGroeten,\n" + meResponse.Data.First_name
+        Multiline = "Beste {{Voor_achternaam}} van {{Land}},\n Dit is een testkaart die je gaat ontvangen.\n\nGroeten,\n" + meResponse.Data.First_name
     },
 
     // If your card is setup to use a QR-code:
@@ -146,3 +155,20 @@ logger.LogInformation("Deleted order: {OrderId}", orderId);
 
 // Wait before exiting.
 Debugger.Break();
+
+public record TextVariables
+{
+    public string? Bedrijf { get; set; }
+
+    [JsonPropertyName("Voor_achternaam"), JsonProperty("Voor_achternaam")]
+    public string? VoorAchternaam { get; set; }
+
+    [JsonPropertyName("Straat_nr"), JsonProperty("Straat_nr")]
+    public string? StraatNr { get; set; }
+
+    [JsonPropertyName("Postcode_plaats"), JsonProperty("Postcode_plaats")]
+    public string? PostcodePlaats { get; set; }
+
+    public string? Land { get; set; }
+    public string? Multiline { get; set; }
+}
