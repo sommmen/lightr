@@ -396,3 +396,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# HTTP archive recordings can include credentials and customer data.
+*.har

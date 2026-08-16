@@ -57,15 +57,18 @@ Requests are delayed when the limit is reached. See the `ServiceCollectionExtens
 
 # Development
 
-The project should build as-is.
+The library is generated from the upstream OpenAPI document and requires the .NET 10 SDK. Restore the repository-local tools before building:
 
-The library is basically a wrapper to an api document.
-It uses the .net open api integration.
+```powershell
+dotnet tool restore
+dotnet build
+```
 
-To update the open api document follow the steps below.
- - Within visual studio open the connected services tab for the project.
- - Open the dropdown menu for the openapi document, and press refresh.
- - Rebuild the project.
+To refresh the checked-in OpenAPI document, run:
 
- The generator can be quite strict, throwing on unexpected results so the api document may need some post processing.
- For example, some properties are marked required when in practice they're not.
+```powershell
+.\scripts\Refresh-OpenApi.ps1
+dotnet build
+```
+
+The build automatically applies `schema-corrections.overlay.yaml` before NSwag generates the client. The overlay corrects known upstream schema defects, so no manual post-processing of the downloaded document is needed.
