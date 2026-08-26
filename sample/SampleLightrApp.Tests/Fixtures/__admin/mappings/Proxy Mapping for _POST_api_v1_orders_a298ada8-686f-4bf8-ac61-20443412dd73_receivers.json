@@ -1,0 +1,134 @@
+{
+  "Guid": "a59c5404-72ac-41cf-890a-275e84b969bf",
+  "UpdatedAt": "2026-08-26T17:43:52.7507383Z",
+  "Title": "Proxy Mapping for POST /api/v1/orders/a298ada8-686f-4bf8-ac61-20443412dd73/receivers",
+  "Description": "Proxy Mapping for POST /api/v1/orders/a298ada8-686f-4bf8-ac61-20443412dd73/receivers",
+  "Priority": -2000000,
+  "Request": {
+    "Path": {
+      "Matchers": [
+        {
+          "Name": "WildcardMatcher",
+          "Pattern": "/api/v1/orders/a298ada8-686f-4bf8-ac61-20443412dd73/receivers",
+          "IgnoreCase": false
+        }
+      ]
+    },
+    "Methods": [
+      "POST"
+    ],
+    "HttpVersion": "1.1",
+    "Headers": [
+      {
+        "Name": "Accept",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "application/json",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      },
+      {
+        "Name": "Host",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "localhost:55330",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      },
+      {
+        "Name": "Content-Type",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "application/json",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      }
+    ],
+    "Body": {
+      "Matcher": {
+        "Name": "JsonMatcher",
+        "Pattern": {
+          "id": "00000000-0000-0000-0000-000000000000",
+          "order_id": "a298ada8-686f-4bf8-ac61-20443412dd73",
+          "name": "[redacted]",
+          "country_id": "99d4d37a-0956-428c-9eb6-67e9b205cc09",
+          "text_variables": {
+            "Bedrijf": "[redacted]",
+            "Voor_achternaam": "[redacted]",
+            "Straat_nr": "[redacted]",
+            "Postcode_plaats": "[redacted]",
+            "Land": "[redacted]",
+            "Multiline": "[redacted]"
+          },
+          "qr_variables": [
+            {
+              "index": 0,
+              "value": "https://example.com/card2",
+              "trackable": true
+            }
+          ],
+          "received_by_extractor_at": null,
+          "address": "[redacted]",
+          "postal_code": "[redacted]",
+          "city": "[redacted]",
+          "allow_empty_text_variables": true
+        },
+        "IgnoreCase": true,
+        "Regex": false
+      }
+    }
+  },
+  "Response": {
+    "StatusCode": 201,
+    "BodyAsJson": {
+      "data": {
+        "id": "a298adac-ed12-495b-8a65-44df36e1e9cc",
+        "order_id": "a298ada8-686f-4bf8-ac61-20443412dd73",
+        "country_id": "99d4d37a-0956-428c-9eb6-67e9b205cc09",
+        "name": "[redacted]",
+        "company": null,
+        "text_variables": {
+          "Bedrijf": "[redacted]",
+          "Voor_achternaam": "[redacted]",
+          "Straat_nr": "[redacted]",
+          "Postcode_plaats": "[redacted]",
+          "Land": "[redacted]",
+          "Multiline": "[redacted]"
+        },
+        "received_by_extractor_at": null,
+        "qr_variables": [
+          {
+            "index": 0,
+            "value": "https://example.com/card2",
+            "trackable": true
+          }
+        ],
+        "address": "[redacted]",
+        "postal_code": "[redacted]",
+        "city": "[redacted]",
+        "open_rates": []
+      }
+    },
+    "Headers": {
+      "Content-Type": "application/json",
+      "Date": "Wed, 26 Aug 2026 17:45:27 GMT",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "X-Powered-By": "PHP/8.2.26",
+      "Cache-Control": "no-cache, private",
+      "X-RateLimit-Limit": "120",
+      "X-RateLimit-Remaining": "111",
+      "Access-Control-Allow-Origin": "*",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+    }
+  }
+}

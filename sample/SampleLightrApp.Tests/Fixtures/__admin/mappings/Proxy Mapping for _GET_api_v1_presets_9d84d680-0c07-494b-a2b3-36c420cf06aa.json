@@ -1,0 +1,120 @@
+{
+  "Guid": "6059c02d-831f-4c26-9937-d5020aabe23c",
+  "UpdatedAt": "2026-08-26T17:43:47.0613593Z",
+  "Title": "Proxy Mapping for GET /api/v1/presets/9d84d680-0c07-494b-a2b3-36c420cf06aa",
+  "Description": "Proxy Mapping for GET /api/v1/presets/9d84d680-0c07-494b-a2b3-36c420cf06aa",
+  "Priority": -2000000,
+  "Request": {
+    "Path": {
+      "Matchers": [
+        {
+          "Name": "WildcardMatcher",
+          "Pattern": "/api/v1/presets/9d84d680-0c07-494b-a2b3-36c420cf06aa",
+          "IgnoreCase": false
+        }
+      ]
+    },
+    "Methods": [
+      "GET"
+    ],
+    "HttpVersion": "1.1",
+    "Headers": [
+      {
+        "Name": "Accept",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "application/json",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      },
+      {
+        "Name": "Host",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "localhost:55330",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      }
+    ]
+  },
+  "Response": {
+    "StatusCode": 200,
+    "BodyAsJson": {
+      "data": {
+        "id": "9d84d680-0c07-494b-a2b3-36c420cf06aa",
+        "organization_id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+        "font_id": "9b371339-2879-44aa-847b-d3bf85680769",
+        "max_font_size": 30,
+        "label": "[redacted]",
+        "format": "A6",
+        "base_template_id": "9e4dfb19-2bba-422f-98ea-cff5a7d8cafa",
+        "background_template_id": "a05a9f6a-4e9a-4cbb-b68a-bde7c8e9b3c6",
+        "qr_tracking_enabled": true,
+        "preview_front_url": "https://fixtures.invalid/resource",
+        "preview_front_url_full_sized": "https://fixtures.invalid/resource",
+        "preview_back_url": "https://fixtures.invalid/resource",
+        "preview_back_url_full_sized": "https://fixtures.invalid/resource",
+        "images": [
+          {
+            "name": "[redacted]",
+            "width": 430.13169699907,
+            "height": 308.44970703125,
+            "is_qr": false,
+            "url": null,
+            "file_url": "https://fixtures.invalid/resource"
+          },
+          {
+            "name": "[redacted]",
+            "width": 56.692901611328,
+            "height": 56.692901611328,
+            "is_qr": true,
+            "url": "https://fixtures.invalid/resource",
+            "file_url": null
+          }
+        ],
+        "has_multiline": true,
+        "text_variables": [
+          "Bedrijf",
+          "Voor_achternaam",
+          "Straat_nr",
+          "Postcode_plaats",
+          "Land"
+        ],
+        "printlane_template_id": 406,
+        "printlane_template_token": "[redacted]",
+        "tags": [],
+        "created_at": "2024-11-18T14:03:19.000000Z",
+        "updated_at": "2025-11-14T09:01:03.000000Z",
+        "permissions": {
+          "viewAny": false,
+          "view": true,
+          "create": true,
+          "update": false,
+          "delete": true,
+          "forceDelete": false,
+          "restore": false
+        },
+        "add_ons": []
+      }
+    },
+    "Headers": {
+      "Content-Type": "application/json",
+      "Date": "Wed, 26 Aug 2026 17:45:22 GMT",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Vary": "Accept-Encoding",
+      "X-Powered-By": "PHP/8.2.26",
+      "Cache-Control": "no-cache, private",
+      "X-RateLimit-Limit": "120",
+      "X-RateLimit-Remaining": "116",
+      "Access-Control-Allow-Origin": "*",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+    }
+  }
+}

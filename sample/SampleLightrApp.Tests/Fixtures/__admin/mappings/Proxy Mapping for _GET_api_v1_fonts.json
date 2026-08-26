@@ -1,0 +1,154 @@
+{
+  "Guid": "3f354635-0bc7-48b4-a7e2-89461a3e840e",
+  "UpdatedAt": "2026-08-26T17:43:46.6021046Z",
+  "Title": "Proxy Mapping for GET /api/v1/fonts",
+  "Description": "Proxy Mapping for GET /api/v1/fonts",
+  "Priority": -2000000,
+  "Request": {
+    "Path": {
+      "Matchers": [
+        {
+          "Name": "WildcardMatcher",
+          "Pattern": "/api/v1/fonts",
+          "IgnoreCase": false
+        }
+      ]
+    },
+    "Methods": [
+      "GET"
+    ],
+    "HttpVersion": "1.1",
+    "Headers": [
+      {
+        "Name": "Accept",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "application/json",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      },
+      {
+        "Name": "Host",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "localhost:55330",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      }
+    ]
+  },
+  "Response": {
+    "StatusCode": 200,
+    "BodyAsJson": {
+      "data": [
+        {
+          "id": "99e56c99-b7d0-42b6-bb33-eacc4c70fe8d",
+          "organization_id": null,
+          "label": "[redacted]",
+          "ttf_file_url": null,
+          "woff_file_url": null,
+          "woff2_file_url": null,
+          "is_active": true,
+          "created_at": "2023-08-15T13:34:45.000000Z",
+          "updated_at": "2023-08-15T13:34:45.000000Z"
+        },
+        {
+          "id": "9b371339-2879-44aa-847b-d3bf85680769",
+          "organization_id": null,
+          "label": "[redacted]",
+          "ttf_file_url": null,
+          "woff_file_url": null,
+          "woff2_file_url": null,
+          "is_active": true,
+          "created_at": "2024-01-30T09:54:40.000000Z",
+          "updated_at": "2025-10-22T14:32:21.000000Z"
+        },
+        {
+          "id": "9b3d2634-b252-4df0-8be7-3e2b098d065b",
+          "organization_id": null,
+          "label": "[redacted]",
+          "ttf_file_url": null,
+          "woff_file_url": null,
+          "woff2_file_url": null,
+          "is_active": true,
+          "created_at": "2024-02-02T10:22:42.000000Z",
+          "updated_at": "2024-02-02T14:08:54.000000Z"
+        },
+        {
+          "id": "9b3d6875-fc90-4181-9834-f112e64ff760",
+          "organization_id": null,
+          "label": "[redacted]",
+          "ttf_file_url": null,
+          "woff_file_url": null,
+          "woff2_file_url": null,
+          "is_active": true,
+          "created_at": "2024-02-02T13:27:58.000000Z",
+          "updated_at": "2024-02-02T13:56:28.000000Z"
+        },
+        {
+          "id": "9b3d5207-4cd4-4de3-8f4a-c9f92b9207a1",
+          "organization_id": null,
+          "label": "[redacted]",
+          "ttf_file_url": null,
+          "woff_file_url": null,
+          "woff2_file_url": null,
+          "is_active": true,
+          "created_at": "2024-02-02T12:25:15.000000Z",
+          "updated_at": "2024-02-02T13:56:42.000000Z"
+        },
+        {
+          "id": "9b1323a4-3f67-437d-ac11-a29f4c760066",
+          "organization_id": null,
+          "label": "[redacted]",
+          "ttf_file_url": null,
+          "woff_file_url": null,
+          "woff2_file_url": null,
+          "is_active": true,
+          "created_at": "2024-01-12T13:10:46.000000Z",
+          "updated_at": "2025-05-13T13:09:30.000000Z"
+        },
+        {
+          "id": "9c61143c-87ce-4e8e-964a-ee3f2ea4380d",
+          "organization_id": null,
+          "label": "[redacted]",
+          "ttf_file_url": null,
+          "woff_file_url": null,
+          "woff2_file_url": null,
+          "is_active": true,
+          "created_at": "2024-06-26T13:14:12.000000Z",
+          "updated_at": "2024-10-12T06:33:42.000000Z"
+        },
+        {
+          "id": "9c611c47-8021-406c-852a-47bbf1b22ab9",
+          "organization_id": null,
+          "label": "[redacted]",
+          "ttf_file_url": null,
+          "woff_file_url": null,
+          "woff2_file_url": null,
+          "is_active": true,
+          "created_at": "2024-06-26T13:36:42.000000Z",
+          "updated_at": "2025-01-14T13:15:49.000000Z"
+        }
+      ]
+    },
+    "Headers": {
+      "Content-Type": "application/json",
+      "Date": "Wed, 26 Aug 2026 17:45:21 GMT",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Vary": "Accept-Encoding",
+      "X-Powered-By": "PHP/8.2.26",
+      "Cache-Control": "no-cache, private",
+      "X-RateLimit-Limit": "120",
+      "X-RateLimit-Remaining": "118",
+      "Access-Control-Allow-Origin": "*",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+    }
+  }
+}

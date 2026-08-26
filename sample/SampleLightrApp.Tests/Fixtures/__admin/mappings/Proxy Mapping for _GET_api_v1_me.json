@@ -1,0 +1,152 @@
+{
+  "Guid": "f59ea0d8-1a96-46c9-8211-461c5836a6b0",
+  "UpdatedAt": "2026-08-26T17:43:46.4452376Z",
+  "Title": "Proxy Mapping for GET /api/v1/me",
+  "Description": "Proxy Mapping for GET /api/v1/me",
+  "Priority": -2000000,
+  "Request": {
+    "Path": {
+      "Matchers": [
+        {
+          "Name": "WildcardMatcher",
+          "Pattern": "/api/v1/me",
+          "IgnoreCase": false
+        }
+      ]
+    },
+    "Methods": [
+      "GET"
+    ],
+    "HttpVersion": "1.1",
+    "Headers": [
+      {
+        "Name": "Accept",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "application/json",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      },
+      {
+        "Name": "Host",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "localhost:55330",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      }
+    ]
+  },
+  "Response": {
+    "StatusCode": 200,
+    "BodyAsJson": {
+      "data": {
+        "id": "9ad8c3b7-030d-4c14-a542-c2f2523b945c",
+        "organization_user_role_id": "99d4d37a-06f4-48a8-adab-ab05f57b98a5",
+        "first_name": "[redacted]",
+        "last_name": "[redacted]",
+        "email": "[redacted]",
+        "phone_number": null,
+        "created_at": "2023-12-14T12:44:31.000000Z",
+        "updated_at": "2023-12-14T12:46:32.000000Z",
+        "organization": {
+          "id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+          "name": "[redacted]",
+          "onboarding_steps_completed": {
+            "billing_address": true,
+            "subscription_active": true
+          },
+          "billing_address": {
+            "id": "9ad8c682-c115-4d16-8569-467fe33bcc67",
+            "organization_id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+            "type": "billing",
+            "address": "[redacted]",
+            "postal_code": "[redacted]",
+            "city": "[redacted]",
+            "country_id": "99d4d37a-0956-428c-9eb6-67e9b205cc09",
+            "tags": [],
+            "created_at": "2023-12-14T12:52:20.000000Z",
+            "updated_at": "2023-12-14T12:52:20.000000Z"
+          },
+          "shipping_address": {
+            "id": "a1f8b559-97e0-4ca2-8233-b78579b8eaa2",
+            "organization_id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+            "type": "shipping",
+            "address": "[redacted]",
+            "postal_code": "[redacted]",
+            "city": "[redacted]",
+            "country_id": "99d4d37a-0956-428c-9eb6-67e9b205cc09",
+            "tags": [],
+            "created_at": "2026-06-08T05:14:25.000000Z",
+            "updated_at": "2026-06-08T05:14:25.000000Z"
+          },
+          "subscription": {
+            "id": 347,
+            "subscription_plan_id": "99d51030-b75c-4933-9d1b-bff97a62f741",
+            "stripe_status": "active",
+            "trial_ends": null,
+            "ends_at": null,
+            "created_at": "2026-06-08T05:14:28.000000Z",
+            "updated_at": "2026-06-08T05:14:28.000000Z",
+            "permissions": {
+              "view": true,
+              "delete": true,
+              "resume": false
+            }
+          },
+          "subscriptionPlan": {
+            "id": "99d51030-b75c-4933-9d1b-bff97a62f741",
+            "title": "Basic plan",
+            "amount": 0,
+            "base_price_card_a5": "1.50",
+            "base_price_card_a6": "1.00",
+            "base_price_card_a7": "0.75",
+            "created_at": "2023-08-07T10:23:07.000000Z",
+            "updated_at": "2023-11-01T12:26:24.000000Z"
+          },
+          "subscription_period_ends_at": "2026-09-08T05:14:28.000000Z",
+          "credits": "-1.196,81",
+          "agency": null,
+          "match_domain_for_new_users": true,
+          "auto_add_credits": false,
+          "lower_limit": 0,
+          "replenishment_method": "add_until",
+          "amount": 0,
+          "pay_on_account": true,
+          "pay_on_account_limit": 0,
+          "annual_volume": 0,
+          "annual_volume_shipped": 0,
+          "annual_volume_tier": "10001\u002B",
+          "anonymize_active_orders": false,
+          "anonymize_active_orders_after_days": null
+        },
+        "features": {
+          "qr_codes": true,
+          "dashboard": true,
+          "custom_base_templates": true,
+          "custom_back_templates": true,
+          "manage_api_tokens": false
+        }
+      }
+    },
+    "Headers": {
+      "Content-Type": "application/json",
+      "Date": "Wed, 26 Aug 2026 17:45:21 GMT",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Vary": "Accept-Encoding",
+      "X-Powered-By": "PHP/8.2.26",
+      "Cache-Control": "no-cache, private",
+      "X-RateLimit-Limit": "120",
+      "X-RateLimit-Remaining": "119",
+      "Access-Control-Allow-Origin": "*",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+    }
+  }
+}

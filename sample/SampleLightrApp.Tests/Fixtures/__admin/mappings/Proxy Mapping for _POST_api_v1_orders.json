@@ -1,0 +1,126 @@
+{
+  "Guid": "61e6d437-0e59-4abf-8a95-c1b048584d75",
+  "UpdatedAt": "2026-08-26T17:43:47.2882233Z",
+  "Title": "Proxy Mapping for POST /api/v1/orders",
+  "Description": "Proxy Mapping for POST /api/v1/orders",
+  "Priority": -2000000,
+  "Request": {
+    "Path": {
+      "Matchers": [
+        {
+          "Name": "WildcardMatcher",
+          "Pattern": "/api/v1/orders",
+          "IgnoreCase": false
+        }
+      ]
+    },
+    "Methods": [
+      "POST"
+    ],
+    "HttpVersion": "1.1",
+    "Headers": [
+      {
+        "Name": "Accept",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "application/json",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      },
+      {
+        "Name": "Host",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "localhost:55330",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      },
+      {
+        "Name": "Content-Type",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "application/json",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      }
+    ],
+    "Body": {
+      "Matcher": {
+        "Name": "JsonMatcher",
+        "Pattern": {
+          "id": "00000000-0000-0000-0000-000000000000",
+          "preset_id": "9d84d680-0c07-494b-a2b3-36c420cf06aa",
+          "quantity": 1,
+          "font_id": "99e56c99-b7d0-42b6-bb33-eacc4c70fe8d",
+          "total_cards": 0,
+          "status": "draft",
+          "type": "send_multiple",
+          "created_at": "0001-01-01T00:00:00\u002B00:00",
+          "updated_at": "0001-01-01T00:00:00\u002B00:00"
+        },
+        "IgnoreCase": true,
+        "Regex": false
+      }
+    }
+  },
+  "Response": {
+    "StatusCode": 201,
+    "BodyAsJson": {
+      "data": {
+        "id": "a298ada8-686f-4bf8-ac61-20443412dd73",
+        "preset_id": "9d84d680-0c07-494b-a2b3-36c420cf06aa",
+        "font_id": "99e56c99-b7d0-42b6-bb33-eacc4c70fe8d",
+        "label": "[redacted]",
+        "quantity": 1,
+        "total_cards": 0,
+        "status": "draft",
+        "external_number": "[redacted]",
+        "finalized_at": null,
+        "processed_at": null,
+        "type": "send_multiple",
+        "credits": "0,00",
+        "qr_default_value": null,
+        "open_rate_percentage": 0,
+        "qr_last_scannend": null,
+        "preview_front_url": "https://fixtures.invalid/resource",
+        "preview_back_url": "https://fixtures.invalid/resource",
+        "created_at": "2026-08-26T17:45:22.000000Z",
+        "updated_at": "2026-08-26T17:45:22.000000Z",
+        "permissions": {
+          "viewAny": true,
+          "view": true,
+          "create": true,
+          "update": true,
+          "delete": true,
+          "forceDelete": false,
+          "restore": false,
+          "finalize": true,
+          "replicate": false
+        },
+        "shipping_date": null,
+        "add_ons": []
+      }
+    },
+    "Headers": {
+      "Content-Type": "application/json",
+      "Date": "Wed, 26 Aug 2026 17:45:22 GMT",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "X-Powered-By": "PHP/8.2.26",
+      "Cache-Control": "no-cache, private",
+      "X-RateLimit-Limit": "120",
+      "X-RateLimit-Remaining": "114",
+      "Access-Control-Allow-Origin": "*",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+    }
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "Guid": "b58fb862-af10-4a6b-af44-17eaefedce19",
+  "UpdatedAt": "2026-08-26T17:43:53.067063Z",
+  "Title": "Proxy Mapping for GET /api/v1/orders/a298ada8-686f-4bf8-ac61-20443412dd73/receivers",
+  "Description": "Proxy Mapping for GET /api/v1/orders/a298ada8-686f-4bf8-ac61-20443412dd73/receivers",
+  "Priority": -2000000,
+  "Request": {
+    "Path": {
+      "Matchers": [
+        {
+          "Name": "WildcardMatcher",
+          "Pattern": "/api/v1/orders/a298ada8-686f-4bf8-ac61-20443412dd73/receivers",
+          "IgnoreCase": false
+        }
+      ]
+    },
+    "Methods": [
+      "GET"
+    ],
+    "HttpVersion": "1.1",
+    "Headers": [
+      {
+        "Name": "Accept",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "application/json",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      },
+      {
+        "Name": "Host",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "localhost:55330",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      }
+    ]
+  },
+  "Response": {
+    "StatusCode": 200,
+    "BodyAsJson": {
+      "current_page": 1,
+      "data": [
+        {
+          "id": "a298ada8-c352-429a-991d-b03038c6e2a8",
+          "order_id": "a298ada8-686f-4bf8-ac61-20443412dd73",
+          "country_id": "99d4d37a-0956-428c-9eb6-67e9b205cc09",
+          "name": "[redacted]",
+          "company": null,
+          "text_variables": {
+            "Bedrijf": "[redacted]",
+            "Voor_achternaam": "[redacted]",
+            "Straat_nr": "[redacted]",
+            "Postcode_plaats": "[redacted]",
+            "Land": "[redacted]",
+            "Multiline": "[redacted]"
+          },
+          "received_by_extractor_at": null,
+          "qr_variables": [
+            {
+              "index": 0,
+              "value": "https://example.com/card1",
+              "trackable": true
+            }
+          ],
+          "address": "[redacted]",
+          "postal_code": "[redacted]",
+          "city": "[redacted]",
+          "open_rates": []
+        },
+        {
+          "id": "a298adac-ed12-495b-8a65-44df36e1e9cc",
+          "order_id": "a298ada8-686f-4bf8-ac61-20443412dd73",
+          "country_id": "99d4d37a-0956-428c-9eb6-67e9b205cc09",
+          "name": "[redacted]",
+          "company": null,
+          "text_variables": {
+            "Bedrijf": "[redacted]",
+            "Voor_achternaam": "[redacted]",
+            "Straat_nr": "[redacted]",
+            "Postcode_plaats": "[redacted]",
+            "Land": "[redacted]",
+            "Multiline": "[redacted]"
+          },
+          "received_by_extractor_at": null,
+          "qr_variables": [
+            {
+              "index": 0,
+              "value": "https://example.com/card2",
+              "trackable": true
+            }
+          ],
+          "address": "[redacted]",
+          "postal_code": "[redacted]",
+          "city": "[redacted]",
+          "open_rates": []
+        }
+      ],
+      "first_page_url": "https://fixtures.invalid/resource",
+      "from": 1,
+      "last_page": 1,
+      "last_page_url": "https://fixtures.invalid/resource",
+      "links": [
+        {
+          "url": null,
+          "label": "[redacted]",
+          "active": false
+        },
+        {
+          "url": "https://fixtures.invalid/resource",
+          "label": "[redacted]",
+          "active": true
+        },
+        {
+          "url": null,
+          "label": "[redacted]",
+          "active": false
+        }
+      ],
+      "next_page_url": null,
+      "path": "https://app.lightr.nl/api/v1/orders/a298ada8-686f-4bf8-ac61-20443412dd73/receivers",
+      "per_page": 200,
+      "prev_page_url": null,
+      "to": 2,
+      "total": 2
+    },
+    "Headers": {
+      "Content-Type": "application/json",
+      "Date": "Wed, 26 Aug 2026 17:45:28 GMT",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Vary": "Accept-Encoding",
+      "X-Powered-By": "PHP/8.2.26",
+      "Cache-Control": "no-cache, private",
+      "X-RateLimit-Limit": "120",
+      "X-RateLimit-Remaining": "109",
+      "Access-Control-Allow-Origin": "*",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+    }
+  }
+}

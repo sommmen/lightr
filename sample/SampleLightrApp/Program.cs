@@ -3,9 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using SampleLightrApp;
 using System.Diagnostics;
 using System.Text.Json.Serialization;
-using Vcr.HttpRecorder;
+using WireMock.Server;
+using WireMock.Settings;
 
 var builder = Host.CreateApplicationBuilder(args);
 
@@ -19,9 +21,25 @@ if (string.IsNullOrWhiteSpace(apiKey))
                                         ApiKey is null or whitespace, please add an apiKey: dotnet user-secrets set "ApiKey" "..."
                                         """);
 
+// Below is just to demonstrate configuring the client further. Here WireMock.Net is used as a proxy in front
+// of the real Lightr API and writes replayable mappings to the gitignored __admin/mappings folder.
+// Authentication material is excluded from the saved request matchers.
+// See: https://github.com/wiremock/WireMock.Net
+using var mockServer = WireMockServer.Start(new WireMockServerSettings
+{
+    Urls = ["http://localhost:55330"],
+    ProxyAndRecordSettings = new ProxyAndRecordSettings
+    {
+        Url = "https://app.lightr.nl",
+        SaveMapping = true,
+        SaveMappingToFile = true,
+        ExcludedHeaders = ["Authorization", "Cookie", "Set-Cookie"]
+    }
+});
+
 builder.Services.AddLightr(apiKey)
-    // Below is just to demonstrate configuring the client further, in this case we'll be saving all request data to a .har file to inspect
-    .AddHttpRecorder("sample_lightr_client", HttpRecorderMode.Record);
+    // Redirects outgoing requests to the local WireMock.Net proxy, leaving LightrClient.BaseUrl untouched.
+    .AddHttpMessageHandler(() => new WireMockRedirectHandler(mockServer));
 
 // We build and use a Host so that we can use DI, however we don't run it.
 var host = builder.Build();
@@ -153,6 +171,8 @@ Debugger.Break();
 await client.OrdersDELETEAsync(orderId);
 logger.LogInformation("Deleted order: {OrderId}", orderId);
 
+RecordedMappingSanitizer.Sanitize(Path.Combine(Directory.GetCurrentDirectory(), "__admin", "mappings"));
+
 // Wait before exiting.
 Debugger.Break();
 
@@ -171,4 +191,18 @@ public record TextVariables
 
     public string? Land { get; set; }
     public string? Multiline { get; set; }
+}
+
+/// <summary>
+/// Redirects outgoing requests to the local WireMock.Net server, so that the LightrClient's fixed,
+/// absolute BaseUrl (which it always uses regardless of HttpClient.BaseAddress) doesn't need to change.
+/// Mirrors the pattern used internally by WireMock.Net's own WireMockDelegationHandler.
+/// </summary>
+file sealed class WireMockRedirectHandler(WireMockServer mockServer) : DelegatingHandler
+{
+    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    {
+        request.RequestUri = new Uri(mockServer.Url! + request.RequestUri!.PathAndQuery);
+        return base.SendAsync(request, cancellationToken);
+    }
 }
