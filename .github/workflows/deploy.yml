@@ -37,7 +37,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore --configuration Release
     - name: Test
-      run: dotnet test --no-build --no-restore --verbosity normal --configuration Release
+      run: dotnet test --no-build --no-restore --verbosity normal --configuration Release --report-gh
     - name: pack
       run: dotnet pack --include-symbols --include-source --no-build --no-restore --configuration Release --output ${{ env.NuGetDirectory }}
     - name: NuGet login (OIDC to temporary API key)
