@@ -1,0 +1,55 @@
+{
+  "Guid": "ae313b9c-4cf7-46dc-895f-97ab0e29cd67",
+  "UpdatedAt": "2026-08-26T17:43:53.1499036Z",
+  "Title": "Proxy Mapping for DELETE /api/v1/orders/a298ada8-686f-4bf8-ac61-20443412dd73",
+  "Description": "Proxy Mapping for DELETE /api/v1/orders/a298ada8-686f-4bf8-ac61-20443412dd73",
+  "Priority": -2000000,
+  "Request": {
+    "Path": {
+      "Matchers": [
+        {
+          "Name": "WildcardMatcher",
+          "Pattern": "/api/v1/orders/a298ada8-686f-4bf8-ac61-20443412dd73",
+          "IgnoreCase": false
+        }
+      ]
+    },
+    "Methods": [
+      "DELETE"
+    ],
+    "HttpVersion": "1.1",
+    "Headers": [
+      {
+        "Name": "Host",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "localhost:55330",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      }
+    ],
+    "Body": {
+      "Matcher": {
+        "Name": "ExactMatcher",
+        "Pattern": "",
+        "IgnoreCase": true
+      }
+    }
+  },
+  "Response": {
+    "StatusCode": 204,
+    "Headers": {
+      "Date": "Wed, 26 Aug 2026 17:45:28 GMT",
+      "Connection": "keep-alive",
+      "X-Powered-By": "PHP/8.2.26",
+      "Cache-Control": "no-cache, private",
+      "X-RateLimit-Limit": "120",
+      "X-RateLimit-Remaining": "108",
+      "Access-Control-Allow-Origin": "*",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+    }
+  }
+}

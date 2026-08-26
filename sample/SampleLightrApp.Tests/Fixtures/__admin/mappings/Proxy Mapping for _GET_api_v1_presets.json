@@ -1,0 +1,955 @@
+{
+  "Guid": "85deaed4-84c9-4315-ac6c-bab962ec7db1",
+  "UpdatedAt": "2026-08-26T17:43:46.9510723Z",
+  "Title": "Proxy Mapping for GET /api/v1/presets",
+  "Description": "Proxy Mapping for GET /api/v1/presets",
+  "Priority": -2000000,
+  "Request": {
+    "Path": {
+      "Matchers": [
+        {
+          "Name": "WildcardMatcher",
+          "Pattern": "/api/v1/presets",
+          "IgnoreCase": false
+        }
+      ]
+    },
+    "Methods": [
+      "GET"
+    ],
+    "HttpVersion": "1.1",
+    "Headers": [
+      {
+        "Name": "Accept",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "application/json",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      },
+      {
+        "Name": "Host",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "localhost:55330",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      }
+    ]
+  },
+  "Response": {
+    "StatusCode": 200,
+    "BodyAsJson": {
+      "data": [
+        {
+          "id": "a1ff5fb9-abf5-42eb-8aba-e5d8dcae48d6",
+          "organization_id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+          "font_id": "9b371339-2879-44aa-847b-d3bf85680769",
+          "max_font_size": 30,
+          "label": "[redacted]",
+          "format": "A6",
+          "base_template_id": "9e1b95b8-b1cc-47b8-a771-ee0d0c1b1a02",
+          "background_template_id": "a1ff5fb7-0d8f-4fc5-a788-47a412fa013f",
+          "qr_tracking_enabled": false,
+          "preview_front_url": "https://fixtures.invalid/resource",
+          "preview_front_url_full_sized": "https://fixtures.invalid/resource",
+          "preview_back_url": "https://fixtures.invalid/resource",
+          "preview_back_url_full_sized": "https://fixtures.invalid/resource",
+          "images": [
+            {
+              "name": "[redacted]",
+              "width": 0,
+              "height": 0,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            }
+          ],
+          "has_multiline": true,
+          "text_variables": [
+            "Voor_achternaam",
+            "Straat_nr",
+            "Postcode_plaats",
+            "Land"
+          ],
+          "printlane_template_id": 2540,
+          "printlane_template_token": "[redacted]",
+          "tags": [],
+          "created_at": "2026-06-11T12:45:47.000000Z",
+          "updated_at": "2026-06-11T12:45:49.000000Z",
+          "permissions": {
+            "viewAny": false,
+            "view": true,
+            "create": true,
+            "update": false,
+            "delete": true,
+            "forceDelete": false,
+            "restore": false
+          },
+          "add_ons": []
+        },
+        {
+          "id": "9d84d680-0c07-494b-a2b3-36c420cf06aa",
+          "organization_id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+          "font_id": "9b371339-2879-44aa-847b-d3bf85680769",
+          "max_font_size": 30,
+          "label": "[redacted]",
+          "format": "A6",
+          "base_template_id": "9e4dfb19-2bba-422f-98ea-cff5a7d8cafa",
+          "background_template_id": "a05a9f6a-4e9a-4cbb-b68a-bde7c8e9b3c6",
+          "qr_tracking_enabled": true,
+          "preview_front_url": "https://fixtures.invalid/resource",
+          "preview_front_url_full_sized": "https://fixtures.invalid/resource",
+          "preview_back_url": "https://fixtures.invalid/resource",
+          "preview_back_url_full_sized": "https://fixtures.invalid/resource",
+          "images": [
+            {
+              "name": "[redacted]",
+              "width": 430.13169699907,
+              "height": 308.44970703125,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            },
+            {
+              "name": "[redacted]",
+              "width": 56.692901611328,
+              "height": 56.692901611328,
+              "is_qr": true,
+              "url": "https://fixtures.invalid/resource",
+              "file_url": null
+            }
+          ],
+          "has_multiline": true,
+          "text_variables": [
+            "Bedrijf",
+            "Voor_achternaam",
+            "Straat_nr",
+            "Postcode_plaats",
+            "Land"
+          ],
+          "printlane_template_id": 406,
+          "printlane_template_token": "[redacted]",
+          "tags": [],
+          "created_at": "2024-11-18T14:03:19.000000Z",
+          "updated_at": "2025-11-14T09:01:03.000000Z",
+          "permissions": {
+            "viewAny": false,
+            "view": true,
+            "create": true,
+            "update": false,
+            "delete": true,
+            "forceDelete": false,
+            "restore": false
+          },
+          "add_ons": []
+        },
+        {
+          "id": "a0a96659-89f1-4572-974a-d695a56fa57b",
+          "organization_id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+          "font_id": "9b371339-2879-44aa-847b-d3bf85680769",
+          "max_font_size": 30,
+          "label": "[redacted]",
+          "format": "A6",
+          "base_template_id": "9c6efa7c-3bf3-4b50-a68e-3c9c1d21f183",
+          "background_template_id": "a0a96657-55cc-483a-b88c-0c67ef2fbe70",
+          "qr_tracking_enabled": false,
+          "preview_front_url": "https://fixtures.invalid/resource",
+          "preview_front_url_full_sized": "https://fixtures.invalid/resource",
+          "preview_back_url": "https://fixtures.invalid/resource",
+          "preview_back_url_full_sized": "https://fixtures.invalid/resource",
+          "images": [
+            {
+              "name": "[redacted]",
+              "width": 0,
+              "height": 0,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            }
+          ],
+          "has_multiline": true,
+          "text_variables": [],
+          "printlane_template_id": 2080,
+          "printlane_template_token": "[redacted]",
+          "tags": [],
+          "created_at": "2025-12-23T12:51:10.000000Z",
+          "updated_at": "2025-12-23T12:51:12.000000Z",
+          "permissions": {
+            "viewAny": false,
+            "view": true,
+            "create": true,
+            "update": false,
+            "delete": true,
+            "forceDelete": false,
+            "restore": false
+          },
+          "add_ons": []
+        },
+        {
+          "id": "a0e17d41-9664-4d56-89df-073b03ab4c0a",
+          "organization_id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+          "font_id": "9b371339-2879-44aa-847b-d3bf85680769",
+          "max_font_size": 30,
+          "label": "[redacted]",
+          "format": "A6",
+          "base_template_id": "9e1b9575-e7c2-4416-860e-52188a883029",
+          "background_template_id": "a0e17d2c-f0b9-467e-9aa1-b14c38d227e7",
+          "qr_tracking_enabled": false,
+          "preview_front_url": "https://fixtures.invalid/resource",
+          "preview_front_url_full_sized": "https://fixtures.invalid/resource",
+          "preview_back_url": "https://fixtures.invalid/resource",
+          "preview_back_url_full_sized": "https://fixtures.invalid/resource",
+          "images": [
+            {
+              "name": "[redacted]",
+              "width": 0,
+              "height": 0,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            }
+          ],
+          "has_multiline": true,
+          "text_variables": [
+            "Bedrijf",
+            "Voor_achternaam",
+            "Straat_nr",
+            "Postcode_plaats",
+            "Land"
+          ],
+          "printlane_template_id": 2081,
+          "printlane_template_token": "[redacted]",
+          "tags": [],
+          "created_at": "2026-01-20T10:01:35.000000Z",
+          "updated_at": "2026-01-20T10:01:38.000000Z",
+          "permissions": {
+            "viewAny": false,
+            "view": true,
+            "create": true,
+            "update": false,
+            "delete": true,
+            "forceDelete": false,
+            "restore": false
+          },
+          "add_ons": []
+        },
+        {
+          "id": "a103af05-ab41-4da2-b738-9953a31ab710",
+          "organization_id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+          "font_id": "9b371339-2879-44aa-847b-d3bf85680769",
+          "max_font_size": 30,
+          "label": "[redacted]",
+          "format": "A6",
+          "base_template_id": "9e1b95b8-b1cc-47b8-a771-ee0d0c1b1a02",
+          "background_template_id": "a103af03-7fd0-49a3-b18f-0e20ad964d83",
+          "qr_tracking_enabled": false,
+          "preview_front_url": "https://fixtures.invalid/resource",
+          "preview_front_url_full_sized": "https://fixtures.invalid/resource",
+          "preview_back_url": "https://fixtures.invalid/resource",
+          "preview_back_url_full_sized": "https://fixtures.invalid/resource",
+          "images": [
+            {
+              "name": "[redacted]",
+              "width": 0,
+              "height": 0,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            }
+          ],
+          "has_multiline": true,
+          "text_variables": [
+            "Voor_achternaam",
+            "Straat_nr",
+            "Postcode_plaats",
+            "Land"
+          ],
+          "printlane_template_id": 2259,
+          "printlane_template_token": "[redacted]",
+          "tags": [],
+          "created_at": "2026-02-06T09:58:53.000000Z",
+          "updated_at": "2026-02-06T09:58:56.000000Z",
+          "permissions": {
+            "viewAny": false,
+            "view": true,
+            "create": true,
+            "update": false,
+            "delete": true,
+            "forceDelete": false,
+            "restore": false
+          },
+          "add_ons": []
+        },
+        {
+          "id": "a172873a-b65d-4479-852c-08fac1b1fbdd",
+          "organization_id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+          "font_id": "9b371339-2879-44aa-847b-d3bf85680769",
+          "max_font_size": 30,
+          "label": "[redacted]",
+          "format": "A6",
+          "base_template_id": "a080d8ed-1bd2-43e1-b567-0719f0d83123",
+          "background_template_id": "a1728738-4cf7-4524-b03e-ddaf1effc258",
+          "qr_tracking_enabled": false,
+          "preview_front_url": "https://fixtures.invalid/resource",
+          "preview_front_url_full_sized": "https://fixtures.invalid/resource",
+          "preview_back_url": "https://fixtures.invalid/resource",
+          "preview_back_url_full_sized": "https://fixtures.invalid/resource",
+          "images": [
+            {
+              "name": "[redacted]",
+              "width": 430.13169699907,
+              "height": 308.44970703125,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            }
+          ],
+          "has_multiline": true,
+          "text_variables": [
+            "Voor_achternaam",
+            "Straat_nr",
+            "Postcode_plaats"
+          ],
+          "printlane_template_id": 2400,
+          "printlane_template_token": "[redacted]",
+          "tags": [],
+          "created_at": "2026-04-02T12:24:31.000000Z",
+          "updated_at": "2026-04-03T11:43:00.000000Z",
+          "permissions": {
+            "viewAny": false,
+            "view": true,
+            "create": true,
+            "update": false,
+            "delete": true,
+            "forceDelete": false,
+            "restore": false
+          },
+          "add_ons": []
+        },
+        {
+          "id": "9ad8c54f-b45c-4377-861f-2e45fdd15663",
+          "organization_id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+          "font_id": "99e56c63-0354-44dd-8ae8-136718864e39",
+          "max_font_size": 45,
+          "label": "[redacted]",
+          "format": "A5",
+          "base_template_id": "9a8e5931-b289-4a61-a564-6da3bada7c92",
+          "background_template_id": "9a8e5f16-8bda-4560-b154-1f03825e3e73",
+          "qr_tracking_enabled": false,
+          "preview_front_url": "https://fixtures.invalid/resource",
+          "preview_front_url_full_sized": "https://fixtures.invalid/resource",
+          "preview_back_url": "https://fixtures.invalid/resource",
+          "preview_back_url_full_sized": "https://fixtures.invalid/resource",
+          "images": [
+            {
+              "name": "[redacted]",
+              "width": 166.56000232696533,
+              "height": 78.239990234375,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            }
+          ],
+          "has_multiline": true,
+          "text_variables": [
+            "Bedrijf",
+            "Naam",
+            "Straat",
+            "Postcode",
+            "Land"
+          ],
+          "printlane_template_id": 0,
+          "printlane_template_token": null,
+          "tags": [],
+          "created_at": "2023-12-14T12:48:59.000000Z",
+          "updated_at": "2023-12-14T12:49:07.000000Z",
+          "permissions": {
+            "viewAny": false,
+            "view": true,
+            "create": true,
+            "update": false,
+            "delete": true,
+            "forceDelete": false,
+            "restore": false
+          },
+          "add_ons": []
+        },
+        {
+          "id": "9ae29ca8-74f4-4347-9d31-176a7619b2b1",
+          "organization_id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+          "font_id": "99e56c46-d474-4181-a9f6-292115c43298",
+          "max_font_size": 45,
+          "label": "[redacted]",
+          "format": "A6",
+          "base_template_id": "9a945ad9-d032-44c4-b94a-2dab22830b64",
+          "background_template_id": "9a8e623a-ad79-4b94-8231-29b35d42e471",
+          "qr_tracking_enabled": false,
+          "preview_front_url": "https://fixtures.invalid/resource",
+          "preview_front_url_full_sized": "https://fixtures.invalid/resource",
+          "preview_back_url": "https://fixtures.invalid/resource",
+          "preview_back_url_full_sized": "https://fixtures.invalid/resource",
+          "images": [
+            {
+              "name": "[redacted]",
+              "width": 429.00003468990326,
+              "height": 306.9999694824219,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            },
+            {
+              "name": "[redacted]",
+              "width": 150.23895263671875,
+              "height": 90.70938110351562,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            }
+          ],
+          "has_multiline": true,
+          "text_variables": [
+            "Naam",
+            "Straat",
+            "Postcode",
+            "Land"
+          ],
+          "printlane_template_id": 0,
+          "printlane_template_token": null,
+          "tags": [],
+          "created_at": "2023-12-19T10:13:35.000000Z",
+          "updated_at": "2023-12-19T10:13:42.000000Z",
+          "permissions": {
+            "viewAny": false,
+            "view": true,
+            "create": true,
+            "update": false,
+            "delete": true,
+            "forceDelete": false,
+            "restore": false
+          },
+          "add_ons": []
+        },
+        {
+          "id": "9b38ebc0-8a58-4f07-92a6-f6930ffe1a67",
+          "organization_id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+          "font_id": "9b1323a4-3f67-437d-ac11-a29f4c760066",
+          "max_font_size": 45,
+          "label": "[redacted]",
+          "format": "A6",
+          "base_template_id": "9a929c7c-1b98-4d40-b5e6-7e2d2ddff224",
+          "background_template_id": "9b12b823-72b6-46b6-ac2e-d33495cbfc86",
+          "qr_tracking_enabled": false,
+          "preview_front_url": "https://fixtures.invalid/resource",
+          "preview_front_url_full_sized": "https://fixtures.invalid/resource",
+          "preview_back_url": "https://fixtures.invalid/resource",
+          "preview_back_url_full_sized": "https://fixtures.invalid/resource",
+          "images": [
+            {
+              "name": "[redacted]",
+              "width": 430.623852096498,
+              "height": 308.738525390625,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            },
+            {
+              "name": "[redacted]",
+              "width": 72.03936767578125,
+              "height": 72.03936767578125,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            }
+          ],
+          "has_multiline": true,
+          "text_variables": [
+            "Naam",
+            "Straat",
+            "Postcode",
+            "Land"
+          ],
+          "printlane_template_id": 0,
+          "printlane_template_token": null,
+          "tags": [],
+          "created_at": "2024-01-31T07:55:57.000000Z",
+          "updated_at": "2024-01-31T07:57:50.000000Z",
+          "permissions": {
+            "viewAny": false,
+            "view": true,
+            "create": true,
+            "update": false,
+            "delete": true,
+            "forceDelete": false,
+            "restore": false
+          },
+          "add_ons": []
+        },
+        {
+          "id": "9b38ec04-4867-40d8-b9d6-a59ec4ec20b9",
+          "organization_id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+          "font_id": "9b1323a4-3f67-437d-ac11-a29f4c760066",
+          "max_font_size": 45,
+          "label": "[redacted]",
+          "format": "A5",
+          "base_template_id": "9aa22e86-ae06-4272-8bc6-e8b4c2ba3d0f",
+          "background_template_id": "9b12b832-b40d-4e0c-9e04-a93515f78d8b",
+          "qr_tracking_enabled": false,
+          "preview_front_url": "https://fixtures.invalid/resource",
+          "preview_front_url_full_sized": "https://fixtures.invalid/resource",
+          "preview_back_url": "https://fixtures.invalid/resource",
+          "preview_back_url_full_sized": "https://fixtures.invalid/resource",
+          "images": [
+            {
+              "name": "[redacted]",
+              "width": 602.0410597324371,
+              "height": 427.4999084472656,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            },
+            {
+              "name": "[redacted]",
+              "width": 85.03936767578125,
+              "height": 85.03936767578125,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            }
+          ],
+          "has_multiline": true,
+          "text_variables": [
+            "Naam",
+            "Straat",
+            "Postcode",
+            "Land"
+          ],
+          "printlane_template_id": 0,
+          "printlane_template_token": null,
+          "tags": [],
+          "created_at": "2024-01-31T07:56:41.000000Z",
+          "updated_at": "2024-01-31T07:57:25.000000Z",
+          "permissions": {
+            "viewAny": false,
+            "view": true,
+            "create": true,
+            "update": false,
+            "delete": true,
+            "forceDelete": false,
+            "restore": false
+          },
+          "add_ons": []
+        },
+        {
+          "id": "9b611689-ba81-47b4-b310-79496c401c8b",
+          "organization_id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+          "font_id": "9b371339-2879-44aa-847b-d3bf85680769",
+          "max_font_size": 45,
+          "label": "[redacted]",
+          "format": "A6",
+          "base_template_id": "9b5f6094-64d2-4cfc-a5eb-08ef1255371c",
+          "background_template_id": "9b6115eb-085b-47de-b729-93290374a16a",
+          "qr_tracking_enabled": false,
+          "preview_front_url": "https://fixtures.invalid/resource",
+          "preview_front_url_full_sized": "https://fixtures.invalid/resource",
+          "preview_back_url": "https://fixtures.invalid/resource",
+          "preview_back_url_full_sized": "https://fixtures.invalid/resource",
+          "images": [
+            {
+              "name": "[redacted]",
+              "width": 72.03936767578125,
+              "height": 72.03936767578125,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            },
+            {
+              "name": "[redacted]",
+              "width": 430.623852096498,
+              "height": 308.738525390625,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            }
+          ],
+          "has_multiline": true,
+          "text_variables": [
+            "Naam",
+            "Straat",
+            "Postcode",
+            "Land"
+          ],
+          "printlane_template_id": 0,
+          "printlane_template_token": null,
+          "tags": [],
+          "created_at": "2024-02-20T07:08:42.000000Z",
+          "updated_at": "2024-02-26T09:09:37.000000Z",
+          "permissions": {
+            "viewAny": false,
+            "view": true,
+            "create": true,
+            "update": false,
+            "delete": true,
+            "forceDelete": false,
+            "restore": false
+          },
+          "add_ons": []
+        },
+        {
+          "id": "9b6d5430-1c18-4051-90c1-cba40985a062",
+          "organization_id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+          "font_id": "9b371339-2879-44aa-847b-d3bf85680769",
+          "max_font_size": 40,
+          "label": "[redacted]",
+          "format": "A6",
+          "base_template_id": "9b5f6094-64d2-4cfc-a5eb-08ef1255371c",
+          "background_template_id": "9b6115eb-085b-47de-b729-93290374a16a",
+          "qr_tracking_enabled": false,
+          "preview_front_url": "https://fixtures.invalid/resource",
+          "preview_front_url_full_sized": "https://fixtures.invalid/resource",
+          "preview_back_url": "https://fixtures.invalid/resource",
+          "preview_back_url_full_sized": "https://fixtures.invalid/resource",
+          "images": [
+            {
+              "name": "[redacted]",
+              "width": 430.6238520965,
+              "height": 308.73852539062,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            },
+            {
+              "name": "[redacted]",
+              "width": 72.039367675781,
+              "height": 72.039367675781,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            }
+          ],
+          "has_multiline": true,
+          "text_variables": [
+            "Naam",
+            "Straat",
+            "Postcode",
+            "Land"
+          ],
+          "printlane_template_id": 0,
+          "printlane_template_token": null,
+          "tags": [],
+          "created_at": "2024-02-26T09:11:01.000000Z",
+          "updated_at": "2024-02-26T09:11:06.000000Z",
+          "permissions": {
+            "viewAny": false,
+            "view": true,
+            "create": true,
+            "update": false,
+            "delete": true,
+            "forceDelete": false,
+            "restore": false
+          },
+          "add_ons": []
+        },
+        {
+          "id": "9cfb7d66-9ed5-4fc2-ab2a-fde78c4dfc9a",
+          "organization_id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+          "font_id": "9b371339-2879-44aa-847b-d3bf85680769",
+          "max_font_size": 30,
+          "label": "[redacted]",
+          "format": "A6",
+          "base_template_id": "9ce1bf4c-61b9-4f72-8985-31318d4a336a",
+          "background_template_id": "9cfb7d62-edc5-4758-9aca-2732d318f045",
+          "qr_tracking_enabled": true,
+          "preview_front_url": "https://fixtures.invalid/resource",
+          "preview_front_url_full_sized": "https://fixtures.invalid/resource",
+          "preview_back_url": "https://fixtures.invalid/resource",
+          "preview_back_url_full_sized": "https://fixtures.invalid/resource",
+          "images": [
+            {
+              "name": "[redacted]",
+              "width": 0,
+              "height": 0,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            },
+            {
+              "name": "[redacted]",
+              "width": 0,
+              "height": 0,
+              "is_qr": true,
+              "url": "https://fixtures.invalid/resource",
+              "file_url": null
+            }
+          ],
+          "has_multiline": true,
+          "text_variables": [
+            "Bedrijf",
+            "Voor_achternaam",
+            "Straat_nr",
+            "Postcode_plaats",
+            "Land"
+          ],
+          "printlane_template_id": 406,
+          "printlane_template_token": "[redacted]",
+          "tags": [],
+          "created_at": "2024-09-11T07:25:46.000000Z",
+          "updated_at": "2024-09-11T07:25:49.000000Z",
+          "permissions": {
+            "viewAny": false,
+            "view": true,
+            "create": true,
+            "update": false,
+            "delete": true,
+            "forceDelete": false,
+            "restore": false
+          },
+          "add_ons": []
+        },
+        {
+          "id": "9d7a925b-bb8d-4bfb-bb43-3153175352a6",
+          "organization_id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+          "font_id": "9b371339-2879-44aa-847b-d3bf85680769",
+          "max_font_size": 30,
+          "label": "[redacted]",
+          "format": "A6",
+          "base_template_id": "9ce1bf4c-61b9-4f72-8985-31318d4a336a",
+          "background_template_id": "9d7a924b-45ac-4e2a-a78c-84639ab977bc",
+          "qr_tracking_enabled": true,
+          "preview_front_url": "https://fixtures.invalid/resource",
+          "preview_front_url_full_sized": "https://fixtures.invalid/resource",
+          "preview_back_url": "https://fixtures.invalid/resource",
+          "preview_back_url_full_sized": "https://fixtures.invalid/resource",
+          "images": [
+            {
+              "name": "[redacted]",
+              "width": 0,
+              "height": 0,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            },
+            {
+              "name": "[redacted]",
+              "width": 0,
+              "height": 0,
+              "is_qr": true,
+              "url": "https://fixtures.invalid/resource",
+              "file_url": null
+            }
+          ],
+          "has_multiline": true,
+          "text_variables": [
+            "Bedrijf",
+            "Voor_achternaam",
+            "Straat_nr",
+            "Postcode_plaats",
+            "Land"
+          ],
+          "printlane_template_id": 406,
+          "printlane_template_token": "[redacted]",
+          "tags": [],
+          "created_at": "2024-11-13T11:34:30.000000Z",
+          "updated_at": "2024-11-13T11:34:33.000000Z",
+          "permissions": {
+            "viewAny": false,
+            "view": true,
+            "create": true,
+            "update": false,
+            "delete": true,
+            "forceDelete": false,
+            "restore": false
+          },
+          "add_ons": []
+        },
+        {
+          "id": "9d7aa377-5d5c-47bb-9295-9e8a694a6952",
+          "organization_id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+          "font_id": "9b371339-2879-44aa-847b-d3bf85680769",
+          "max_font_size": 30,
+          "label": "[redacted]",
+          "format": "A6",
+          "base_template_id": "9ce1bf4c-61b9-4f72-8985-31318d4a336a",
+          "background_template_id": "9d7aa36a-51b8-4e66-a437-fd60704db5b1",
+          "qr_tracking_enabled": true,
+          "preview_front_url": "https://fixtures.invalid/resource",
+          "preview_front_url_full_sized": "https://fixtures.invalid/resource",
+          "preview_back_url": "https://fixtures.invalid/resource",
+          "preview_back_url_full_sized": "https://fixtures.invalid/resource",
+          "images": [
+            {
+              "name": "[redacted]",
+              "width": 0,
+              "height": 0,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            },
+            {
+              "name": "[redacted]",
+              "width": 0,
+              "height": 0,
+              "is_qr": true,
+              "url": "https://fixtures.invalid/resource",
+              "file_url": null
+            }
+          ],
+          "has_multiline": true,
+          "text_variables": [
+            "Bedrijf",
+            "Voor_achternaam",
+            "Straat_nr",
+            "Postcode_plaats",
+            "Land"
+          ],
+          "printlane_template_id": 406,
+          "printlane_template_token": "[redacted]",
+          "tags": [],
+          "created_at": "2024-11-13T12:22:20.000000Z",
+          "updated_at": "2024-11-13T12:22:24.000000Z",
+          "permissions": {
+            "viewAny": false,
+            "view": true,
+            "create": true,
+            "update": false,
+            "delete": true,
+            "forceDelete": false,
+            "restore": false
+          },
+          "add_ons": []
+        },
+        {
+          "id": "9d987a8c-2889-47eb-b4ab-3d3271c82bac",
+          "organization_id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+          "font_id": "9b371339-2879-44aa-847b-d3bf85680769",
+          "max_font_size": 30,
+          "label": "[redacted]",
+          "format": "A6",
+          "base_template_id": "9ce1bf4c-61b9-4f72-8985-31318d4a336a",
+          "background_template_id": "9d987a89-7f7b-4f25-8ee4-f8d3868ffa7a",
+          "qr_tracking_enabled": true,
+          "preview_front_url": "https://fixtures.invalid/resource",
+          "preview_front_url_full_sized": "https://fixtures.invalid/resource",
+          "preview_back_url": "https://fixtures.invalid/resource",
+          "preview_back_url_full_sized": "https://fixtures.invalid/resource",
+          "images": [
+            {
+              "name": "[redacted]",
+              "width": 0,
+              "height": 0,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            },
+            {
+              "name": "[redacted]",
+              "width": 0,
+              "height": 0,
+              "is_qr": true,
+              "url": "https://fixtures.invalid/resource",
+              "file_url": null
+            }
+          ],
+          "has_multiline": true,
+          "text_variables": [
+            "Bedrijf",
+            "Voor_achternaam",
+            "Straat_nr",
+            "Postcode_plaats",
+            "Land"
+          ],
+          "printlane_template_id": 717,
+          "printlane_template_token": "[redacted]",
+          "tags": [],
+          "created_at": "2024-11-28T08:22:45.000000Z",
+          "updated_at": "2024-11-28T08:22:48.000000Z",
+          "permissions": {
+            "viewAny": false,
+            "view": true,
+            "create": true,
+            "update": false,
+            "delete": true,
+            "forceDelete": false,
+            "restore": false
+          },
+          "add_ons": []
+        },
+        {
+          "id": "9da2ec5a-cf55-4a99-b59f-71051fd265cc",
+          "organization_id": "9ad8c3b6-c0c2-4bae-961f-2ba4e3bc8439",
+          "font_id": "9b371339-2879-44aa-847b-d3bf85680769",
+          "max_font_size": 30,
+          "label": "[redacted]",
+          "format": "A6",
+          "base_template_id": "9ce1bf4c-61b9-4f72-8985-31318d4a336a",
+          "background_template_id": "9da2ec4e-388c-46b6-9813-b5b66349967e",
+          "qr_tracking_enabled": true,
+          "preview_front_url": "https://fixtures.invalid/resource",
+          "preview_front_url_full_sized": "https://fixtures.invalid/resource",
+          "preview_back_url": "https://fixtures.invalid/resource",
+          "preview_back_url_full_sized": "https://fixtures.invalid/resource",
+          "images": [
+            {
+              "name": "[redacted]",
+              "width": 0,
+              "height": 0,
+              "is_qr": false,
+              "url": null,
+              "file_url": "https://fixtures.invalid/resource"
+            },
+            {
+              "name": "[redacted]",
+              "width": 0,
+              "height": 0,
+              "is_qr": true,
+              "url": "https://fixtures.invalid/resource",
+              "file_url": null
+            }
+          ],
+          "has_multiline": true,
+          "text_variables": [
+            "Bedrijf",
+            "Voor_achternaam",
+            "Straat_nr",
+            "Postcode_plaats",
+            "Land"
+          ],
+          "printlane_template_id": 406,
+          "printlane_template_token": "[redacted]",
+          "tags": [],
+          "created_at": "2024-12-03T12:59:16.000000Z",
+          "updated_at": "2024-12-03T12:59:18.000000Z",
+          "permissions": {
+            "viewAny": false,
+            "view": true,
+            "create": true,
+            "update": false,
+            "delete": true,
+            "forceDelete": false,
+            "restore": false
+          },
+          "add_ons": []
+        }
+      ]
+    },
+    "Headers": {
+      "Content-Type": "application/json",
+      "Date": "Wed, 26 Aug 2026 17:45:21 GMT",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Vary": "Accept-Encoding",
+      "X-Powered-By": "PHP/8.2.26",
+      "Cache-Control": "no-cache, private",
+      "X-RateLimit-Limit": "120",
+      "X-RateLimit-Remaining": "117",
+      "Access-Control-Allow-Origin": "*",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+    }
+  }
+}

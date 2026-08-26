@@ -402,3 +402,10 @@ FodyWeavers.xsd
 
 # HTTP archive recordings can include credentials and customer data.
 *.har
+
+# WireMock.Net recorded mappings can include credentials and customer data.
+__admin/
+
+# Sanitized WireMock.Net static mappings used by the offline test suite.
+!sample/SampleLightrApp.Tests/Fixtures/__admin/
+!sample/SampleLightrApp.Tests/Fixtures/__admin/**

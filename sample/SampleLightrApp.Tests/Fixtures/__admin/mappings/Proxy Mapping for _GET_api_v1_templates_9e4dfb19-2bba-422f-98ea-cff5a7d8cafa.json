@@ -1,0 +1,112 @@
+{
+  "Guid": "489171b4-ca3e-418c-8fa9-4b3cc19b5ebb",
+  "UpdatedAt": "2026-08-26T17:43:47.1522814Z",
+  "Title": "Proxy Mapping for GET /api/v1/templates/9e4dfb19-2bba-422f-98ea-cff5a7d8cafa",
+  "Description": "Proxy Mapping for GET /api/v1/templates/9e4dfb19-2bba-422f-98ea-cff5a7d8cafa",
+  "Priority": -2000000,
+  "Request": {
+    "Path": {
+      "Matchers": [
+        {
+          "Name": "WildcardMatcher",
+          "Pattern": "/api/v1/templates/9e4dfb19-2bba-422f-98ea-cff5a7d8cafa",
+          "IgnoreCase": false
+        }
+      ]
+    },
+    "Methods": [
+      "GET"
+    ],
+    "HttpVersion": "1.1",
+    "Headers": [
+      {
+        "Name": "Accept",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "application/json",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      },
+      {
+        "Name": "Host",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "localhost:55330",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      }
+    ]
+  },
+  "Response": {
+    "StatusCode": 200,
+    "BodyAsJson": {
+      "data": {
+        "id": "9e4dfb19-2bba-422f-98ea-cff5a7d8cafa",
+        "organization_id": null,
+        "agency_id": null,
+        "label": "[redacted]",
+        "type": "base",
+        "format": "A6",
+        "preview_front_file": "preview-front-9e4dfb19-2bba-422f-98ea-cff5a7d8cafa.png",
+        "preview_front_url": "https://fixtures.invalid/resource",
+        "preview_front_url_full_sized": "https://fixtures.invalid/resource",
+        "preview_back_file": "preview-back-9e4dfb19-2bba-422f-98ea-cff5a7d8cafa.png",
+        "preview_back_url": "https://fixtures.invalid/resource",
+        "preview_back_url_full_sized": "https://fixtures.invalid/resource",
+        "extractor_state": "processed",
+        "file_url": "https://fixtures.invalid/resource",
+        "image_variables": [
+          {
+            "name": "[redacted]",
+            "width": 430.13169699907303,
+            "height": 308.44970703125
+          },
+          {
+            "name": "[redacted]",
+            "width": 56.692901611328125,
+            "height": 56.692901611328125
+          }
+        ],
+        "text_variables": [
+          "Multiline",
+          "Bedrijf",
+          "Voor_achternaam",
+          "Straat_nr",
+          "Postcode_plaats",
+          "Land"
+        ],
+        "tags": [],
+        "created_at": "2025-02-26T13:47:04.000000Z",
+        "updated_at": "2025-02-26T13:47:05.000000Z",
+        "permissions": {
+          "viewAny": true,
+          "view": true,
+          "create": false,
+          "update": false,
+          "delete": false,
+          "forceDelete": false,
+          "restore": false
+        }
+      }
+    },
+    "Headers": {
+      "Content-Type": "application/json",
+      "Date": "Wed, 26 Aug 2026 17:45:22 GMT",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Vary": "Accept-Encoding",
+      "X-Powered-By": "PHP/8.2.26",
+      "Cache-Control": "no-cache, private",
+      "X-RateLimit-Limit": "120",
+      "X-RateLimit-Remaining": "115",
+      "Access-Control-Allow-Origin": "*",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "Guid": "357688fe-eb4a-49dd-a349-297d05d61b59",
+  "UpdatedAt": "2026-08-26T17:43:47.377708Z",
+  "Title": "Proxy Mapping for GET /api/v1/orders/a298ada8-686f-4bf8-ac61-20443412dd73",
+  "Description": "Proxy Mapping for GET /api/v1/orders/a298ada8-686f-4bf8-ac61-20443412dd73",
+  "Priority": -2000000,
+  "Request": {
+    "Path": {
+      "Matchers": [
+        {
+          "Name": "WildcardMatcher",
+          "Pattern": "/api/v1/orders/a298ada8-686f-4bf8-ac61-20443412dd73",
+          "IgnoreCase": false
+        }
+      ]
+    },
+    "Methods": [
+      "GET"
+    ],
+    "HttpVersion": "1.1",
+    "Headers": [
+      {
+        "Name": "Accept",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "application/json",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      },
+      {
+        "Name": "Host",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "localhost:55330",
+            "IgnoreCase": true
+          }
+        ],
+        "IgnoreCase": true
+      }
+    ]
+  },
+  "Response": {
+    "StatusCode": 200,
+    "BodyAsJson": {
+      "data": {
+        "id": "a298ada8-686f-4bf8-ac61-20443412dd73",
+        "preset_id": "9d84d680-0c07-494b-a2b3-36c420cf06aa",
+        "font_id": "99e56c99-b7d0-42b6-bb33-eacc4c70fe8d",
+        "label": "[redacted]",
+        "quantity": 1,
+        "total_cards": 0,
+        "status": "draft",
+        "external_number": "[redacted]",
+        "finalized_at": null,
+        "processed_at": null,
+        "type": "send_multiple",
+        "credits": "0,00",
+        "qr_default_value": null,
+        "open_rate_percentage": 0,
+        "qr_last_scannend": null,
+        "preview_front_url": "https://fixtures.invalid/resource",
+        "preview_back_url": "https://fixtures.invalid/resource",
+        "created_at": "2026-08-26T17:45:22.000000Z",
+        "updated_at": "2026-08-26T17:45:22.000000Z",
+        "permissions": {
+          "viewAny": true,
+          "view": true,
+          "create": true,
+          "update": true,
+          "delete": true,
+          "forceDelete": false,
+          "restore": false,
+          "finalize": true,
+          "replicate": false
+        },
+        "shipping_date": null,
+        "add_ons": []
+      }
+    },
+    "Headers": {
+      "Content-Type": "application/json",
+      "Date": "Wed, 26 Aug 2026 17:45:22 GMT",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Vary": "Accept-Encoding",
+      "X-Powered-By": "PHP/8.2.26",
+      "Cache-Control": "no-cache, private",
+      "X-RateLimit-Limit": "120",
+      "X-RateLimit-Remaining": "113",
+      "Access-Control-Allow-Origin": "*",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+    }
+  }
+}
