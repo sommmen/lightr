@@ -15,7 +15,8 @@ public sealed class LightrApiFixture : IDisposable
         {
             FileSystemHandler = new LocalFileSystemHandler(MappingRoot),
             ReadStaticMappings = true,
-            Urls = ["http://localhost:55330"]
+            UseSSL = false,
+            Port = 0
         });
     }
 
