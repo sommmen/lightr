@@ -35,7 +35,7 @@
         "Matchers": [
           {
             "Name": "WildcardMatcher",
-            "Pattern": "localhost:55330",
+            "Pattern": "localhost:*",
             "IgnoreCase": true
           }
         ],
