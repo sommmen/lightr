@@ -10,7 +10,7 @@
       "rollForward": false
     },
     "binkylabs.openapi.overlays.tool": {
-      "version": "2.6.0",
+      "version": "3.0.0",
       "commands": [
         "clio"
       ],
