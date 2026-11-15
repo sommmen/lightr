@@ -4,6 +4,7 @@
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
+		<IsPackable>true</IsPackable>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<Title>Lightr</Title>
 		<Authors>sommmen</Authors>
@@ -13,8 +14,6 @@
 		<RepositoryUrl>https://github.com/sommmen/lightr.git</RepositoryUrl>
 
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-		<IncludeSymbols>True</IncludeSymbols>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
 		<PackageIcon>nuget-icon-lightr.png</PackageIcon>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -64,23 +63,23 @@
 	</Target>
 
 	<ItemGroup>
-		<PackageReference Include="DotNet.ReproducibleBuilds" Version="2.0.5">
+		<PackageReference Include="DotNet.ReproducibleBuilds">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="GitVersion.MsBuild" Version="6.8.2">
+		<PackageReference Include="GitVersion.MsBuild">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.Extensions.Http" Version="10.0.11" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-		<PackageReference Include="NSwag.ApiDescription.Client" Version="14.7.1">
+		<PackageReference Include="Microsoft.Extensions.Http" />
+		<PackageReference Include="Newtonsoft.Json" />
+		<PackageReference Include="NSwag.ApiDescription.Client">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-		<PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
-		<PackageReference Include="System.Threading.RateLimiting" Version="10.0.11" />
+		<PackageReference Include="System.ComponentModel.Annotations" />
+		<PackageReference Include="System.Runtime.Serialization.Primitives" />
+		<PackageReference Include="System.Threading.RateLimiting" />
 	</ItemGroup>
 
 </Project>

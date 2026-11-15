@@ -7,6 +7,28 @@ handwritten cards via an API. The client library is generated from the
 upstream OpenAPI document and targets the .NET 10 SDK. The repository also
 contains a sample app under [sample/](sample) demonstrating usage.
 
+## Project structure
+
+- `src/Lightr/Lightr/` - the published `Lightr` library (netstandard2.1).
+  `OpenAPIs/docs.json` is the checked-in upstream OpenAPI document;
+  `OpenAPIs/schema-corrections.overlay.yaml` fixes known upstream schema
+  defects and is applied at build time by `clio` (target
+  `GenerateLightrOverlaidOpenApiDocument` in `Lightr.csproj`) before NSwag
+  generates `LightrClient`. `DI/ServiceCollectionExtensions.cs` provides
+  `AddLightr`; `LightrRateLimitedHandler.cs` implements rate limiting.
+- `sample/SampleLightrApp/` - usage sample (Generic Host), including
+  `RecordedMappingSanitizer.cs`. `sample/SampleLightrApp.Tests/` - xUnit v3
+  (MTP v2) tests that replay sanitised WireMock.Net mappings from
+  `Fixtures/__admin/`.
+- `scripts/Refresh-OpenApi.ps1` - refreshes `docs.json` from
+  `https://app.lightr.nl/api/docs.json`.
+- `dotnet-tools.json` - `dotnet-openapi` and `clio`; run `dotnet tool restore`
+  before building.
+- `Directory.Packages.props` - Central Package Management; package versions
+  live here, not in the `.csproj` files.
+- `.github/workflows/` - `build-ci.yml` (build and test), `deploy.yml`
+  (publish on release), `renovate.yml`, `pr-title-lint.yml`.
+- `docs/xunit-v3-mtp-v2-baseline.md` - test-stack notes.
 ## Commit conventions
 
 Use Conventional Commits for every commit message and pull request title:
