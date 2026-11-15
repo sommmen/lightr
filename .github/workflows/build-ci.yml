@@ -8,6 +8,9 @@ on:
   merge_group:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   build:
 
@@ -29,3 +32,4 @@ jobs:
       run: dotnet build --no-restore --configuration Release
     - name: Test
       run: dotnet test --no-build --no-restore --configuration Release --verbosity normal --report-gh
+
