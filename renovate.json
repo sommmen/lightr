@@ -37,7 +37,7 @@
       "automerge": true
     },
     {
-      "description": "Build-time only: SourceLink and reproducible-build SDKs emit nothing at runtime, so a bad version fails the build rather than reaching production. GitVersion.MsBuild is deliberately excluded because it determines published version numbers.",
+      "description": "Build-time only: SourceLink and reproducible-build SDKs emit nothing at runtime, so a bad version fails the build rather than reaching production. Nerdbank.GitVersioning is deliberately excluded because it determines published version numbers.",
       "matchManagers": [
         "nuget"
       ],

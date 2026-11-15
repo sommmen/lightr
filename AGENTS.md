@@ -24,6 +24,7 @@ contains a sample app under [sample/](sample) demonstrating usage.
   `https://app.lightr.nl/api/docs.json`.
 - `dotnet-tools.json` - `dotnet-openapi` and `clio`; run `dotnet tool restore`
   before building.
+- `version.json` - Nerdbank.GitVersioning configuration. The version is`n  `<major>.<minor>.<git height>`; `main` and tags named `X.Y.Z` (no `v` prefix)`n  build public versions, other refs get a `-g<sha>` prerelease suffix. Bump`n  `version` only for a new minor/major; see the README for the release steps.`n  CI needs `fetch-depth: 0`.
 - `Directory.Packages.props` - Central Package Management; package versions
   live here, not in the `.csproj` files.
 - `.github/workflows/` - `build-ci.yml` (build and test), `deploy.yml`

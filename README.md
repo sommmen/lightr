@@ -72,3 +72,10 @@ dotnet build
 ```
 
 The build automatically applies `schema-corrections.overlay.yaml` before NSwag generates the client. The overlay corrects known upstream schema defects, so no manual post-processing of the downloaded document is needed.
+
+
+## Versioning and releasing
+
+Versions are computed by [Nerdbank.GitVersioning](https://github.com/dotnet/Nerdbank.GitVersioning) from `version.json`: `<major>.<minor>` comes from the file and the patch is the git height since that value last changed. Builds from `main` and from tags named `X.Y.Z` (no `v` prefix) are public versions; every other ref gets a `-g<sha>` prerelease suffix. CI and the deploy workflow therefore check out the full history (`fetch-depth: 0`).
+
+To release, publish a GitHub release on a tag that matches the version `nbgv get-version -v NuGetPackageVersion` prints for the commit on `main` (for example `1.7.1`). The `deploy` workflow builds that tag and pushes the package to nuget.org and GitHub Packages. To start a new minor or major line, bump `version` in `version.json`.
