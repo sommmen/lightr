@@ -11,8 +11,6 @@
 *.userosscache
 *.sln.docstates
 *.env
-.env.*
-!.env.example
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -430,6 +428,19 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+### VisualStudioCode ###
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+!*.code-workspace
+
+# Built Visual Studio Code Extensions
+*.vsix
 
 # Commit Serena's project config; ignore its machine-local index and memories.
 .serena/*
