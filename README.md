@@ -73,6 +73,8 @@ dotnet build
 
 The build automatically applies `schema-corrections.overlay.yaml` before NSwag generates the client. The overlay corrects known upstream schema defects, so no manual post-processing of the downloaded document is needed.
 
+Dependency updates are handled by a self-hosted Renovate workflow; see [docs/Renovate/Renovate.md](docs/Renovate/Renovate.md) for its triggers, automerge rules and troubleshooting.
+
 
 ## Versioning and releasing
 
