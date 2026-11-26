@@ -52,8 +52,20 @@ For more information check the [sample](https://github.com/sommmen/lightr/tree/m
 
 # Rate Limits
 
-A `LightrRateLimitedHandler` is added by default which handles the rate limits of the API. 
-Requests are delayed when the limit is reached. See the `ServiceCollectionExtensions` for the precise configuration.
+A `LightrRateLimitedHandler` is added by default which handles the rate limits of the API.
+One sliding-window limiter is shared per registration (so it survives `IHttpClientFactory` handler rotation) and
+requests are delayed when the limit is reached. It defaults to 100 requests per 60 seconds, below the server's 120 per
+minute. A server `429` with a `Retry-After` of at most 60 seconds is waited out and retried once.
+
+```csharp
+services.Configure<LightrRateLimitOptions>(o =>
+{
+    o.PermitLimit = 100;
+    o.Window = TimeSpan.FromSeconds(60);
+    o.QueueLimit = 120;
+    o.MaxRetryAfter = TimeSpan.FromSeconds(60); // TimeSpan.Zero disables the 429 retry
+});
+```
 
 # Development
 
