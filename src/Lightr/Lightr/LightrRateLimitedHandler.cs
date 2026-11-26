@@ -1,62 +1,46 @@
-﻿using System.Net.Http;
-using System.Threading.Tasks;
-using System.Threading;
 using System;
-using System.Globalization;
 using System.Net;
+using System.Net.Http;
+using System.Threading;
 using System.Threading.RateLimiting;
+using System.Threading.Tasks;
 
 namespace Lightr;
 
 /// <summary>
+/// Delays requests to stay within the API budget and honours <c>Retry-After</c> on a server 429.
 /// See: <see href="https://learn.microsoft.com/en-us/dotnet/core/extensions/http-ratelimiter"/>
 /// </summary>
-/// <param name="limiter"></param>
-internal sealed class LightrRateLimitedHandler(RateLimiter limiter) : DelegatingHandler, IAsyncDisposable
+/// <remarks>The limiter is shared across handler instances and owned by <see cref="LightrRateLimiter"/>, so this handler never disposes it.</remarks>
+internal sealed class LightrRateLimitedHandler(LightrRateLimiter limiter) : DelegatingHandler
 {
     protected override async Task<HttpResponseMessage> SendAsync(
         HttpRequestMessage request, CancellationToken cancellationToken)
     {
-        while (true)
+        var response = await SendLimitedAsync(request, cancellationToken).ConfigureAwait(false);
+
+        if (response.StatusCode != HttpStatusCode.TooManyRequests
+            || !limiter.TryGetRetryDelay(response, out var delay))
         {
-            using RateLimitLease lease = await limiter.AcquireAsync(
-                permitCount: 1, cancellationToken);
-
-            if (lease.IsAcquired)
-            {
-                return await base.SendAsync(request, cancellationToken);
-            }
-
-            var response = new HttpResponseMessage(HttpStatusCode.TooManyRequests);
-            if (lease.TryGetMetadata(
-                    MetadataName.RetryAfter, out var retryAfter))
-            {
-                response.Headers.Add(
-                    "Retry-After",
-                    ((int)retryAfter.TotalSeconds).ToString(
-                        NumberFormatInfo.InvariantInfo));
-            }
-
             return response;
         }
+
+        response.Dispose();
+        await Task.Delay(delay, cancellationToken).ConfigureAwait(false);
+
+        return await SendLimitedAsync(request, cancellationToken).ConfigureAwait(false);
     }
 
-    async ValueTask IAsyncDisposable.DisposeAsync()
+    private async Task<HttpResponseMessage> SendLimitedAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
-        await limiter.DisposeAsync().ConfigureAwait(false);
+        using var lease = await limiter.Limiter.AcquireAsync(permitCount: 1, cancellationToken).ConfigureAwait(false);
 
-        Dispose(disposing: false);
-        // ReSharper disable once GCSuppressFinalizeForTypeWithoutDestructor Reason: MS recommends this
-        GC.SuppressFinalize(this);
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-
-        if (disposing)
+        if (lease.IsAcquired)
         {
-            limiter.Dispose();
+            return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
         }
+
+        // Local queue is full: surface a 429 without Retry-After so it is not retried here.
+        return new HttpResponseMessage(HttpStatusCode.TooManyRequests) { RequestMessage = request };
     }
 }
