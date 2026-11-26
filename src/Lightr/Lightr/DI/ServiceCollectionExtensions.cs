@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading.RateLimiting;
 using Lightr;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 
 // ReSharper disable once CheckNamespace In MS namespace to help with discoverability
@@ -10,15 +10,6 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {
-    private static readonly FixedWindowRateLimiterOptions RateLimiterOptions = new()
-    {
-        Window = TimeSpan.FromSeconds(60.250), // 120 p/m, with some margin (client/server delay etc.).
-        AutoReplenishment = true,
-        PermitLimit = 120,
-        QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-        QueueLimit = 120
-    };
-
     /// <summary>
     /// Registers the <see cref="ILightrClient"/> named HTTP client.
     /// </summary>
@@ -28,13 +19,15 @@ public static class ServiceCollectionExtensions
     /// <returns>The <see cref="IHttpClientBuilder"/> for any further http client configuration needs.</returns>
     public static IHttpClientBuilder AddLightr(this IServiceCollection services, string token, Action<IServiceProvider, HttpClient>? configureClient = null)
     {
+        AddRateLimiter(services);
+
         return services
             .AddHttpClient<ILightrClient, LightrClient>("lightr", (s, c) =>
             {
                 c.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 configureClient?.Invoke(s, c);
             })
-            .AddHttpMessageHandler(() => new LightrRateLimitedHandler(limiter: new FixedWindowRateLimiter(RateLimiterOptions)));
+            .AddHttpMessageHandler(s => new LightrRateLimitedHandler(s.GetRequiredService<LightrRateLimiter>()));
     }
 
     /// <summary>
@@ -45,6 +38,8 @@ public static class ServiceCollectionExtensions
     /// <returns>The <see cref="IHttpClientBuilder"/> for any further http client configuration needs.</returns>
     public static IHttpClientBuilder AddLightr(this IServiceCollection services, Action<IServiceProvider, LightrOptions> configureLightr)
     {
+        AddRateLimiter(services);
+
         return services
             .AddHttpClient<ILightrClient, LightrClient>("lightr", (s, c) =>
             {
@@ -64,7 +59,14 @@ public static class ServiceCollectionExtensions
 
                 c.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", options.Token);
             })
-            .AddHttpMessageHandler(() => new LightrRateLimitedHandler(limiter: new FixedWindowRateLimiter(RateLimiterOptions)));
+            .AddHttpMessageHandler(s => new LightrRateLimitedHandler(s.GetRequiredService<LightrRateLimiter>()));
+    }
+
+    // One limiter per service collection: IHttpClientFactory rebuilds the handler chain every HandlerLifetime, and the server keeps counting against the same token.
+    private static void AddRateLimiter(IServiceCollection services)
+    {
+        services.AddOptions<LightrRateLimitOptions>();
+        services.TryAddSingleton<LightrRateLimiter>();
     }
 }
 
