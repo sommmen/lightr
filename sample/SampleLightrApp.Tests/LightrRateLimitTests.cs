@@ -2,7 +2,6 @@ using System.Diagnostics;
 using Lightr;
 using Microsoft.Extensions.DependencyInjection;
 using WireMock.RequestBuilders;
-using WireMock.ResponseBuilders;
 using Response = WireMock.ResponseBuilders.Response;
 using WireMock.Server;
 
