@@ -60,6 +60,51 @@
         "minor",
         "patch"
       ]
+    },
+    {
+      "description": "Build-time generators for LightrClient: NSwag generates it and clio applies the OpenAPI overlay with --strict, so a bad version fails the required 'build' check. Capped at minor/patch because NSwag output is the shipped public API and a major can reshape it without breaking the build.",
+      "matchManagers": [
+        "nuget"
+      ],
+      "matchDepNames": [
+        "/^[Nn][Ss]wag\\./",
+        "/^[Bb]inky[Ll]abs\\.[Oo]pen[Aa]pi\\.[Oo]verlays/"
+      ],
+      "automerge": true,
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
+    },
+    {
+      "description": ".NET servicing updates (runtime packages and dotnet-openapi) within the current major. A major (new target runtime, raised minimum Microsoft.Extensions.* version for consumers of the published package) stays a manual review. Microsoft.AspNetCore.WebUtilities is excluded because it is a security pin.",
+      "matchManagers": [
+        "nuget"
+      ],
+      "matchDepNames": [
+        "/^[Mm]icrosoft\\.Extensions\\./",
+        "/^[Ss]ystem\\.Threading\\.RateLimiting$/",
+        "/^[Mm]icrosoft\\.dotnet-openapi$/"
+      ],
+      "automerge": true,
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
+    },
+    {
+      "description": "SDK servicing pin in global.json: a patch or minor SDK that breaks the build or tests fails the required 'build' check. A major SDK stays a manual review.",
+      "matchManagers": [
+        "nuget"
+      ],
+      "matchDepNames": [
+        "dotnet-sdk"
+      ],
+      "automerge": true,
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
     }
   ]
 }
