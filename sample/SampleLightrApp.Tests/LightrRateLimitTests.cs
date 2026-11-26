@@ -47,12 +47,14 @@ public sealed class LightrRateLimitTests : IDisposable
         _server
             .Given(Request.Create().WithPath(FontsPath).UsingGet())
             .InScenario("rate-limit")
+            .AtPriority(2)
             .WillSetStateTo("recovered")
             .RespondWith(Response.Create().WithStatusCode(429).WithHeader("Retry-After", "1"));
         _server
             .Given(Request.Create().WithPath(FontsPath).UsingGet())
             .InScenario("rate-limit")
             .WhenStateIs("recovered")
+            .AtPriority(1)
             .RespondWith(Response.Create().WithStatusCode(200).WithHeader("Content-Type", "application/json").WithBody(EmptyFonts));
 
         await using var provider = BuildProvider(new LightrRateLimitOptions(), handlerLifetime: null);
