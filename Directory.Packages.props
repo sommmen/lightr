@@ -8,16 +8,16 @@
   <ItemGroup>
     <PackageVersion Include="DotNet.ReproducibleBuilds" Version="2.0.5" />
     <!-- Pin patched transitive version of WireMock.Net's Microsoft.AspNetCore.Http dependency: first patched in 2.3.14, GHSA-6527-9fp8-r4x6 (NU1902) -->
-    <PackageVersion Include="Microsoft.AspNetCore.WebUtilities" Version="2.3.14" />
-    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.15" />
-    <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.15" />
+    <PackageVersion Include="Microsoft.AspNetCore.WebUtilities" Version="11.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="11.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="11.0.0" />
     <PackageVersion Include="Microsoft.Testing.Extensions.GitHubActionsReport" Version="2.5.2" />
     <PackageVersion Include="Nerdbank.GitVersioning" Version="3.10.94" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageVersion Include="NSwag.ApiDescription.Client" Version="14.8.0" />
     <PackageVersion Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageVersion Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
-    <PackageVersion Include="System.Threading.RateLimiting" Version="10.0.15" />
+    <PackageVersion Include="System.Threading.RateLimiting" Version="11.0.0" />
     <PackageVersion Include="WireMock.Net" Version="2.32.0" />
     <PackageVersion Include="xunit.v3.mtp-v2" Version="4.0.3" />
   </ItemGroup>
